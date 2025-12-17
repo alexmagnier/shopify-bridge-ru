@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext, ReactNode } from 'react';
+import { useState, useEffect, createContext, useContext, ReactNode, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 
 // ============================================
@@ -652,6 +652,41 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// ============================================
+// INTERSECTION OBSERVER HOOK FOR ANIMATIONS
+// ============================================
+const useIntersectionObserver = (options = {}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        // Можно отключить наблюдение после первого появления
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      }
+    }, {
+      threshold: 0.1,
+      ...options
+    });
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return { ref, isVisible };
+};
+
 // CSS Variables and Global Styles
 const GlobalStyles = () => (
   <style>{`
@@ -709,6 +744,44 @@ const GlobalStyles = () => (
       }
     }
     
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -719,15 +792,81 @@ const GlobalStyles = () => (
       50% { opacity: 0.7; }
     }
     
-    .animate-in {
-      animation: fadeInUp 0.6s ease-out forwards;
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
     }
     
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
-    .delay-5 { animation-delay: 0.5s; }
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .animate-slide-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .animate-slide-left {
+      animation: slideInLeft 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .animate-slide-right {
+      animation: slideInRight 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .animate-scale {
+      animation: scaleIn 0.6s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+    .delay-600 { animation-delay: 0.6s; }
+    .delay-700 { animation-delay: 0.7s; }
+    .delay-800 { animation-delay: 0.8s; }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      
+      body {
+        font-size: 14px;
+      }
+      
+      h1 {
+        font-size: 32px !important;
+      }
+      
+      h2 {
+        font-size: 28px !important;
+      }
+      
+      h3 {
+        font-size: 20px !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 12px;
+      }
+      
+      h1 {
+        font-size: 28px !important;
+      }
+      
+      h2 {
+        font-size: 24px !important;
+      }
+    }
   `}</style>
 );
 
@@ -880,31 +1019,50 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div style={{
-          background: 'var(--bg-dark)',
-          padding: '24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-        }}>
-          {navLinks.map(link => (
+        <div
+          className="animate-slide-up"
+          style={{
+            background: 'var(--bg-dark)',
+            padding: '24px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+            borderTop: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+          }}
+        >
+          {navLinks.map((link, index) => (
             <Link
               key={link.path}
               to={link.path}
               onClick={() => setIsMobileMenuOpen(false)}
+              className={`animate-slide-left delay-${index * 100}`}
               style={{
                 color: 'var(--text-light)',
                 textDecoration: 'none',
                 fontSize: '16px',
                 padding: '12px 0',
                 borderBottom: '1px solid rgba(255,255,255,0.1)',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--accent)';
+                e.currentTarget.style.paddingLeft = '8px';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--text-light)';
+                e.currentTarget.style.paddingLeft = '0';
               }}
             >{link.label}</Link>
           ))}
           
           {/* Mobile Language Switcher */}
           <button
-            onClick={() => setLanguage(language === 'ru' ? 'en' : 'ru')}
+            onClick={() => {
+              setLanguage(language === 'ru' ? 'en' : 'ru');
+              setIsMobileMenuOpen(false);
+            }}
+            className="animate-scale delay-500"
             style={{
               background: 'rgba(255,255,255,0.1)',
               border: '1px solid rgba(255,255,255,0.2)',
@@ -918,22 +1076,43 @@ const Header = () => {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '8px',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
             }}
           >
             <span style={{ fontSize: '18px' }}>🌐</span>
             {language === 'ru' ? 'Switch to English' : 'Переключить на Русский'}
           </button>
           
-          <Link to="/contact" style={{
-            background: 'var(--accent)',
-            color: 'white',
-            padding: '16px 24px',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            fontWeight: '600',
-            textAlign: 'center',
-            marginTop: '8px',
-          }}>{t('nav.contact')} →</Link>
+          <Link
+            to="/contact"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="animate-scale delay-600"
+            style={{
+              background: 'var(--accent)',
+              color: 'white',
+              padding: '16px 24px',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              fontWeight: '600',
+              textAlign: 'center',
+              marginTop: '8px',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.02)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(224, 122, 95, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >{t('nav.contact')} →</Link>
         </div>
       )}
 
@@ -952,8 +1131,10 @@ const Header = () => {
 // ============================================
 const HeroSection = () => {
   const { t } = useLanguage();
+  const { ref, isVisible } = useIntersectionObserver();
+  
   return (
-  <section style={{
+  <section ref={ref} style={{
     background: 'linear-gradient(135deg, var(--bg-dark) 0%, #0D2B26 50%, var(--bg-dark) 100%)',
     minHeight: '100vh',
     display: 'flex',
@@ -992,7 +1173,7 @@ const HeroSection = () => {
         margin: '0 auto',
         textAlign: 'center',
       }}>
-        <div className="animate-in" style={{
+        <div className={isVisible ? 'animate-fade-in' : ''} style={{
           display: 'inline-block',
           background: 'rgba(10, 107, 92, 0.2)',
           border: '1px solid rgba(10, 107, 92, 0.4)',
@@ -1005,9 +1186,9 @@ const HeroSection = () => {
           </span>
         </div>
 
-        <h1 className="animate-in delay-1" style={{
+        <h1 className={isVisible ? 'animate-slide-up delay-100' : ''} style={{
           fontFamily: "'Playfair Display', serif",
-          fontSize: 'clamp(36px, 6vw, 64px)',
+          fontSize: 'clamp(32px, 6vw, 64px)',
           fontWeight: '700',
           color: 'var(--text-light)',
           lineHeight: '1.1',
@@ -1017,59 +1198,88 @@ const HeroSection = () => {
           <span style={{ color: 'var(--accent)' }}>{t('hero.title2')}</span>
         </h1>
 
-        <p className="animate-in delay-2" style={{
-          fontSize: '18px',
+        <p className={isVisible ? 'animate-slide-up delay-200' : ''} style={{
+          fontSize: 'clamp(16px, 2vw, 18px)',
           color: 'rgba(255,255,255,0.8)',
           maxWidth: '600px',
           margin: '0 auto 20px',
           lineHeight: '1.7',
+          padding: '0 16px',
         }}>
           {t('hero.subtitle')}
         </p>
 
-        <div className="animate-in delay-3" style={{
+        <div className={isVisible ? 'animate-slide-up delay-300' : ''} style={{
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',
-          gap: '16px',
+          gap: '12px',
           marginBottom: '40px',
+          padding: '0 16px',
         }}>
           {[
             t('hero.benefit1'),
             t('hero.benefit2'),
             t('hero.benefit3'),
           ].map((item, i) => (
-            <div key={i} style={{
-              background: 'rgba(255,255,255,0.05)',
-              padding: '10px 16px',
-              borderRadius: '8px',
-              border: '1px solid rgba(255,255,255,0.1)',
-            }}>
-              <span style={{ color: 'var(--text-light)', fontSize: '14px' }}>{item}</span>
+            <div
+              key={i}
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                padding: '10px 16px',
+                borderRadius: '8px',
+                border: '1px solid rgba(255,255,255,0.1)',
+                transition: 'all 0.3s ease',
+                backdropFilter: 'blur(10px)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.borderColor = 'rgba(10, 107, 92, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+              }}
+            >
+              <span style={{ color: 'var(--text-light)', fontSize: 'clamp(12px, 2vw, 14px)' }}>{item}</span>
             </div>
           ))}
         </div>
 
-        <div className="animate-in delay-4" style={{
+        <div className={isVisible ? 'animate-slide-up delay-400' : ''} style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '16px',
         }}>
-          <Link to="/contact" style={{
-            background: 'linear-gradient(135deg, var(--accent), var(--accent-dark))',
-            color: 'white',
-            padding: '18px 48px',
-            borderRadius: '12px',
-            textDecoration: 'none',
-            fontWeight: '700',
-            fontSize: '16px',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            boxShadow: '0 4px 24px rgba(224, 122, 95, 0.4)',
-            transition: 'all 0.3s ease',
-          }}>
+          <Link
+            to="/contact"
+            style={{
+              background: 'linear-gradient(135deg, var(--accent), var(--accent-dark))',
+              color: 'white',
+              padding: '18px 48px',
+              borderRadius: '12px',
+              textDecoration: 'none',
+              fontWeight: '700',
+              fontSize: '16px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: '0 4px 24px rgba(224, 122, 95, 0.4)',
+              transition: 'all 0.3s ease',
+              cursor: 'pointer',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(224, 122, 95, 0.6)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              e.currentTarget.style.boxShadow = '0 4px 24px rgba(224, 122, 95, 0.4)';
+            }}
+          >
             {t('hero.cta')}
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
@@ -1082,13 +1292,14 @@ const HeroSection = () => {
       </div>
 
       {/* Stats Row */}
-      <div className="animate-in delay-5" style={{
+      <div className={isVisible ? 'animate-slide-up delay-500' : ''} style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-        gap: '24px',
-        marginTop: '80px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+        gap: '16px',
+        marginTop: '60px',
         maxWidth: '700px',
-        margin: '80px auto 0',
+        margin: '60px auto 0',
+        padding: '0 16px',
       }}>
         {[
           { value: t('hero.stat1.value'), label: t('hero.stat1.label') },
@@ -1096,21 +1307,38 @@ const HeroSection = () => {
           { value: t('hero.stat3.value'), label: t('hero.stat3.label') },
           { value: t('hero.stat4.value'), label: t('hero.stat4.label') },
         ].map((stat, i) => (
-          <div key={i} style={{
-            textAlign: 'center',
-            padding: '20px',
-            background: 'rgba(255,255,255,0.03)',
-            borderRadius: '12px',
-            border: '1px solid rgba(255,255,255,0.08)',
-          }}>
+          <div
+            key={i}
+            style={{
+              textAlign: 'center',
+              padding: '20px 12px',
+              background: 'rgba(255,255,255,0.03)',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.08)',
+              transition: 'all 0.3s ease',
+              backdropFilter: 'blur(10px)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(224, 122, 95, 0.2)';
+              e.currentTarget.style.borderColor = 'rgba(224, 122, 95, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+            }}
+          >
             <div style={{
-              fontSize: '28px',
+              fontSize: 'clamp(24px, 4vw, 28px)',
               fontWeight: '800',
               color: 'var(--accent)',
               marginBottom: '4px',
             }}>{stat.value}</div>
             <div style={{
-              fontSize: '13px',
+              fontSize: 'clamp(11px, 2vw, 13px)',
               color: 'rgba(255,255,255,0.6)',
             }}>{stat.label}</div>
           </div>
@@ -1126,13 +1354,15 @@ const HeroSection = () => {
 // ============================================
 const ProblemSection = () => {
   const { t } = useLanguage();
+  const { ref, isVisible } = useIntersectionObserver();
+  
   return (
-  <section style={{
+  <section ref={ref} style={{
     background: 'var(--bg-cream)',
-    padding: '100px 0',
+    padding: 'clamp(60px, 10vw, 100px) 0',
   }}>
     <div className="container">
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <div className={isVisible ? 'animate-slide-up' : ''} style={{ textAlign: 'center', marginBottom: '60px' }}>
         <span style={{
           color: 'var(--accent)',
           fontWeight: '600',
@@ -1154,8 +1384,8 @@ const ProblemSection = () => {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '24px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '20px',
       }}>
         {[
           {
@@ -1177,22 +1407,29 @@ const ProblemSection = () => {
             color: '#DC2626',
           },
         ].map((item, i) => (
-          <div key={i} style={{
-            background: 'white',
-            borderRadius: '16px',
-            padding: '32px',
-            border: '1px solid var(--border)',
-            transition: 'all 0.3s ease',
-            cursor: 'default',
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.transform = 'translateY(-4px)';
-            e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.08)';
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = 'none';
-          }}>
+          <div
+            key={i}
+            className={isVisible ? `animate-slide-up delay-${(i + 1) * 100}` : ''}
+            style={{
+              background: 'white',
+              borderRadius: '16px',
+              padding: '32px',
+              border: '1px solid var(--border)',
+              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+              cursor: 'default',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
+              e.currentTarget.style.boxShadow = '0 20px 48px rgba(0,0,0,0.12)';
+              e.currentTarget.style.borderColor = `${item.color}40`;
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
+              e.currentTarget.style.borderColor = 'var(--border)';
+            }}
+          >
             <div style={{
               width: '56px',
               height: '56px',
@@ -1203,15 +1440,19 @@ const ProblemSection = () => {
               justifyContent: 'center',
               fontSize: '24px',
               marginBottom: '20px',
-            }}>{item.icon}</div>
+              transition: 'transform 0.3s ease',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(-5deg) scale(1.1)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0) scale(1)'}
+            >{item.icon}</div>
             <h3 style={{
-              fontSize: '18px',
+              fontSize: 'clamp(16px, 2.5vw, 18px)',
               fontWeight: '700',
               color: 'var(--text-dark)',
               marginBottom: '12px',
             }}>{item.title}</h3>
             <p style={{
-              fontSize: '15px',
+              fontSize: 'clamp(14px, 2vw, 15px)',
               color: 'var(--text-muted)',
               lineHeight: '1.6',
             }}>{item.desc}</p>
@@ -1219,19 +1460,23 @@ const ProblemSection = () => {
         ))}
       </div>
 
-      <div style={{
-        background: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)',
-        borderRadius: '16px',
-        padding: '24px 32px',
-        marginTop: '40px',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '16px',
-        border: '1px solid #F59E0B',
-      }}>
-        <span style={{ fontSize: '28px' }}>⚠️</span>
+      <div
+        className={isVisible ? 'animate-slide-up delay-400' : ''}
+        style={{
+          background: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)',
+          borderRadius: '16px',
+          padding: 'clamp(20px, 3vw, 24px) clamp(24px, 4vw, 32px)',
+          marginTop: '40px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '16px',
+          border: '1px solid #F59E0B',
+          boxShadow: '0 4px 16px rgba(245, 158, 11, 0.15)',
+        }}
+      >
+        <span style={{ fontSize: 'clamp(24px, 3vw, 28px)', flexShrink: 0 }}>⚠️</span>
         <p style={{
-          fontSize: '15px',
+          fontSize: 'clamp(14px, 2vw, 15px)',
           color: '#92400E',
           lineHeight: '1.6',
         }}>
@@ -1943,13 +2188,15 @@ const WhyUsSection = () => {
 // ============================================
 const PricingSection = () => {
   const { t } = useLanguage();
+  const { ref, isVisible } = useIntersectionObserver();
+  
   return (
-  <section style={{
+  <section ref={ref} style={{
     background: 'white',
-    padding: '100px 0',
+    padding: 'clamp(60px, 10vw, 100px) 0',
   }}>
     <div className="container">
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <div className={isVisible ? 'animate-slide-up' : ''} style={{ textAlign: 'center', marginBottom: '60px' }}>
         <span style={{
           color: 'var(--accent)',
           fontWeight: '600',
