@@ -687,7 +687,7 @@ const useScrollAnimation = () => {
 // CSS Variables and Global Styles
 const GlobalStyles = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
     
     :root {
       --primary: #0A6B5C;
@@ -705,6 +705,9 @@ const GlobalStyles = () => (
       --border: #E5E1D8;
       --success: #10B981;
       --warning: #F59E0B;
+      
+      /* Typography */
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
     
     * {
@@ -716,14 +719,17 @@ const GlobalStyles = () => (
     html {
       scroll-behavior: smooth;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     
     body {
-      font-family: 'Manrope', sans-serif;
+      font-family: var(--font-family);
       background: var(--bg-cream);
       color: var(--text-dark);
       line-height: 1.6;
       overflow-x: hidden;
+      font-weight: 400;
     }
     
     .container {
@@ -1306,9 +1312,9 @@ const HeroSection = () => {
 
         {/* Title */}
         <h1 className="anim-hidden delay-1" style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
           fontSize: 'clamp(28px, 7vw, 56px)',
-          fontWeight: '700',
+          fontWeight: '800',
           color: 'var(--text-light)',
           lineHeight: '1.15',
           marginBottom: '20px',
@@ -1460,9 +1466,9 @@ const ProblemSection = () => {
           letterSpacing: '2px',
         }}>{t('problem.label')}</span>
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(24px, 5vw, 38px)',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginTop: '12px',
         }}>
@@ -1588,9 +1594,9 @@ const SolutionSection = () => {
           letterSpacing: '2px',
         }}>{t('solution.label')}</span>
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(24px, 5vw, 38px)',
-          fontWeight: '700',
           color: 'var(--text-light)',
           marginTop: '12px',
         }}>
@@ -1717,9 +1723,9 @@ const HowItWorksSection = () => {
           letterSpacing: '2px',
         }}>{t('howItWorks.label')}</span>
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(28px, 4vw, 42px)',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginTop: '12px',
         }}>
@@ -1887,9 +1893,9 @@ const TargetAudienceSection = () => {
           letterSpacing: '2px',
         }}>{t('audience.label')}</span>
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(28px, 4vw, 42px)',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginTop: '12px',
         }}>
@@ -2027,9 +2033,9 @@ const TransparencySection = () => {
           letterSpacing: '2px',
         }}>{t('transparency.label')}</span>
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(28px, 4vw, 42px)',
-          fontWeight: '700',
           color: 'var(--text-light)',
           marginTop: '12px',
         }}>
@@ -2164,9 +2170,9 @@ const WhyUsSection = () => {
           letterSpacing: '2px',
         }}>{t('whyUs.label')}</span>
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(28px, 4vw, 42px)',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginTop: '12px',
         }}>
@@ -2276,9 +2282,9 @@ const PricingSection = () => {
           letterSpacing: '2px',
         }}>{t('pricing.label')}</span>
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(24px, 5vw, 38px)',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginTop: '12px',
         }}>
@@ -2526,9 +2532,9 @@ const FAQSection = () => {
             letterSpacing: '2px',
           }}>{t('faq.label')}</span>
           <h2 style={{
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "var(--font-family)",
+          fontWeight: '800',
             fontSize: 'clamp(28px, 4vw, 42px)',
-            fontWeight: '700',
             color: 'var(--text-dark)',
             marginTop: '12px',
           }}>
@@ -2619,9 +2625,9 @@ const CTASection = () => {
         textAlign: 'center',
       }}>
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(28px, 4vw, 42px)',
-          fontWeight: '700',
           color: 'var(--text-light)',
           marginBottom: '20px',
         }}>
@@ -2823,9 +2829,9 @@ const HowItWorksPage = () => {
     <section style={{ background: 'var(--bg-cream)', padding: '60px 0' }}>
       <div className="container">
         <h1 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(32px, 5vw, 48px)',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginBottom: '20px',
         }}>
@@ -2861,9 +2867,9 @@ const FulfillmentPage = () => {
           letterSpacing: '2px',
         }}>{t('nav.fulfillment')}</span>
         <h1 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(32px, 5vw, 48px)',
-          fontWeight: '700',
           color: 'var(--text-light)',
           marginTop: '12px',
           marginBottom: '20px',
@@ -2907,9 +2913,9 @@ const FulfillmentPage = () => {
     <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
       <div className="container">
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: '32px',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginBottom: '40px',
         }}>
@@ -3022,9 +3028,9 @@ const FulfillmentPage = () => {
     <section style={{ background: 'white', padding: '80px 0' }}>
       <div className="container">
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: '32px',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginBottom: '40px',
         }}>
@@ -3086,9 +3092,9 @@ const FulfillmentPage = () => {
     <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
       <div className="container">
         <h2 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: '32px',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginBottom: '40px',
         }}>
@@ -3162,9 +3168,9 @@ const PricingPage = () => {
     <section style={{ background: 'var(--bg-cream)', padding: '60px 0' }}>
       <div className="container">
         <h1 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(32px, 5vw, 48px)',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginBottom: '20px',
         }}>
@@ -3189,9 +3195,9 @@ const FAQPage = () => {
     <section style={{ background: 'var(--bg-cream)', padding: '60px 0' }}>
       <div className="container">
         <h1 style={{
-          fontFamily: "'Playfair Display', serif",
+          fontFamily: "var(--font-family)",
+          fontWeight: '800',
           fontSize: 'clamp(32px, 5vw, 48px)',
-          fontWeight: '700',
           color: 'var(--text-dark)',
           marginBottom: '20px',
         }}>
@@ -3250,9 +3256,9 @@ const ContactPage = () => {
                 letterSpacing: '2px',
               }}>{t('contact.label')}</span>
               <h1 style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "var(--font-family)",
+          fontWeight: '800',
                 fontSize: 'clamp(32px, 5vw, 48px)',
-                fontWeight: '700',
                 color: 'var(--text-light)',
                 marginTop: '12px',
                 marginBottom: '20px',
