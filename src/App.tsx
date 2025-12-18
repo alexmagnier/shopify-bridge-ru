@@ -1649,7 +1649,6 @@ const SolutionSection = () => {
             gap: '10px',
             marginBottom: '20px',
           }}>
-            <span style={{ fontSize: '20px' }}>❌</span>
             <h3 style={{ color: '#FCA5A5', fontSize: '16px', fontWeight: '700' }}>
               {t('solution.old.title')}
             </h3>
@@ -1687,7 +1686,6 @@ const SolutionSection = () => {
             gap: '10px',
             marginBottom: '20px',
           }}>
-            <span style={{ fontSize: '20px' }}>✅</span>
             <h3 style={{ color: 'var(--primary-light)', fontSize: '16px', fontWeight: '700' }}>
               {t('solution.new.title')}
             </h3>
