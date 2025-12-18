@@ -2094,38 +2094,39 @@ const TransparencySection = () => {
         border: '1px solid rgba(255,255,255,0.1)',
       }}>
         <h3 style={{
-          fontSize: '20px',
+          fontSize: '18px',
           fontWeight: '700',
           color: 'var(--text-light)',
-          marginBottom: '32px',
+          marginBottom: '24px',
           textAlign: 'center',
         }}>{t('transparency.flow.title')}</h3>
         
         <div style={{
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          flexWrap: 'wrap',
-          gap: '16px',
+          gap: '12px',
         }}>
           {[
             { label: t('transparency.flow.buyer'), sublabel: 'Visa/MC', icon: '👤' },
-            { label: '', icon: '→' },
+            { label: '', icon: '↓' },
             { label: 'Shopify Bridge', sublabel: 'UK Ltd', icon: '🏛' },
-            { label: '', icon: '→' },
+            { label: '', icon: '↓' },
             { label: t('transparency.flow.you'), sublabel: 'USDT', icon: '💰' },
           ].map((item, i) => (
-            item.icon === '→' ? (
-              <span key={i} style={{ color: 'var(--accent)', fontSize: '24px', fontWeight: '700' }}>→</span>
+            item.icon === '↓' ? (
+              <span key={i} style={{ color: 'var(--accent)', fontSize: '24px', fontWeight: '700' }}>↓</span>
             ) : (
               <div key={i} style={{
                 background: 'rgba(10, 107, 92, 0.2)',
                 borderRadius: '12px',
-                padding: '20px 24px',
+                padding: '16px 20px',
                 textAlign: 'center',
-                minWidth: '140px',
+                width: '100%',
+                maxWidth: '280px',
               }}>
-                <span style={{ fontSize: '32px', display: 'block', marginBottom: '8px' }}>{item.icon}</span>
+                <span style={{ fontSize: '28px', display: 'block', marginBottom: '6px' }}>{item.icon}</span>
                 <div style={{ color: 'var(--text-light)', fontWeight: '600', fontSize: '14px' }}>{item.label}</div>
                 <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '12px' }}>{item.sublabel}</div>
               </div>
@@ -2134,13 +2135,13 @@ const TransparencySection = () => {
         </div>
 
         <div style={{
-          marginTop: '32px',
-          padding: '20px',
+          marginTop: '24px',
+          padding: '16px',
           background: 'rgba(10, 107, 92, 0.1)',
           borderRadius: '12px',
           textAlign: 'center',
         }}>
-          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '14px', lineHeight: '1.6' }}>
+          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px', lineHeight: '1.5' }}>
             {t('transparency.flow.note')} <strong style={{ color: 'var(--primary-light)' }}>{t('transparency.flow.morNote')}</strong>{t('transparency.flow.text')}
           </p>
         </div>
