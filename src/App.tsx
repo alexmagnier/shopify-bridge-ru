@@ -989,6 +989,20 @@ const GlobalStyles = () => (
     .overflow-hidden {
       overflow: hidden;
     }
+    
+    /* Fulfillment Cards - Desktop layout */
+    @media (min-width: 768px) {
+      .fulfillment-card {
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 24px !important;
+      }
+      
+      .fulfillment-card > div:first-child {
+        flex-direction: row !important;
+        flex: 0 0 auto !important;
+      }
+    }
   `}</style>
 );
 
@@ -2911,21 +2925,21 @@ const FulfillmentPage = () => {
     </section>
 
     {/* How Warehouse Works */}
-    <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
+    <section style={{ background: 'var(--bg-cream)', padding: '60px 0' }}>
       <div className="container">
         <h2 style={{
           fontFamily: "var(--font-family)",
           fontWeight: '800',
-          fontSize: '32px',
+          fontSize: 'clamp(24px, 5vw, 32px)',
           color: 'var(--text-dark)',
-          marginBottom: '40px',
+          marginBottom: '24px',
         }}>
           {t('fulfillment.cycle.title')}
         </h2>
 
         <div style={{
           display: 'grid',
-          gap: '24px',
+          gap: '16px',
         }}>
           {[
             {
@@ -2964,61 +2978,72 @@ const FulfillmentPage = () => {
               time: t('fulfillment.step5.time'),
             },
           ].map((item, i) => (
-            <div key={i} style={{
+            <div key={i} className="fulfillment-card" style={{
               background: 'white',
-              borderRadius: '16px',
-              padding: '28px',
+              borderRadius: '12px',
+              padding: '20px',
               border: '1px solid var(--border)',
-              display: 'grid',
-              gridTemplateColumns: '80px 1fr auto',
-              gap: '24px',
-              alignItems: 'start',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px',
             }}>
               <div style={{
-                width: '80px',
-                height: '80px',
-                background: 'linear-gradient(135deg, var(--primary), var(--primary-light))',
-                borderRadius: '16px',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '32px',
-                position: 'relative',
+                gap: '16px',
               }}>
-                {item.icon}
-                <span style={{
-                  position: 'absolute',
-                  top: '-8px',
-                  right: '-8px',
-                  width: '24px',
-                  height: '24px',
-                  background: 'var(--accent)',
-                  borderRadius: '50%',
+                <div style={{
+                  width: '60px',
+                  height: '60px',
+                  background: 'linear-gradient(135deg, var(--primary), var(--primary-light))',
+                  borderRadius: '12px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '11px',
-                  fontWeight: '700',
-                }}>{item.step}</span>
+                  fontSize: '28px',
+                  position: 'relative',
+                  flexShrink: 0,
+                }}>
+                  {item.icon}
+                  <span style={{
+                    position: 'absolute',
+                    top: '-6px',
+                    right: '-6px',
+                    width: '22px',
+                    height: '22px',
+                    background: 'var(--accent)',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontSize: '10px',
+                    fontWeight: '700',
+                  }}>{item.step}</span>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '4px' }}>
+                    {item.title}
+                  </h3>
+                  <span style={{
+                    background: 'rgba(10, 107, 92, 0.1)',
+                    color: 'var(--primary)',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    fontSize: '11px',
+                    fontWeight: '600',
+                    display: 'inline-block',
+                  }}>{item.time}</span>
+                </div>
               </div>
-              <div>
-                <h3 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '8px' }}>
-                  {item.title}
-                </h3>
-                <p style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
-                  {item.desc}
-                </p>
-              </div>
-              <span style={{
-                background: 'rgba(10, 107, 92, 0.1)',
-                color: 'var(--primary)',
-                padding: '6px 12px',
-                borderRadius: '6px',
-                fontSize: '12px',
-                fontWeight: '600',
-                whiteSpace: 'nowrap',
-              }}>{item.time}</span>
+              <p style={{ 
+                fontSize: '14px', 
+                color: 'var(--text-muted)', 
+                lineHeight: '1.5',
+                margin: 0 
+              }}>
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
@@ -3026,12 +3051,12 @@ const FulfillmentPage = () => {
     </section>
 
     {/* Why Dubai */}
-    <section style={{ background: 'white', padding: '80px 0' }}>
+    <section style={{ background: 'white', padding: '60px 0' }}>
       <div className="container">
         <h2 style={{
           fontFamily: "var(--font-family)",
           fontWeight: '800',
-          fontSize: '32px',
+          fontSize: 'clamp(24px, 5vw, 32px)',
           color: 'var(--text-dark)',
           marginBottom: '40px',
         }}>
@@ -3090,12 +3115,12 @@ const FulfillmentPage = () => {
     </section>
 
     {/* Pricing */}
-    <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
+    <section style={{ background: 'var(--bg-cream)', padding: '60px 0' }}>
       <div className="container">
         <h2 style={{
           fontFamily: "var(--font-family)",
           fontWeight: '800',
-          fontSize: '32px',
+          fontSize: 'clamp(24px, 5vw, 32px)',
           color: 'var(--text-dark)',
           marginBottom: '40px',
         }}>
