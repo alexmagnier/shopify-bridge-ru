@@ -653,39 +653,36 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 };
 
 // ============================================
-// INTERSECTION OBSERVER HOOK FOR ANIMATIONS
+// SCROLL ANIMATION HOOK - ADDS CLASS ON VISIBILITY
 // ============================================
-const useIntersectionObserver = (options = {}) => {
-  const [isVisible, setIsVisible] = useState(false);
+const useScrollAnimation = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        // Можно отключить наблюдение после первого появления
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
-      }
-    }, {
-      threshold: 0.1,
-      ...options
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('anim-visible');
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -50px 0px' }
+    );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    // Observe all animated elements within the ref
+    const el = ref.current;
+    if (el) {
+      const animatedElements = el.querySelectorAll('.anim-hidden, .anim-card, .anim-left, .anim-right, .anim-scale');
+      animatedElements.forEach((elem) => observer.observe(elem));
     }
 
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
+    return () => observer.disconnect();
   }, []);
 
-  return { ref, isVisible };
+  return ref;
 };
+
 
 // CSS Variables and Global Styles
 const GlobalStyles = () => (
@@ -718,6 +715,7 @@ const GlobalStyles = () => (
     
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
     
     body {
@@ -725,132 +723,233 @@ const GlobalStyles = () => (
       background: var(--bg-cream);
       color: var(--text-dark);
       line-height: 1.6;
+      overflow-x: hidden;
     }
     
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;
+      width: 100%;
     }
     
-    @keyframes fadeInUp {
+    /* ========== 3D ANIMATIONS ========== */
+    @keyframes fadeInUp3D {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(60px) perspective(1000px) rotateX(10deg);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) perspective(1000px) rotateX(0);
       }
     }
     
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    @keyframes slideInLeft {
+    @keyframes fadeInScale3D {
       from {
         opacity: 0;
-        transform: translateX(-40px);
+        transform: scale(0.8) perspective(1000px) rotateY(-5deg);
       }
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform: scale(1) perspective(1000px) rotateY(0);
       }
     }
     
-    @keyframes slideInRight {
+    @keyframes slideInLeft3D {
       from {
         opacity: 0;
-        transform: translateX(40px);
+        transform: translateX(-80px) perspective(1000px) rotateY(15deg);
       }
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0) perspective(1000px) rotateY(0);
       }
     }
     
-    @keyframes scaleIn {
+    @keyframes slideInRight3D {
       from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: translateX(80px) perspective(1000px) rotateY(-15deg);
       }
       to {
         opacity: 1;
-        transform: scale(1);
+        transform: translateX(0) perspective(1000px) rotateY(0);
       }
     }
     
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(2deg); }
     }
     
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(224, 122, 95, 0.4); }
+      50% { transform: scale(1.02); box-shadow: 0 0 20px 10px rgba(224, 122, 95, 0); }
     }
     
     @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
     
-    .animate-fade-in {
-      animation: fadeIn 0.8s ease-out forwards;
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    /* ========== ANIMATION CLASSES ========== */
+    .anim-hidden {
       opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .animate-slide-up {
-      animation: fadeInUp 0.8s ease-out forwards;
+    .anim-visible {
+      opacity: 1;
+      transform: translateY(0) !important;
+    }
+    
+    .anim-card {
       opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .animate-slide-left {
-      animation: slideInLeft 0.8s ease-out forwards;
+    .anim-card.anim-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    
+    .anim-left {
       opacity: 0;
+      transform: translateX(-60px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .animate-slide-right {
-      animation: slideInRight 0.8s ease-out forwards;
+    .anim-left.anim-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .anim-right {
       opacity: 0;
+      transform: translateX(60px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .animate-scale {
-      animation: scaleIn 0.6s ease-out forwards;
+    .anim-right.anim-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .anim-scale {
       opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    .delay-100 { animation-delay: 0.1s; }
-    .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-    .delay-400 { animation-delay: 0.4s; }
-    .delay-500 { animation-delay: 0.5s; }
-    .delay-600 { animation-delay: 0.6s; }
-    .delay-700 { animation-delay: 0.7s; }
-    .delay-800 { animation-delay: 0.8s; }
+    .anim-scale.anim-visible {
+      opacity: 1;
+      transform: scale(1);
+    }
     
-    /* Mobile responsiveness */
+    /* Stagger delays */
+    .delay-1 { transition-delay: 0.1s !important; }
+    .delay-2 { transition-delay: 0.2s !important; }
+    .delay-3 { transition-delay: 0.3s !important; }
+    .delay-4 { transition-delay: 0.4s !important; }
+    .delay-5 { transition-delay: 0.5s !important; }
+    .delay-6 { transition-delay: 0.6s !important; }
+    .delay-7 { transition-delay: 0.7s !important; }
+    .delay-8 { transition-delay: 0.8s !important; }
+    
+    /* ========== 3D CARD HOVER ========== */
+    .card-3d {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+    }
+    
+    .card-3d:hover {
+      transform: translateY(-12px) scale(1.02) perspective(1000px) rotateX(2deg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    /* ========== GLASSMORPHISM ========== */
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .glass-dark {
+      background: rgba(28, 28, 40, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* ========== GRADIENT TEXT ========== */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* ========== MOBILE RESPONSIVENESS ========== */
     @media (max-width: 768px) {
       .container {
         padding: 0 16px;
       }
       
-      body {
-        font-size: 14px;
+      section {
+        padding: 60px 0 !important;
       }
       
       h1 {
-        font-size: 32px !important;
+        font-size: 28px !important;
+        line-height: 1.2 !important;
       }
       
       h2 {
-        font-size: 28px !important;
+        font-size: 24px !important;
+        line-height: 1.2 !important;
       }
       
       h3 {
-        font-size: 20px !important;
+        font-size: 18px !important;
+      }
+      
+      p {
+        font-size: 15px !important;
+      }
+      
+      .hide-mobile {
+        display: none !important;
+      }
+      
+      .mobile-stack {
+        flex-direction: column !important;
+      }
+      
+      .mobile-full {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      
+      .mobile-center {
+        text-align: center !important;
+        align-items: center !important;
+      }
+      
+      .mobile-gap-sm {
+        gap: 12px !important;
+      }
+      
+      .mobile-padding {
+        padding: 20px !important;
       }
     }
     
@@ -859,13 +958,30 @@ const GlobalStyles = () => (
         padding: 0 12px;
       }
       
+      section {
+        padding: 40px 0 !important;
+      }
+      
       h1 {
-        font-size: 28px !important;
+        font-size: 24px !important;
       }
       
       h2 {
-        font-size: 24px !important;
+        font-size: 20px !important;
       }
+      
+      h3 {
+        font-size: 16px !important;
+      }
+      
+      .card-3d:hover {
+        transform: none;
+      }
+    }
+    
+    /* Prevent horizontal overflow */
+    .overflow-hidden {
+      overflow: hidden;
     }
   `}</style>
 );
@@ -1131,20 +1247,20 @@ const Header = () => {
 // ============================================
 const HeroSection = () => {
   const { t } = useLanguage();
-  const { ref, isVisible } = useIntersectionObserver();
+  const animRef = useScrollAnimation();
   
   return (
-  <section ref={ref} style={{
+  <section style={{
     background: 'linear-gradient(135deg, var(--bg-dark) 0%, #0D2B26 50%, var(--bg-dark) 100%)',
     minHeight: '100vh',
     display: 'flex',
     alignItems: 'center',
     position: 'relative',
     overflow: 'hidden',
-    paddingTop: '80px',
+    padding: '100px 0 60px',
   }}>
     {/* Animated Background Elements */}
-    <div style={{
+    <div className="hide-mobile" style={{
       position: 'absolute',
       top: '20%',
       right: '10%',
@@ -1155,7 +1271,7 @@ const HeroSection = () => {
       filter: 'blur(60px)',
       animation: 'float 6s ease-in-out infinite',
     }} />
-    <div style={{
+    <div className="hide-mobile" style={{
       position: 'absolute',
       bottom: '20%',
       left: '5%',
@@ -1167,55 +1283,58 @@ const HeroSection = () => {
       animation: 'float 8s ease-in-out infinite reverse',
     }} />
 
-    <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+    <div ref={animRef} className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
       <div style={{
         maxWidth: '800px',
         margin: '0 auto',
         textAlign: 'center',
+        padding: '0 8px',
       }}>
-        <div className={isVisible ? 'animate-fade-in' : ''} style={{
+        {/* Badge */}
+        <div className="anim-hidden" style={{
           display: 'inline-block',
           background: 'rgba(10, 107, 92, 0.2)',
           border: '1px solid rgba(10, 107, 92, 0.4)',
           borderRadius: '100px',
-          padding: '8px 20px',
-          marginBottom: '24px',
+          padding: '8px 16px',
+          marginBottom: '20px',
         }}>
-          <span style={{ color: 'var(--primary-light)', fontSize: '14px', fontWeight: '600' }}>
+          <span style={{ color: 'var(--primary-light)', fontSize: '13px', fontWeight: '600' }}>
             {t('hero.badge')}
           </span>
         </div>
 
-        <h1 className={isVisible ? 'animate-slide-up delay-100' : ''} style={{
+        {/* Title */}
+        <h1 className="anim-hidden delay-1" style={{
           fontFamily: "'Playfair Display', serif",
-          fontSize: 'clamp(32px, 6vw, 64px)',
+          fontSize: 'clamp(28px, 7vw, 56px)',
           fontWeight: '700',
           color: 'var(--text-light)',
-          lineHeight: '1.1',
-          marginBottom: '24px',
+          lineHeight: '1.15',
+          marginBottom: '20px',
         }}>
           {t('hero.title1')}<br/>
           <span style={{ color: 'var(--accent)' }}>{t('hero.title2')}</span>
         </h1>
 
-        <p className={isVisible ? 'animate-slide-up delay-200' : ''} style={{
-          fontSize: 'clamp(16px, 2vw, 18px)',
+        {/* Subtitle */}
+        <p className="anim-hidden delay-2" style={{
+          fontSize: 'clamp(14px, 3vw, 17px)',
           color: 'rgba(255,255,255,0.8)',
-          maxWidth: '600px',
-          margin: '0 auto 20px',
-          lineHeight: '1.7',
-          padding: '0 16px',
+          maxWidth: '550px',
+          margin: '0 auto 24px',
+          lineHeight: '1.6',
         }}>
           {t('hero.subtitle')}
         </p>
 
-        <div className={isVisible ? 'animate-slide-up delay-300' : ''} style={{
+        {/* Benefits - стек на мобильных */}
+        <div className="anim-hidden delay-3" style={{
           display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '12px',
-          marginBottom: '40px',
-          padding: '0 16px',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+          marginBottom: '32px',
         }}>
           {[
             t('hero.benefit1'),
@@ -1224,82 +1343,66 @@ const HeroSection = () => {
           ].map((item, i) => (
             <div
               key={i}
+              className="card-3d"
               style={{
                 background: 'rgba(255,255,255,0.05)',
                 padding: '10px 16px',
                 borderRadius: '8px',
                 border: '1px solid rgba(255,255,255,0.1)',
-                transition: 'all 0.3s ease',
                 backdropFilter: 'blur(10px)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.borderColor = 'rgba(10, 107, 92, 0.4)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                width: '100%',
+                maxWidth: '400px',
               }}
             >
-              <span style={{ color: 'var(--text-light)', fontSize: 'clamp(12px, 2vw, 14px)' }}>{item}</span>
+              <span style={{ color: 'var(--text-light)', fontSize: '13px' }}>{item}</span>
             </div>
           ))}
         </div>
 
-        <div className={isVisible ? 'animate-slide-up delay-400' : ''} style={{
+        {/* CTA Button */}
+        <div className="anim-hidden delay-4" style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '16px',
+          gap: '12px',
         }}>
           <Link
             to="/contact"
+            className="card-3d"
             style={{
               background: 'linear-gradient(135deg, var(--accent), var(--accent-dark))',
               color: 'white',
-              padding: '18px 48px',
+              padding: '16px 40px',
               borderRadius: '12px',
               textDecoration: 'none',
               fontWeight: '700',
-              fontSize: '16px',
+              fontSize: '15px',
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
               boxShadow: '0 4px 24px rgba(224, 122, 95, 0.4)',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
-              e.currentTarget.style.boxShadow = '0 8px 32px rgba(224, 122, 95, 0.6)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = '0 4px 24px rgba(224, 122, 95, 0.4)';
             }}
           >
             {t('hero.cta')}
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
-          <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px' }}>
+          <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '12px' }}>
             {t('hero.note')}
           </span>
         </div>
       </div>
 
-      {/* Stats Row */}
-      <div className={isVisible ? 'animate-slide-up delay-500' : ''} style={{
+      {/* Stats Row - 2x2 grid on mobile */}
+      <div className="anim-hidden delay-5" style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-        gap: '16px',
-        marginTop: '60px',
-        maxWidth: '700px',
-        margin: '60px auto 0',
-        padding: '0 16px',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '12px',
+        marginTop: '40px',
+        maxWidth: '500px',
+        margin: '40px auto 0',
+        padding: '0 8px',
       }}>
         {[
           { value: t('hero.stat1.value'), label: t('hero.stat1.label') },
@@ -1309,36 +1412,21 @@ const HeroSection = () => {
         ].map((stat, i) => (
           <div
             key={i}
+            className="card-3d glass"
             style={{
               textAlign: 'center',
-              padding: '20px 12px',
-              background: 'rgba(255,255,255,0.03)',
+              padding: '16px 10px',
               borderRadius: '12px',
-              border: '1px solid rgba(255,255,255,0.08)',
-              transition: 'all 0.3s ease',
-              backdropFilter: 'blur(10px)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(224, 122, 95, 0.2)';
-              e.currentTarget.style.borderColor = 'rgba(224, 122, 95, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
             }}
           >
             <div style={{
-              fontSize: 'clamp(24px, 4vw, 28px)',
+              fontSize: 'clamp(20px, 5vw, 26px)',
               fontWeight: '800',
               color: 'var(--accent)',
               marginBottom: '4px',
             }}>{stat.value}</div>
             <div style={{
-              fontSize: 'clamp(11px, 2vw, 13px)',
+              fontSize: 'clamp(10px, 2.5vw, 12px)',
               color: 'rgba(255,255,255,0.6)',
             }}>{stat.label}</div>
           </div>
@@ -1354,25 +1442,26 @@ const HeroSection = () => {
 // ============================================
 const ProblemSection = () => {
   const { t } = useLanguage();
-  const { ref, isVisible } = useIntersectionObserver();
+  const animRef = useScrollAnimation();
   
   return (
-  <section ref={ref} style={{
+  <section style={{
     background: 'var(--bg-cream)',
-    padding: 'clamp(60px, 10vw, 100px) 0',
+    padding: '60px 0',
   }}>
-    <div className="container">
-      <div className={isVisible ? 'animate-slide-up' : ''} style={{ textAlign: 'center', marginBottom: '60px' }}>
+    <div ref={animRef} className="container">
+      {/* Header */}
+      <div className="anim-hidden" style={{ textAlign: 'center', marginBottom: '40px' }}>
         <span style={{
           color: 'var(--accent)',
           fontWeight: '600',
-          fontSize: '14px',
+          fontSize: '13px',
           textTransform: 'uppercase',
           letterSpacing: '2px',
         }}>{t('problem.label')}</span>
         <h2 style={{
           fontFamily: "'Playfair Display', serif",
-          fontSize: 'clamp(28px, 4vw, 42px)',
+          fontSize: 'clamp(24px, 5vw, 38px)',
           fontWeight: '700',
           color: 'var(--text-dark)',
           marginTop: '12px',
@@ -1382,10 +1471,11 @@ const ProblemSection = () => {
         </h2>
       </div>
 
+      {/* Cards */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+        gap: '16px',
       }}>
         {[
           {
@@ -1409,74 +1499,59 @@ const ProblemSection = () => {
         ].map((item, i) => (
           <div
             key={i}
-            className={isVisible ? `animate-slide-up delay-${(i + 1) * 100}` : ''}
+            className={`anim-card card-3d delay-${i + 1}`}
             style={{
               background: 'white',
               borderRadius: '16px',
-              padding: '32px',
+              padding: '24px',
               border: '1px solid var(--border)',
-              transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-              cursor: 'default',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)';
-              e.currentTarget.style.boxShadow = '0 20px 48px rgba(0,0,0,0.12)';
-              e.currentTarget.style.borderColor = `${item.color}40`;
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
-              e.currentTarget.style.borderColor = 'var(--border)';
+              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
             }}
           >
             <div style={{
-              width: '56px',
-              height: '56px',
+              width: '48px',
+              height: '48px',
               background: `${item.color}15`,
               borderRadius: '12px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '24px',
-              marginBottom: '20px',
-              transition: 'transform 0.3s ease',
+              fontSize: '22px',
+              marginBottom: '16px',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(-5deg) scale(1.1)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0) scale(1)'}
             >{item.icon}</div>
             <h3 style={{
-              fontSize: 'clamp(16px, 2.5vw, 18px)',
+              fontSize: '16px',
               fontWeight: '700',
               color: 'var(--text-dark)',
-              marginBottom: '12px',
+              marginBottom: '10px',
             }}>{item.title}</h3>
             <p style={{
-              fontSize: 'clamp(14px, 2vw, 15px)',
+              fontSize: '14px',
               color: 'var(--text-muted)',
-              lineHeight: '1.6',
+              lineHeight: '1.5',
             }}>{item.desc}</p>
           </div>
         ))}
       </div>
 
+      {/* Warning */}
       <div
-        className={isVisible ? 'animate-slide-up delay-400' : ''}
+        className="anim-card delay-4"
         style={{
           background: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)',
-          borderRadius: '16px',
-          padding: 'clamp(20px, 3vw, 24px) clamp(24px, 4vw, 32px)',
-          marginTop: '40px',
+          borderRadius: '12px',
+          padding: '16px 20px',
+          marginTop: '24px',
           display: 'flex',
-          alignItems: 'center',
-          gap: '16px',
+          alignItems: 'flex-start',
+          gap: '12px',
           border: '1px solid #F59E0B',
-          boxShadow: '0 4px 16px rgba(245, 158, 11, 0.15)',
         }}
       >
-        <span style={{ fontSize: 'clamp(24px, 3vw, 28px)', flexShrink: 0 }}>⚠️</span>
+        <span style={{ fontSize: '20px', flexShrink: 0 }}>⚠️</span>
         <p style={{
-          fontSize: 'clamp(14px, 2vw, 15px)',
+          fontSize: '14px',
           color: '#92400E',
           lineHeight: '1.6',
         }}>
@@ -1493,36 +1568,28 @@ const ProblemSection = () => {
 // ============================================
 const SolutionSection = () => {
   const { t } = useLanguage();
+  const animRef = useScrollAnimation();
+  
   return (
   <section style={{
     background: 'var(--bg-dark)',
-    padding: '100px 0',
+    padding: '60px 0',
     position: 'relative',
     overflow: 'hidden',
   }}>
-    <div style={{
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: '600px',
-      height: '600px',
-      background: 'radial-gradient(circle, rgba(10, 107, 92, 0.15) 0%, transparent 60%)',
-      borderRadius: '50%',
-    }} />
-
-    <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+    <div ref={animRef} className="container" style={{ position: 'relative', zIndex: 1 }}>
+      {/* Header */}
+      <div className="anim-hidden" style={{ textAlign: 'center', marginBottom: '40px' }}>
         <span style={{
           color: 'var(--accent)',
           fontWeight: '600',
-          fontSize: '14px',
+          fontSize: '13px',
           textTransform: 'uppercase',
           letterSpacing: '2px',
         }}>{t('solution.label')}</span>
         <h2 style={{
           fontFamily: "'Playfair Display', serif",
-          fontSize: 'clamp(28px, 4vw, 42px)',
+          fontSize: 'clamp(24px, 5vw, 38px)',
           fontWeight: '700',
           color: 'var(--text-light)',
           marginTop: '12px',
@@ -1531,37 +1598,39 @@ const SolutionSection = () => {
           <span style={{ color: 'var(--primary-light)' }}>{t('solution.title2')}</span>
         </h2>
         <p style={{
-          fontSize: '18px',
+          fontSize: '15px',
           color: 'rgba(255,255,255,0.7)',
-          maxWidth: '600px',
-          margin: '20px auto 0',
+          maxWidth: '500px',
+          margin: '16px auto 0',
+          lineHeight: '1.6',
         }}>
           {t('solution.subtitle')}
         </p>
       </div>
 
-      {/* Comparison Table */}
+      {/* Comparison Cards */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '24px',
-        maxWidth: '900px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '16px',
+        maxWidth: '800px',
         margin: '0 auto',
       }}>
-        <div style={{
+        {/* Old Way - Red */}
+        <div className="anim-left delay-1 card-3d" style={{
           background: 'rgba(220, 38, 38, 0.1)',
           borderRadius: '16px',
-          padding: '32px',
+          padding: '24px',
           border: '1px solid rgba(220, 38, 38, 0.3)',
         }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
-            marginBottom: '24px',
+            gap: '10px',
+            marginBottom: '20px',
           }}>
-            <span style={{ fontSize: '24px' }}>❌</span>
-            <h3 style={{ color: '#FCA5A5', fontSize: '18px', fontWeight: '700' }}>
+            <span style={{ fontSize: '20px' }}>❌</span>
+            <h3 style={{ color: '#FCA5A5', fontSize: '16px', fontWeight: '700' }}>
               {t('solution.old.title')}
             </h3>
           </div>
@@ -1575,30 +1644,31 @@ const SolutionSection = () => {
             <div key={i} style={{
               display: 'flex',
               alignItems: 'flex-start',
-              gap: '12px',
-              padding: '12px 0',
+              gap: '10px',
+              padding: '10px 0',
               borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.1)' : 'none',
             }}>
-              <span style={{ color: '#FCA5A5' }}>✗</span>
-              <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '14px' }}>{item}</span>
+              <span style={{ color: '#FCA5A5', flexShrink: 0 }}>✗</span>
+              <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px', lineHeight: '1.4' }}>{item}</span>
             </div>
           ))}
         </div>
 
-        <div style={{
+        {/* New Way - Green */}
+        <div className="anim-right delay-2 card-3d" style={{
           background: 'rgba(10, 107, 92, 0.15)',
           borderRadius: '16px',
-          padding: '32px',
+          padding: '24px',
           border: '1px solid rgba(10, 107, 92, 0.4)',
         }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
-            marginBottom: '24px',
+            gap: '10px',
+            marginBottom: '20px',
           }}>
-            <span style={{ fontSize: '24px' }}>✅</span>
-            <h3 style={{ color: 'var(--primary-light)', fontSize: '18px', fontWeight: '700' }}>
+            <span style={{ fontSize: '20px' }}>✅</span>
+            <h3 style={{ color: 'var(--primary-light)', fontSize: '16px', fontWeight: '700' }}>
               {t('solution.new.title')}
             </h3>
           </div>
@@ -1612,12 +1682,12 @@ const SolutionSection = () => {
             <div key={i} style={{
               display: 'flex',
               alignItems: 'flex-start',
-              gap: '12px',
-              padding: '12px 0',
+              gap: '10px',
+              padding: '10px 0',
               borderBottom: i < 4 ? '1px solid rgba(255,255,255,0.1)' : 'none',
             }}>
-              <span style={{ color: 'var(--primary-light)' }}>✓</span>
-              <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '14px' }}>{item}</span>
+              <span style={{ color: 'var(--primary-light)', flexShrink: 0 }}>✓</span>
+              <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '13px', lineHeight: '1.4' }}>{item}</span>
             </div>
           ))}
         </div>
@@ -2188,25 +2258,26 @@ const WhyUsSection = () => {
 // ============================================
 const PricingSection = () => {
   const { t } = useLanguage();
-  const { ref, isVisible } = useIntersectionObserver();
+  const animRef = useScrollAnimation();
   
   return (
-  <section ref={ref} style={{
+  <section style={{
     background: 'white',
-    padding: 'clamp(60px, 10vw, 100px) 0',
+    padding: '60px 0',
   }}>
-    <div className="container">
-      <div className={isVisible ? 'animate-slide-up' : ''} style={{ textAlign: 'center', marginBottom: '60px' }}>
+    <div ref={animRef} className="container">
+      {/* Header */}
+      <div className="anim-hidden" style={{ textAlign: 'center', marginBottom: '40px' }}>
         <span style={{
           color: 'var(--accent)',
           fontWeight: '600',
-          fontSize: '14px',
+          fontSize: '13px',
           textTransform: 'uppercase',
           letterSpacing: '2px',
         }}>{t('pricing.label')}</span>
         <h2 style={{
           fontFamily: "'Playfair Display', serif",
-          fontSize: 'clamp(28px, 4vw, 42px)',
+          fontSize: 'clamp(24px, 5vw, 38px)',
           fontWeight: '700',
           color: 'var(--text-dark)',
           marginTop: '12px',
@@ -2216,11 +2287,12 @@ const PricingSection = () => {
         </h2>
       </div>
 
+      {/* Pricing Cards */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '24px',
-        maxWidth: '1000px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+        gap: '16px',
+        maxWidth: '900px',
         margin: '0 auto',
       }}>
         {[
@@ -2270,117 +2342,125 @@ const PricingSection = () => {
             popular: false,
           },
         ].map((plan, i) => (
-          <div key={i} style={{
-            background: plan.popular ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'var(--bg-cream)',
-            borderRadius: '20px',
-            padding: '32px',
-            border: plan.popular ? 'none' : '1px solid var(--border)',
-            position: 'relative',
-            transform: plan.popular ? 'scale(1.05)' : 'none',
-          }}>
+          <div
+            key={i}
+            className={`anim-card card-3d delay-${i + 1}`}
+            style={{
+              background: plan.popular ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'var(--bg-cream)',
+              borderRadius: '16px',
+              padding: '24px',
+              border: plan.popular ? 'none' : '1px solid var(--border)',
+              position: 'relative',
+            }}
+          >
             {plan.popular && (
               <div style={{
                 position: 'absolute',
-                top: '-12px',
+                top: '-10px',
                 left: '50%',
                 transform: 'translateX(-50%)',
                 background: 'var(--accent)',
                 color: 'white',
-                padding: '6px 16px',
+                padding: '4px 12px',
                 borderRadius: '100px',
-                fontSize: '12px',
+                fontSize: '11px',
                 fontWeight: '700',
               }}>{t('pricing.popular')}</div>
             )}
-            <div style={{ marginBottom: '24px' }}>
+            <div style={{ marginBottom: '16px' }}>
               <h3 style={{
-                fontSize: '22px',
+                fontSize: '20px',
                 fontWeight: '700',
                 color: plan.popular ? 'white' : 'var(--text-dark)',
                 marginBottom: '4px',
               }}>{plan.name}</h3>
               <p style={{
-                fontSize: '14px',
+                fontSize: '13px',
                 color: plan.popular ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)',
               }}>{plan.subtitle}</p>
             </div>
-            <div style={{ marginBottom: '20px' }}>
+            <div style={{ marginBottom: '16px' }}>
               <span style={{
-                fontSize: '42px',
+                fontSize: '36px',
                 fontWeight: '800',
                 color: plan.popular ? 'white' : 'var(--text-dark)',
               }}>{plan.price}</span>
               <span style={{
-                fontSize: '16px',
+                fontSize: '14px',
                 color: plan.popular ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)',
               }}>{t('pricing.month')}</span>
             </div>
             <div style={{
               display: 'flex',
-              gap: '12px',
-              marginBottom: '24px',
+              flexWrap: 'wrap',
+              gap: '8px',
+              marginBottom: '16px',
             }}>
               <span style={{
                 background: plan.popular ? 'rgba(255,255,255,0.2)' : 'rgba(10, 107, 92, 0.1)',
                 color: plan.popular ? 'white' : 'var(--primary)',
-                padding: '6px 12px',
+                padding: '4px 10px',
                 borderRadius: '6px',
-                fontSize: '13px',
+                fontSize: '12px',
                 fontWeight: '600',
               }}>+{plan.commission} {t('pricing.commissionText')}</span>
               <span style={{
                 background: plan.popular ? 'rgba(255,255,255,0.2)' : 'rgba(224, 122, 95, 0.1)',
                 color: plan.popular ? 'white' : 'var(--accent)',
-                padding: '6px 12px',
+                padding: '4px 10px',
                 borderRadius: '6px',
-                fontSize: '13px',
+                fontSize: '12px',
                 fontWeight: '600',
               }}>{plan.limit}</span>
             </div>
             <ul style={{
               listStyle: 'none',
-              marginBottom: '24px',
+              marginBottom: '16px',
             }}>
               {plan.features.map((feature, j) => (
                 <li key={j} style={{
                   display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  padding: '8px 0',
-                  fontSize: '14px',
+                  alignItems: 'flex-start',
+                  gap: '8px',
+                  padding: '6px 0',
+                  fontSize: '13px',
                   color: plan.popular ? 'rgba(255,255,255,0.9)' : 'var(--text-dark)',
+                  lineHeight: '1.4',
                 }}>
-                  <span style={{ color: plan.popular ? 'var(--accent-light)' : 'var(--primary)' }}>✓</span>
+                  <span style={{ color: plan.popular ? 'var(--accent-light)' : 'var(--primary)', flexShrink: 0, marginTop: '2px' }}>✓</span>
                   {feature}
                 </li>
               ))}
             </ul>
-            <Link to="/contact" style={{
-              display: 'block',
-              background: plan.popular ? 'white' : 'var(--primary)',
-              color: plan.popular ? 'var(--primary)' : 'white',
-              padding: '14px',
-              borderRadius: '10px',
-              textDecoration: 'none',
-              fontWeight: '600',
-              fontSize: '15px',
-              textAlign: 'center',
-              transition: 'all 0.2s ease',
-            }}>{t('pricing.choose')}</Link>
+            <Link
+              to="/contact"
+              className="card-3d"
+              style={{
+                display: 'block',
+                background: plan.popular ? 'white' : 'var(--primary)',
+                color: plan.popular ? 'var(--primary)' : 'white',
+                padding: '12px',
+                borderRadius: '10px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '14px',
+                textAlign: 'center',
+              }}
+            >{t('pricing.choose')}</Link>
           </div>
         ))}
       </div>
 
       {/* Fulfillment Note */}
-      <div style={{
-        marginTop: '48px',
-        padding: '24px 32px',
+      <div className="anim-hidden delay-5" style={{
+        marginTop: '32px',
+        padding: '16px 20px',
         background: 'var(--bg-cream)',
-        borderRadius: '16px',
+        borderRadius: '12px',
         border: '1px solid var(--border)',
         textAlign: 'center',
       }}>
-        <p style={{ fontSize: '14px', color: 'var(--text-muted)' }}>
+        <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.5' }}>
           <strong style={{ color: 'var(--text-dark)' }}>{t('pricing.fulfillment.note')}</strong> {t('pricing.fulfillment.text')}
         </p>
       </div>
