@@ -4404,7 +4404,7 @@ const FulfillmentPage = () => {
           maxWidth: '600px',
         }}>
           {[
-            { value: '3-7', label: t('fulfillment.stats.1') },
+            { value: '$3-7', label: t('fulfillment.stats.1') },
             { value: '$3', label: t('fulfillment.stats.2') },
             { value: '180+', label: t('fulfillment.stats.3') },
             { value: '24/7', label: t('fulfillment.stats.4') },
