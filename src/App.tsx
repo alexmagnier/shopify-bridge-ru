@@ -201,7 +201,7 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.commissionText': 'с продаж',
     'pricing.choose': 'Выбрать',
     'pricing.fulfillment.note': 'Фулфилмент оплачивается отдельно:',
-    'pricing.fulfillment.text': 'Подключение к складу $399 (разово) • Хранение $299/мес • Обработка заказов $3/заказ',
+    'pricing.fulfillment.text': 'Подключение к складу $399 (разово) • Хранение от $299/мес • Обработка заказов $3/заказ',
     
     // FAQ Section
     'faq.label': 'FAQ',
@@ -506,7 +506,7 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.commissionText': 'of sales',
     'pricing.choose': 'Choose',
     'pricing.fulfillment.note': 'Fulfillment is billed separately:',
-    'pricing.fulfillment.text': 'Warehouse setup $399 (one-time) • Storage $299/mo • Order processing $3/order',
+    'pricing.fulfillment.text': 'Warehouse setup $399 (one-time) • Storage от $299/mo • Order processing $3/order',
     
     // FAQ Section
     'faq.label': 'FAQ',
@@ -3234,7 +3234,7 @@ const FulfillmentPage = () => {
           }}>
             {[
               { label: t('fulfillment.pricing.setup'), value: '$399', note: t('fulfillment.pricing.setupNote') },
-              { label: t('fulfillment.pricing.storage'), value: '$299', note: t('fulfillment.pricing.storageNote') },
+              { label: t('fulfillment.pricing.storage'), value: 'от $299', note: t('fulfillment.pricing.storageNote') },
               { label: t('fulfillment.pricing.processing'), value: '$3', note: t('fulfillment.pricing.processingNote') },
               { label: t('fulfillment.pricing.returns'), value: '$2', note: t('fulfillment.pricing.returnsNote') },
             ].map((item, i) => (
@@ -3261,7 +3261,7 @@ const FulfillmentPage = () => {
             </h4>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '14px' }}>
               <span style={{ color: 'var(--text-muted)' }}>{t('fulfillment.pricing.exStorage')}</span>
-              <span style={{ color: 'var(--text-dark)', fontWeight: '600' }}>$299</span>
+              <span style={{ color: 'var(--text-dark)', fontWeight: '600' }}>от $299</span>
               <span style={{ color: 'var(--text-muted)' }}>{t('fulfillment.pricing.exProcessing')}</span>
               <span style={{ color: 'var(--text-dark)', fontWeight: '600' }}>$150</span>
               <span style={{ color: 'var(--text-muted)' }}>{t('fulfillment.pricing.exShipping')}</span>
