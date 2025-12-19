@@ -1089,6 +1089,13 @@ const GlobalStyles = () => (
         padding: 24px 16px !important;
       }
       
+      /* Desktop default padding */
+      @media (min-width: 769px) {
+        .calculator-card {
+          padding: 40px !important;
+        }
+      }
+      
       .calculator-card h4 {
         font-size: 15px !important;
         margin-bottom: 16px !important;
@@ -1155,6 +1162,15 @@ const GlobalStyles = () => (
       
       .gradient-box-cta {
         padding: 16px !important;
+        margin-top: 12px !important;
+      }
+      
+      /* Desktop padding for gradient box */
+      @media (min-width: 769px) {
+        .gradient-box-cta {
+          padding: 24px !important;
+          margin-top: 20px !important;
+        }
       }
       
       
@@ -1210,10 +1226,11 @@ const GlobalStyles = () => (
       
       /* Calculator cards on very small screens */
       .calculator-card {
-        padding: 18px 12px !important;
+        padding: 16px 10px !important;
       }
       
       .calculator-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 12px !important;
       }
       
@@ -3670,7 +3687,6 @@ const WhyUsAffordableSection = () => {
             <div className="hover-card calculator-card" style={{
               background: 'white',
               borderRadius: '20px',
-              padding: '40px',
               textAlign: 'center',
               border: '2px solid var(--border)',
               boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
@@ -3697,10 +3713,8 @@ const WhyUsAffordableSection = () => {
                 С нами: <span style={{ fontWeight: '700', color: 'var(--primary)' }}>~$779</span>
               </div>
               <div className="gradient-box-cta" style={{
-                padding: 'clamp(16px, 3vw, 24px)',
                 background: 'linear-gradient(135deg, var(--primary), var(--accent))',
                 borderRadius: '16px',
-                marginTop: 'clamp(12px, 3vw, 20px)',
                 color: 'white',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
@@ -3712,7 +3726,6 @@ const WhyUsAffordableSection = () => {
             <div className="hover-card calculator-card" style={{
               background: 'white',
               borderRadius: '20px',
-              padding: '40px',
               textAlign: 'center',
               border: '2px solid var(--border)',
               boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
@@ -3739,10 +3752,8 @@ const WhyUsAffordableSection = () => {
                 С нами: <span style={{ fontWeight: '700', color: 'var(--primary)' }}>2-3 недели</span>
               </div>
               <div className="gradient-box-cta" style={{
-                padding: 'clamp(16px, 3vw, 24px)',
                 background: 'linear-gradient(135deg, var(--primary), var(--accent))',
                 borderRadius: '16px',
-                marginTop: 'clamp(12px, 3vw, 20px)',
                 color: 'white',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
