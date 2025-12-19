@@ -3186,28 +3186,870 @@ const FulfillmentPage = () => {
 
 // Pricing Page
 const PricingPage = () => {
-  const { t } = useLanguage();
   return (
-  <div style={{ paddingTop: '100px' }}>
-    <section style={{ background: 'var(--bg-cream)', padding: '60px 0' }}>
-      <div className="container">
-        <h1 style={{
-          fontFamily: "var(--font-family)",
-          fontWeight: '800',
-          fontSize: 'clamp(32px, 5vw, 48px)',
-          color: 'var(--text-dark)',
-          marginBottom: '20px',
-        }}>
-          {t('page.pricing.title1')} <span style={{ color: 'var(--primary)' }}>{t('page.pricing.title2')}</span>
-        </h1>
-        <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px' }}>
-          {t('page.pricing.subtitle')}
-        </p>
-      </div>
-    </section>
-    <PricingSection />
-    <CTASection />
-  </div>
+    <div style={{ paddingTop: '100px' }}>
+      {/* Hero */}
+      <section style={{ background: 'var(--bg-cream)', padding: '60px 0 40px' }}>
+        <div className="container">
+          <span style={{
+            color: 'var(--accent)',
+            fontWeight: '600',
+            fontSize: '14px',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+          }}>Тарифы</span>
+          <h1 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(32px, 5vw, 48px)',
+            fontWeight: '700',
+            color: 'var(--text-dark)',
+            marginTop: '12px',
+            marginBottom: '16px',
+          }}>
+            Прозрачные <span style={{ color: 'var(--primary)' }}>тарифы</span>
+          </h1>
+          <p style={{ fontSize: '18px', color: 'var(--text-muted)', maxWidth: '600px' }}>
+            Никаких скрытых платежей и неожиданных списаний. 
+            Вы точно знаете, сколько платите и за что.
+          </p>
+        </div>
+      </section>
+
+      {/* Commission Block */}
+      <section style={{ background: 'white', padding: '40px 0' }}>
+        <div className="container">
+          <div style={{
+            background: 'var(--bg-cream)',
+            borderRadius: '20px',
+            padding: '40px',
+            textAlign: 'center',
+            border: '2px solid var(--border)',
+            maxWidth: '700px',
+            margin: '0 auto',
+          }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              marginBottom: '16px',
+            }}>
+              <span style={{ fontSize: '20px' }}>ℹ️</span>
+              <span style={{
+                color: 'var(--accent)',
+                fontWeight: '700',
+                fontSize: '14px',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+              }}>Комиссия от продаж</span>
+            </div>
+            <div style={{
+              fontSize: '64px',
+              fontWeight: '800',
+              color: 'var(--text-dark)',
+              lineHeight: '1',
+              marginBottom: '16px',
+            }}>10%</div>
+            <p style={{
+              fontSize: '16px',
+              color: 'var(--text-muted)',
+              maxWidth: '450px',
+              margin: '0 auto 12px',
+            }}>
+              От каждой выплаты — за Shopify-инфраструктуру, обработку платежей, 
+              контроль рисков и сопровождение
+            </p>
+            <p style={{
+              fontSize: '13px',
+              color: 'var(--text-muted)',
+              fontStyle: 'italic',
+            }}>
+              (взимается только с фактических продаж)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Packages */}
+      <section style={{ background: 'white', padding: '60px 0' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(28px, 4vw, 36px)',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              marginBottom: '12px',
+            }}>
+              Пакеты запуска <span style={{ color: 'var(--primary)' }}>магазина</span>
+            </h2>
+            <p style={{ fontSize: '16px', color: 'var(--text-muted)' }}>
+              Стоимость зависит от количества SKU
+            </p>
+            
+            {/* SKU Explanation */}
+            <div style={{
+              background: 'rgba(10, 107, 92, 0.08)',
+              borderRadius: '12px',
+              padding: '16px 24px',
+              marginTop: '20px',
+              maxWidth: '700px',
+              margin: '20px auto 0',
+              border: '1px solid rgba(10, 107, 92, 0.2)',
+            }}>
+              <p style={{ fontSize: '14px', color: 'var(--text-dark)', margin: 0 }}>
+                <strong>Важно:</strong> Под "SKU" понимается один тип товара, который можно купить отдельно.
+                <br/>
+                <span style={{ color: 'var(--text-muted)' }}>
+                  Например: белая футболка и чёрная футболка = 2 SKU. 
+                  Но размеры S/M/L каждой футболки — это вариации одного SKU, а не отдельные SKU.
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '20px',
+            maxWidth: '1100px',
+            margin: '0 auto',
+          }}>
+            {[
+              {
+                badge: 'Тестирование',
+                badgeColor: 'var(--text-muted)',
+                name: 'Testing Package',
+                subtitle: 'Для тестирования рынка и валидации спроса',
+                sku: 'до 2 SKU',
+                price: '$380',
+                maintenance: null,
+                features: [
+                  'Настройка Shopify-магазина',
+                  'Чистая, простая тема',
+                  'Подключение платёжного шлюза',
+                  'Базовая навигация',
+                  'Мобильная оптимизация',
+                  'Готовность к интеграции фулфилмента',
+                ],
+                highlight: 'Включает хранение на 1-2 типа товара',
+                popular: false,
+              },
+              {
+                badge: null,
+                name: 'Starter Store',
+                subtitle: 'Для старта с минимальным каталогом',
+                sku: 'до 10 SKU',
+                price: '$590',
+                maintenance: '$300 каждые 3 месяца',
+                features: [
+                  'Полная настройка магазина',
+                  'Подключение платёжных решений',
+                  'Базовое оформление и мобильная адаптация',
+                  'Подготовка магазина к международным продажам',
+                ],
+                popular: false,
+              },
+              {
+                badge: 'Рекомендуем',
+                badgeColor: 'var(--primary)',
+                name: 'Growth Store',
+                subtitle: 'Для роста и масштабирования',
+                sku: 'до 25 SKU',
+                price: '$1,200',
+                maintenance: '$450 каждые 3 месяца',
+                features: [
+                  'Всё из Starter',
+                  'Улучшенная структура каталога',
+                  'Логика категорий',
+                  'Базовая SEO-структура',
+                  'Подготовка магазина к масштабированию',
+                ],
+                popular: true,
+              },
+              {
+                badge: null,
+                name: 'Business Store',
+                subtitle: 'Для серьёзного бизнеса',
+                sku: 'до 50 SKU',
+                price: '$2,200',
+                maintenance: '$650 каждые 3 месяца',
+                features: [
+                  'Всё из Growth',
+                  'Продвинутая логика каталога',
+                  'Аналитика и отслеживание заказов',
+                  'Готовность к рекламе и росту',
+                ],
+                popular: false,
+              },
+            ].map((plan, i) => (
+              <div key={i} style={{
+                background: plan.popular ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'var(--bg-cream)',
+                borderRadius: '20px',
+                padding: '28px',
+                border: plan.popular ? 'none' : '1px solid var(--border)',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column',
+              }}>
+                {plan.badge && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '-12px',
+                    left: '20px',
+                    background: plan.popular ? 'var(--accent)' : 'var(--bg-dark)',
+                    color: 'white',
+                    padding: '6px 14px',
+                    borderRadius: '100px',
+                    fontSize: '11px',
+                    fontWeight: '700',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px',
+                  }}>{plan.badge}</div>
+                )}
+                
+                <div style={{ marginBottom: '20px', marginTop: plan.badge ? '8px' : 0 }}>
+                  <h3 style={{
+                    fontSize: '20px',
+                    fontWeight: '700',
+                    color: plan.popular ? 'white' : 'var(--text-dark)',
+                    marginBottom: '4px',
+                  }}>{plan.name}</h3>
+                  <p style={{
+                    fontSize: '13px',
+                    color: plan.popular ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)',
+                  }}>{plan.subtitle}</p>
+                </div>
+
+                <div style={{
+                  background: plan.popular ? 'rgba(255,255,255,0.1)' : 'white',
+                  borderRadius: '8px',
+                  padding: '6px 12px',
+                  display: 'inline-block',
+                  marginBottom: '16px',
+                  alignSelf: 'flex-start',
+                }}>
+                  <span style={{
+                    fontSize: '12px',
+                    fontWeight: '600',
+                    color: plan.popular ? 'var(--accent-light)' : 'var(--primary)',
+                  }}>{plan.sku}</span>
+                </div>
+
+                <div style={{ marginBottom: '16px' }}>
+                  <span style={{
+                    fontSize: '42px',
+                    fontWeight: '800',
+                    color: plan.popular ? 'white' : 'var(--text-dark)',
+                  }}>{plan.price}</span>
+                </div>
+
+                {plan.maintenance && (
+                  <div style={{
+                    fontSize: '13px',
+                    color: plan.popular ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)',
+                    marginBottom: '20px',
+                    padding: '8px 12px',
+                    background: plan.popular ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.03)',
+                    borderRadius: '8px',
+                  }}>
+                    <strong>Обслуживание и поддержка:</strong><br/>
+                    {plan.maintenance}
+                  </div>
+                )}
+
+                {plan.highlight && (
+                  <div style={{
+                    fontSize: '12px',
+                    color: 'var(--primary)',
+                    marginBottom: '16px',
+                    padding: '10px 12px',
+                    background: 'rgba(10, 107, 92, 0.1)',
+                    borderRadius: '8px',
+                    fontWeight: '600',
+                  }}>
+                    ✓ {plan.highlight}
+                  </div>
+                )}
+
+                <ul style={{
+                  listStyle: 'none',
+                  marginBottom: '24px',
+                  flex: 1,
+                }}>
+                  {plan.features.map((feature, j) => (
+                    <li key={j} style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '10px',
+                      padding: '6px 0',
+                      fontSize: '13px',
+                      color: plan.popular ? 'rgba(255,255,255,0.9)' : 'var(--text-dark)',
+                    }}>
+                      <span style={{ 
+                        color: plan.popular ? 'var(--accent-light)' : 'var(--primary)',
+                        flexShrink: 0,
+                      }}>✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <Link to="/contact" style={{
+                  display: 'block',
+                  background: plan.popular ? 'white' : 'transparent',
+                  color: plan.popular ? 'var(--primary)' : 'var(--text-dark)',
+                  padding: '14px',
+                  borderRadius: '10px',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  fontSize: '14px',
+                  textAlign: 'center',
+                  border: plan.popular ? 'none' : '2px solid var(--border)',
+                  transition: 'all 0.2s ease',
+                }}>
+                  Оставить заявку
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          {/* Enterprise note */}
+          <div style={{
+            textAlign: 'center',
+            marginTop: '40px',
+            padding: '32px',
+            background: 'var(--bg-cream)',
+            borderRadius: '16px',
+            border: '1px solid var(--border)',
+            maxWidth: '600px',
+            margin: '40px auto 0',
+          }}>
+            <h3 style={{
+              fontSize: '18px',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              marginBottom: '8px',
+            }}>Больше 50 SKU?</h3>
+            <p style={{
+              fontSize: '14px',
+              color: 'var(--text-muted)',
+              marginBottom: '20px',
+            }}>
+              Свяжитесь для индивидуального предложения под ваш масштаб
+            </p>
+            <Link to="/contact" style={{
+              display: 'inline-block',
+              background: 'transparent',
+              color: 'var(--text-dark)',
+              padding: '12px 28px',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '14px',
+              border: '2px solid var(--text-dark)',
+            }}>
+              Связаться с нами
+            </Link>
+          </div>
+
+          {/* Transparency note */}
+          <div style={{
+            textAlign: 'center',
+            marginTop: '32px',
+            padding: '16px 24px',
+            background: 'rgba(224, 122, 95, 0.08)',
+            borderRadius: '12px',
+            border: '1px solid rgba(224, 122, 95, 0.2)',
+            maxWidth: '700px',
+            margin: '32px auto 0',
+          }}>
+            <p style={{ fontSize: '14px', color: 'var(--text-dark)', margin: 0 }}>
+              💡 Такой подход позволяет клиенту платить только за реальный объём работ и прозрачно понимать стоимость запуска.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* What's Included */}
+      <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
+        <div className="container">
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(28px, 4vw, 36px)',
+            fontWeight: '700',
+            color: 'var(--text-dark)',
+            textAlign: 'center',
+            marginBottom: '48px',
+          }}>
+            Что входит в <span style={{ color: 'var(--primary)' }}>обслуживание</span>
+          </h2>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '24px',
+          }}>
+            {[
+              {
+                title: 'Настройка магазина',
+                items: [
+                  'Создание и конфигурация Shopify-магазина',
+                  'Базовый или премиум дизайн (зависит от тарифа)',
+                  'Структура каталога и категорий',
+                  'Настройка платёжных провайдеров',
+                ],
+              },
+              {
+                title: 'Операционное сопровождение',
+                items: [
+                  'Обработка и контроль заказов',
+                  'Мониторинг возвратов и чарджбеков',
+                  'Регулярные проверки на соответствие правилам',
+                  'Превентивные меры против блокировок',
+                ],
+              },
+              {
+                title: 'Отчётность и выплаты',
+                items: [
+                  'Еженедельные отчёты по продажам',
+                  'Детализация по комиссиям и возвратам',
+                  'Выплаты по расписанию',
+                  'Прозрачная история всех операций',
+                ],
+              },
+              {
+                title: 'Поддержка',
+                items: [
+                  'Персональный аккаунт-менеджер',
+                  'Оперативная связь',
+                  'Ответы в течение рабочего дня',
+                  'Помощь с любыми вопросами',
+                ],
+              },
+            ].map((block, i) => (
+              <div key={i} style={{
+                background: 'white',
+                borderRadius: '16px',
+                padding: '28px',
+                border: '1px solid var(--border)',
+              }}>
+                <h3 style={{
+                  fontSize: '18px',
+                  fontWeight: '700',
+                  color: 'var(--text-dark)',
+                  marginBottom: '20px',
+                }}>{block.title}</h3>
+                <ul style={{ listStyle: 'none' }}>
+                  {block.items.map((item, j) => (
+                    <li key={j} style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '10px',
+                      padding: '8px 0',
+                      fontSize: '14px',
+                      color: 'var(--text-muted)',
+                    }}>
+                      <span style={{ color: 'var(--primary)', flexShrink: 0 }}>✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Optional Services */}
+      <section style={{ background: 'white', padding: '80px 0' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h2 style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 'clamp(28px, 4vw, 36px)',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              marginBottom: '12px',
+            }}>
+              Дополнительные <span style={{ color: 'var(--accent)' }}>опциональные</span> услуги
+            </h2>
+            <p style={{ fontSize: '16px', color: 'var(--text-muted)' }}>
+              Эти услуги не являются обязательными и предоставляются по вашему желанию
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gap: '24px',
+            maxWidth: '900px',
+            margin: '0 auto',
+          }}>
+            {/* Fulfillment */}
+            <div style={{
+              background: 'var(--bg-cream)',
+              borderRadius: '20px',
+              padding: '32px',
+              border: '1px solid var(--border)',
+            }}>
+              <span style={{
+                display: 'inline-block',
+                background: 'rgba(224, 122, 95, 0.15)',
+                color: 'var(--accent)',
+                padding: '6px 14px',
+                borderRadius: '100px',
+                fontSize: '11px',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                marginBottom: '16px',
+              }}>Опционально</span>
+              
+              <h3 style={{
+                fontSize: '20px',
+                fontWeight: '700',
+                color: 'var(--text-dark)',
+                marginBottom: '16px',
+              }}>Фулфилмент и 3PL в ОАЭ</h3>
+              
+              <p style={{
+                fontSize: '14px',
+                color: 'var(--text-muted)',
+                marginBottom: '20px',
+                lineHeight: '1.6',
+              }}>
+                Эта услуга предназначена для бизнесов, которые хотят профессионально 
+                организовать логистику за пределами России. Товар хранится и отправляется 
+                через партнёра-логиста (3PL) в Дубае.
+              </p>
+
+              <p style={{
+                fontSize: '13px',
+                color: 'var(--text-muted)',
+                marginBottom: '24px',
+                padding: '12px',
+                background: 'rgba(0,0,0,0.03)',
+                borderRadius: '8px',
+              }}>
+                Такая модель позволяет начать с небольших тестовых партий, 
+                протестировать несколько продуктов и масштабировать только то, что работает.
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
+                {[
+                  { label: 'Настройка 3PL', sublabel: 'Онбординг, настройка SKU, приём товара', price: '$399', note: 'разово' },
+                  { label: 'Хранение и управление', sublabel: 'Складское хранение, работа со стоком', price: '$299', note: 'в месяц' },
+                  { label: 'Обработка заказа', sublabel: 'Сборка и упаковка', price: '$3', note: 'за заказ' },
+                ].map((item, j) => (
+                  <div key={j} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-start',
+                    padding: '12px 0',
+                    borderBottom: j < 2 ? '1px solid var(--border)' : 'none',
+                  }}>
+                    <div>
+                      <div style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-dark)' }}>{item.label}</div>
+                      <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{item.sublabel}</div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: '16px', fontWeight: '700', color: 'var(--primary)' }}>{item.price}</div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{item.note}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <p style={{
+                fontSize: '12px',
+                color: 'var(--text-muted)',
+                marginBottom: '20px',
+                fontStyle: 'italic',
+              }}>
+                Стоимость доставки рассчитывается отдельно в зависимости от направления и тарифов перевозчика.
+              </p>
+
+              <Link to="/fulfillment" style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                background: 'transparent',
+                color: 'var(--text-dark)',
+                padding: '14px',
+                borderRadius: '10px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '14px',
+                border: '2px solid var(--border)',
+              }}>
+                Подробнее о фулфилменте
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Marketing */}
+            <div style={{
+              background: 'var(--bg-cream)',
+              borderRadius: '20px',
+              padding: '32px',
+              border: '1px solid var(--border)',
+            }}>
+              <span style={{
+                display: 'inline-block',
+                background: 'rgba(224, 122, 95, 0.15)',
+                color: 'var(--accent)',
+                padding: '6px 14px',
+                borderRadius: '100px',
+                fontSize: '11px',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                marginBottom: '16px',
+              }}>Опционально</span>
+              
+              <h3 style={{
+                fontSize: '20px',
+                fontWeight: '700',
+                color: 'var(--text-dark)',
+                marginBottom: '16px',
+              }}>Маркетинговая поддержка</h3>
+              
+              <p style={{
+                fontSize: '14px',
+                color: 'var(--text-muted)',
+                marginBottom: '20px',
+                lineHeight: '1.6',
+              }}>
+                Маркетинг — это отдельная опциональная услуга для бизнесов, 
+                которым нужна помощь в привлечении трафика и продаж после запуска.
+              </p>
+
+              <p style={{
+                fontSize: '13px',
+                color: 'var(--text-muted)',
+                marginBottom: '24px',
+                padding: '12px',
+                background: 'rgba(0,0,0,0.03)',
+                borderRadius: '8px',
+              }}>
+                Услуга предназначена для брендов, у которых уже есть продукт, 
+                и которые хотят получить структурированное руководство по росту через Shopify.
+              </p>
+
+              <div style={{ marginBottom: '24px' }}>
+                <p style={{
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  color: 'var(--text-dark)',
+                  marginBottom: '12px',
+                }}>Что включает:</p>
+                <ul style={{ listStyle: 'none' }}>
+                  {[
+                    'Оптимизация конверсии Shopify-магазина',
+                    'Базовая SEO-структура и оптимизация товарных страниц',
+                    'Консультации по маркетинговой стратегии для международных рынков',
+                  ].map((item, j) => (
+                    <li key={j} style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '10px',
+                      padding: '6px 0',
+                      fontSize: '13px',
+                      color: 'var(--text-muted)',
+                    }}>
+                      <span style={{ color: 'var(--primary)', flexShrink: 0 }}>✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div style={{
+                background: 'rgba(10, 107, 92, 0.08)',
+                borderRadius: '12px',
+                padding: '16px',
+                marginBottom: '20px',
+              }}>
+                <p style={{
+                  fontSize: '13px',
+                  color: 'var(--text-dark)',
+                  margin: 0,
+                }}>
+                  Маркетинговые услуги предоставляются в формате консультаций и стратегической поддержки. 
+                  Они <strong>не входят</strong> в базовый сервис Shopify Bridge.
+                </p>
+              </div>
+
+              <p style={{
+                fontSize: '12px',
+                color: 'var(--text-muted)',
+                marginBottom: '20px',
+                fontStyle: 'italic',
+              }}>
+                Стоимость маркетинговых услуг рассчитывается индивидуально в зависимости от потребностей бизнеса.
+              </p>
+
+              <Link to="/contact" style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                background: 'transparent',
+                color: 'var(--text-dark)',
+                padding: '14px',
+                borderRadius: '10px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                fontSize: '14px',
+                border: '2px solid var(--border)',
+              }}>
+                Узнать подробнее
+                <span>→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Selection Notice */}
+      <section style={{ background: 'var(--bg-cream)', padding: '60px 0' }}>
+        <div className="container">
+          <div style={{
+            background: 'linear-gradient(135deg, var(--bg-dark) 0%, #0D2B26 100%)',
+            borderRadius: '24px',
+            padding: '48px',
+            textAlign: 'center',
+            maxWidth: '800px',
+            margin: '0 auto',
+          }}>
+            <span style={{ fontSize: '48px', display: 'block', marginBottom: '20px' }}>🛡️</span>
+            <h3 style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: 'var(--text-light)',
+              marginBottom: '16px',
+            }}>Мы работаем только с проверенными бизнесами</h3>
+            <p style={{
+              fontSize: '16px',
+              color: 'rgba(255,255,255,0.7)',
+              marginBottom: '24px',
+              maxWidth: '600px',
+              margin: '0 auto 24px',
+              lineHeight: '1.7',
+            }}>
+              Все заявки проходят предварительный отбор. Мы принимаем платежи на свою компанию 
+              и подключаем клиентов через наш Shopify-аккаунт, поэтому тщательно следим 
+              за репутацией и уровнем чарджбеков.
+            </p>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '32px',
+              flexWrap: 'wrap',
+              marginBottom: '32px',
+            }}>
+              {[
+                { icon: '✓', text: 'Проверка бизнеса' },
+                { icon: '✓', text: 'Контроль чарджбеков' },
+                { icon: '✓', text: 'Защита репутации' },
+              ].map((item, i) => (
+                <div key={i} style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}>
+                  <span style={{
+                    width: '24px',
+                    height: '24px',
+                    background: 'var(--primary)',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontSize: '12px',
+                    fontWeight: '700',
+                  }}>{item.icon}</span>
+                  <span style={{ color: 'rgba(255,255,255,0.9)', fontSize: '14px' }}>{item.text}</span>
+                </div>
+              ))}
+            </div>
+            <Link to="/contact" style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: 'var(--accent)',
+              color: 'white',
+              padding: '16px 32px',
+              borderRadius: '10px',
+              textDecoration: 'none',
+              fontWeight: '700',
+              fontSize: '15px',
+            }}>
+              Оставить заявку на подключение
+              <span>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{
+        background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--bg-dark) 100%)',
+        padding: '80px 0',
+      }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h2 style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: 'clamp(28px, 4vw, 42px)',
+            fontWeight: '700',
+            color: 'var(--text-light)',
+            marginBottom: '16px',
+          }}>
+            Готовы выйти на<br/>
+            <span style={{ color: 'var(--accent)' }}>международный рынок?</span>
+          </h2>
+          <p style={{
+            fontSize: '18px',
+            color: 'rgba(255,255,255,0.7)',
+            marginBottom: '32px',
+            maxWidth: '500px',
+            margin: '0 auto 32px',
+          }}>
+            Оставьте заявку — обсудим ваш товар и рассчитаем экономику запуска
+          </p>
+          <Link to="/contact" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: 'var(--accent)',
+            color: 'white',
+            padding: '18px 40px',
+            borderRadius: '12px',
+            textDecoration: 'none',
+            fontWeight: '700',
+            fontSize: '16px',
+            boxShadow: '0 4px 24px rgba(224, 122, 95, 0.4)',
+          }}>
+            Получить консультацию
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '24px',
+            marginTop: '20px',
+            flexWrap: 'wrap',
+          }}>
+            {['🔒 Данные защищены', '⏱ Ответ за 24 часа', '💬 Без навязчивых звонков'].map((item, i) => (
+              <span key={i} style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px' }}>{item}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
