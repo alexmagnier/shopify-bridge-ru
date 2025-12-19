@@ -2371,7 +2371,6 @@ const WhyUsSection = () => {
 // PRICING SECTION - UPDATED 2025-12-19
 // ============================================
 const PricingSection = () => {
-  const { t } = useLanguage();
   const animRef = useScrollAnimation();
   
   return (
