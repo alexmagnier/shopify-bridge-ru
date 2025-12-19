@@ -3738,7 +3738,7 @@ const PricingPage = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
                 {[
                   { label: 'Настройка 3PL', sublabel: 'Онбординг, настройка SKU, приём товара', price: '$399', note: 'разово' },
-                  { label: 'Хранение и управление', sublabel: 'Складское хранение, работа со стоком', price: '$299', note: 'в месяц' },
+                  { label: 'Хранение и управление', sublabel: 'Складское хранение, работа со стоком', price: 'от $299', note: 'в месяц' },
                   { label: 'Обработка заказа', sublabel: 'Сборка и упаковка', price: '$3', note: 'за заказ' },
                 ].map((item, j) => (
                   <div key={j} style={{
