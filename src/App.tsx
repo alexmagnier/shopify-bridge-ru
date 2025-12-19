@@ -2741,48 +2741,76 @@ const WhyUsAffordableSection = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
-          gap: '40px',
-          marginBottom: '60px',
+          gap: '32px',
+          marginBottom: '80px',
         }}>
           {/* LEFT: Self-made */}
           <div style={{
-            background: 'linear-gradient(135deg, #FEF3F2 0%, #FEE2E2 100%)',
+            background: 'white',
             borderRadius: '24px',
-            padding: '40px',
-            border: '2px solid #FCA5A5',
+            padding: '48px',
+            border: '2px solid var(--border)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+            position: 'relative' as const,
           }}>
+            <div style={{
+              position: 'absolute' as const,
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '4px',
+              background: 'linear-gradient(90deg, #DC2626, #F87171)',
+              borderRadius: '24px 24px 0 0',
+            }}></div>
             <h3 style={{
-              fontSize: '24px',
-              fontWeight: '700',
+              fontSize: '26px',
+              fontWeight: '800',
               color: 'var(--text-dark)',
-              marginBottom: '30px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
+              marginBottom: '12px',
             }}>
-              <span style={{ fontSize: '28px' }}>❌</span>
               Если делать всё самому
             </h3>
+            <p style={{
+              fontSize: '15px',
+              color: 'var(--text-muted)',
+              marginBottom: '32px',
+            }}>
+              Полная инфраструктура с нуля
+            </p>
 
             {/* Card 1: UAE Company */}
             <div className="hover-card" style={{
-              background: 'white',
+              background: 'var(--bg-cream)',
               borderRadius: '16px',
-              padding: '24px',
-              marginBottom: '20px',
+              padding: '28px',
+              marginBottom: '24px',
+              border: '1px solid var(--border)',
             }}>
               <div style={{
                 display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                marginBottom: '16px',
+                alignItems: 'flex-start',
+                gap: '16px',
+                marginBottom: '20px',
               }}>
-                <span style={{ fontSize: '32px' }}>🏢</span>
-                <div>
-                  <h4 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '4px' }}>
+                <div style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '24px',
+                  flexShrink: 0,
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                }}>
+                  🏢
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h4 style={{ fontSize: '17px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '6px', letterSpacing: '-0.3px' }}>
                     КОМПАНИЯ В ОАЭ
                   </h4>
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+                  <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0 }}>
                     для работы со складом
                   </p>
                 </div>
@@ -2840,23 +2868,37 @@ const WhyUsAffordableSection = () => {
 
             {/* Card 2: UK Company */}
             <div className="hover-card" style={{
-              background: 'white',
+              background: 'var(--bg-cream)',
               borderRadius: '16px',
-              padding: '24px',
-              marginBottom: '20px',
+              padding: '28px',
+              marginBottom: '24px',
+              border: '1px solid var(--border)',
             }}>
               <div style={{
                 display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                marginBottom: '16px',
+                alignItems: 'flex-start',
+                gap: '16px',
+                marginBottom: '20px',
               }}>
-                <span style={{ fontSize: '32px' }}>💳</span>
-                <div>
-                  <h4 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '4px' }}>
+                <div style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '24px',
+                  flexShrink: 0,
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                }}>
+                  💳
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h4 style={{ fontSize: '17px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '6px', letterSpacing: '-0.3px' }}>
                     КОМПАНИЯ В UK
                   </h4>
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+                  <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0 }}>
                     для приёма платежей Shopify
                   </p>
                 </div>
@@ -2914,23 +2956,37 @@ const WhyUsAffordableSection = () => {
 
             {/* Card 3: Shopify */}
             <div className="hover-card" style={{
-              background: 'white',
+              background: 'var(--bg-cream)',
               borderRadius: '16px',
-              padding: '24px',
-              marginBottom: '24px',
+              padding: '28px',
+              marginBottom: '32px',
+              border: '1px solid var(--border)',
             }}>
               <div style={{
                 display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                marginBottom: '16px',
+                alignItems: 'flex-start',
+                gap: '16px',
+                marginBottom: '20px',
               }}>
-                <span style={{ fontSize: '32px' }}>🛒</span>
-                <div>
-                  <h4 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '4px' }}>
+                <div style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '24px',
+                  flexShrink: 0,
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                }}>
+                  🛒
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h4 style={{ fontSize: '17px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '6px', letterSpacing: '-0.3px' }}>
                     SHOPIFY МАГАЗИН
                   </h4>
-                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+                  <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0 }}>
                     настройка и верификация
                   </p>
                 </div>
@@ -2979,34 +3035,66 @@ const WhyUsAffordableSection = () => {
 
             {/* Total Self-made */}
             <div style={{
-              background: 'linear-gradient(135deg, #DC2626 0%, #991B1B 100%)',
+              background: 'var(--text-dark)',
               borderRadius: '20px',
-              padding: '32px',
+              padding: '40px',
               color: 'white',
+              boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+              position: 'relative' as const,
+              overflow: 'hidden' as const,
             }}>
-              <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '24px', textAlign: 'center' }}>
-                📊 ИТОГО САМОСТОЯТЕЛЬНЫЙ ВЫХОД
+              <div style={{
+                position: 'absolute' as const,
+                top: 0,
+                right: 0,
+                width: '200px',
+                height: '200px',
+                background: 'linear-gradient(135deg, rgba(220,38,38,0.2), rgba(248,113,113,0.1))',
+                borderRadius: '50%',
+                filter: 'blur(60px)',
+              }}></div>
+              <h4 style={{ fontSize: '20px', fontWeight: '800', marginBottom: '32px', textAlign: 'center', position: 'relative' as const }}>
+                ИТОГО САМОСТОЯТЕЛЬНЫЙ ВЫХОД
               </h4>
               
-              <div style={{ fontSize: '15px', marginBottom: '16px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                  <span>💰 Стартовые затраты:</span>
-                  <strong style={{ fontSize: '24px' }}>$19,450-48,000</strong>
+              <div style={{ fontSize: '16px', marginBottom: '24px', position: 'relative' as const }}>
+                <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center',
+                  marginBottom: '20px',
+                  padding: '16px',
+                  background: 'rgba(255,255,255,0.05)',
+                  borderRadius: '12px',
+                }}>
+                  <span style={{ fontWeight: '600' }}>Стартовые затраты:</span>
+                  <strong style={{ fontSize: '28px', color: '#F87171' }}>$19,450-48,000</strong>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
-                  <span>⏱ Время до запуска:</span>
-                  <strong style={{ fontSize: '20px' }}>3-6 МЕСЯЦЕВ</strong>
+                <div style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: '16px',
+                  background: 'rgba(255,255,255,0.05)',
+                  borderRadius: '12px',
+                }}>
+                  <span style={{ fontWeight: '600' }}>Время до запуска:</span>
+                  <strong style={{ fontSize: '22px', color: '#FCA5A5' }}>3-6 МЕСЯЦЕВ</strong>
                 </div>
               </div>
 
               <div style={{
-                background: 'rgba(255,255,255,0.1)',
+                background: 'rgba(220,38,38,0.15)',
                 borderRadius: '12px',
-                padding: '16px',
-                marginBottom: '16px',
+                padding: '20px',
+                marginBottom: '24px',
+                border: '1px solid rgba(220,38,38,0.3)',
+                position: 'relative' as const,
               }}>
-                <p style={{ fontSize: '14px', fontWeight: '600', marginBottom: '12px' }}>⚠️ Риски:</p>
-                <ul style={{ fontSize: '13px', lineHeight: '1.8', paddingLeft: '20px', margin: 0 }}>
+                <p style={{ fontSize: '15px', fontWeight: '700', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '20px' }}>⚠️</span> Риски:
+                </p>
+                <ul style={{ fontSize: '14px', lineHeight: '2', paddingLeft: '24px', margin: 0, opacity: 0.95 }}>
                   <li>Отказ банка в открытии счёта</li>
                   <li>Отказ Shopify в верификации</li>
                   <li>Проблемы с compliance</li>
@@ -3014,43 +3102,63 @@ const WhyUsAffordableSection = () => {
                 </ul>
               </div>
 
-              <div style={{ textAlign: 'center', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
-                <p style={{ fontSize: '13px', marginBottom: '4px', opacity: 0.9 }}>📅 Ежегодные расходы:</p>
-                <p style={{ fontSize: '20px', fontWeight: '800', margin: 0 }}>$6,000-15,000/год</p>
-                <p style={{ fontSize: '12px', marginTop: '4px', opacity: 0.8 }}>(бухгалтерия, лицензии, обслуживание)</p>
+              <div style={{ 
+                textAlign: 'center', 
+                paddingTop: '24px', 
+                borderTop: '1px solid rgba(255,255,255,0.1)',
+                position: 'relative' as const,
+              }}>
+                <p style={{ fontSize: '14px', marginBottom: '8px', opacity: 0.9, fontWeight: '600' }}>Ежегодные расходы:</p>
+                <p style={{ fontSize: '24px', fontWeight: '800', margin: 0, color: '#FCA5A5' }}>$6,000-15,000/год</p>
+                <p style={{ fontSize: '13px', marginTop: '8px', opacity: 0.7 }}>(бухгалтерия, лицензии, обслуживание)</p>
               </div>
             </div>
           </div>
 
           {/* RIGHT: With Shopify Bridge */}
           <div style={{
-            background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)',
+            background: 'white',
             borderRadius: '24px',
-            padding: '40px',
-            border: '2px solid #10B981',
+            padding: '48px',
+            border: '2px solid var(--border)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+            position: 'relative' as const,
           }}>
+            <div style={{
+              position: 'absolute' as const,
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '4px',
+              background: 'linear-gradient(90deg, var(--primary), var(--accent))',
+              borderRadius: '24px 24px 0 0',
+            }}></div>
             <h3 style={{
-              fontSize: '24px',
-              fontWeight: '700',
+              fontSize: '26px',
+              fontWeight: '800',
               color: 'var(--text-dark)',
-              marginBottom: '30px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
+              marginBottom: '12px',
             }}>
-              <span style={{ fontSize: '28px' }}>✅</span>
               С Shopify Bridge
             </h3>
+            <p style={{
+              fontSize: '15px',
+              color: 'var(--text-muted)',
+              marginBottom: '32px',
+            }}>
+              Готовая инфраструктура под ключ
+            </p>
 
             {/* What we handle */}
             <div style={{
-              background: 'white',
+              background: 'var(--bg-cream)',
               borderRadius: '16px',
-              padding: '28px',
-              marginBottom: '24px',
+              padding: '32px',
+              marginBottom: '28px',
+              border: '1px solid var(--border)',
             }}>
-              <h4 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '24px' }}>
-                🎯 ВСЁ ВКЛЮЧЕНО В СЕРВИС
+              <h4 style={{ fontSize: '19px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '28px', letterSpacing: '-0.3px' }}>
+                ВСЁ ВКЛЮЧЕНО В СЕРВИС
               </h4>
 
               {[
@@ -3076,34 +3184,46 @@ const WhyUsAffordableSection = () => {
                 },
               ].map((item, i) => (
                 <div key={i} style={{
-                  paddingBottom: '20px',
-                  marginBottom: '20px',
-                  borderBottom: i < 3 ? '1px solid #E5E7EB' : 'none',
+                  paddingBottom: '24px',
+                  marginBottom: '24px',
+                  borderBottom: i < 3 ? '1px solid var(--border)' : 'none',
                 }}>
                   <div style={{
                     display: 'flex',
                     alignItems: 'flex-start',
-                    gap: '12px',
-                    marginBottom: '8px',
+                    gap: '16px',
+                    marginBottom: '12px',
                   }}>
-                    <span style={{ fontSize: '24px' }}>{item.icon}</span>
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '10px',
+                      background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '20px',
+                      flexShrink: 0,
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                    }}>{item.icon}</div>
                     <div style={{ flex: 1 }}>
-                      <h5 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '6px' }}>
+                      <h5 style={{ fontSize: '16px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '8px', letterSpacing: '-0.2px' }}>
                         {item.title}
                       </h5>
-                      <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0, lineHeight: '1.6' }}>
+                      <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0, lineHeight: '1.7' }}>
                         {item.desc}
                       </p>
                     </div>
                   </div>
                   <div style={{
-                    marginLeft: '36px',
-                    padding: '8px 16px',
-                    background: '#ECFDF5',
-                    borderRadius: '8px',
+                    marginLeft: '56px',
+                    padding: '10px 20px',
+                    background: 'white',
+                    borderRadius: '10px',
                     display: 'inline-block',
+                    border: '2px solid var(--primary)',
                   }}>
-                    <span style={{ fontSize: '14px', fontWeight: '700', color: '#059669' }}>
+                    <span style={{ fontSize: '14px', fontWeight: '800', color: 'var(--primary)' }}>
                       ВАШ РАСХОД: $0
                     </span>
                   </div>
@@ -3113,83 +3233,88 @@ const WhyUsAffordableSection = () => {
 
             {/* What you pay */}
             <div style={{
-              background: 'white',
+              background: 'var(--bg-cream)',
               borderRadius: '16px',
-              padding: '28px',
+              padding: '32px',
+              border: '1px solid var(--border)',
             }}>
-              <h4 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '20px' }}>
-                💵 ВАШИ ЗАТРАТЫ С SHOPIFY BRIDGE
+              <h4 style={{ fontSize: '19px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '24px', letterSpacing: '-0.3px' }}>
+                ВАШИ ЗАТРАТЫ С SHOPIFY BRIDGE
               </h4>
 
-              <div style={{ fontSize: '14px', marginBottom: '20px' }}>
-                <p style={{ fontWeight: '600', color: 'var(--text-dark)', marginBottom: '12px' }}>
-                  📦 ПАКЕТЫ ЗАПУСКА (разово):
+              <div style={{ fontSize: '15px', marginBottom: '24px' }}>
+                <p style={{ fontWeight: '700', color: 'var(--text-dark)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '20px' }}>📦</span> ПАКЕТЫ ЗАПУСКА (разово):
                 </p>
-                <div style={{ paddingLeft: '20px', color: 'var(--text-muted)', lineHeight: '2' }}>
-                  <div>Testing Package (до 2 SKU) — <strong style={{ color: 'var(--primary)' }}>$380</strong></div>
-                  <div>Starter Store (до 10 SKU) — <strong style={{ color: 'var(--primary)' }}>$590</strong></div>
-                  <div>Growth Store (до 25 SKU) — <strong style={{ color: 'var(--primary)' }}>$1,200</strong></div>
-                  <div>Business Store (до 50 SKU) — <strong style={{ color: 'var(--primary)' }}>$2,200</strong></div>
+                <div style={{ paddingLeft: '28px', color: 'var(--text-muted)', lineHeight: '2.2', fontSize: '14px' }}>
+                  <div>Testing Package (до 2 SKU) — <strong style={{ color: 'var(--text-dark)' }}>$380</strong></div>
+                  <div>Starter Store (до 10 SKU) — <strong style={{ color: 'var(--text-dark)' }}>$590</strong></div>
+                  <div>Growth Store (до 25 SKU) — <strong style={{ color: 'var(--text-dark)' }}>$1,200</strong></div>
+                  <div>Business Store (до 50 SKU) — <strong style={{ color: 'var(--text-dark)' }}>$2,200</strong></div>
                 </div>
               </div>
 
               <div style={{
-                background: '#F0FDF4',
+                background: 'white',
                 borderRadius: '12px',
-                padding: '16px',
-                marginBottom: '16px',
+                padding: '20px',
+                marginBottom: '20px',
+                border: '2px solid var(--primary)',
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-dark)' }}>
-                    💳 КОМИССИЯ ОТ ПРОДАЖ:
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-dark)' }}>
+                    КОМИССИЯ ОТ ПРОДАЖ:
                   </span>
-                  <span style={{ fontSize: '24px', fontWeight: '800', color: '#059669' }}>10%</span>
+                  <span style={{ fontSize: '32px', fontWeight: '800', color: 'var(--primary)' }}>10%</span>
                 </div>
-                <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '6px 0 0', lineHeight: '1.5' }}>
+                <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0, lineHeight: '1.6' }}>
                   Shopify-инфраструктура, обработка платежей, контроль рисков
                 </p>
               </div>
 
-              <div style={{ fontSize: '14px', marginBottom: '20px' }}>
-                <p style={{ fontWeight: '600', color: 'var(--text-dark)', marginBottom: '8px' }}>
-                  🔄 ОБСЛУЖИВАНИЕ (каждые 3 месяца):
+              <div style={{ fontSize: '15px', marginBottom: '28px' }}>
+                <p style={{ fontWeight: '700', color: 'var(--text-dark)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '20px' }}>🔄</span> ОБСЛУЖИВАНИЕ (каждые 3 месяца):
                 </p>
-                <div style={{ paddingLeft: '20px', color: 'var(--text-muted)', lineHeight: '1.8' }}>
+                <div style={{ paddingLeft: '28px', color: 'var(--text-muted)', lineHeight: '2', fontSize: '14px' }}>
                   <div>Starter: $300 | Growth: $450 | Business: $650</div>
                 </div>
               </div>
 
               <div style={{
-                background: '#FEF3C7',
-                borderRadius: '12px',
-                padding: '20px',
-                marginTop: '24px',
+                background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                borderRadius: '16px',
+                padding: '28px',
+                marginTop: '28px',
+                color: 'white',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
-                <p style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '12px' }}>
-                  🚀 МИНИМАЛЬНЫЙ СТАРТ (тест рынка):
+                <p style={{ fontSize: '17px', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '24px' }}>🚀</span> МИНИМАЛЬНЫЙ СТАРТ (тест рынка):
                 </p>
-                <div style={{ fontSize: '16px', lineHeight: '2' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div style={{ fontSize: '16px', lineHeight: '2.2' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', opacity: 0.95 }}>
                     <span>Testing Package:</span>
-                    <strong>$380</strong>
+                    <strong style={{ fontSize: '18px' }}>$380</strong>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', opacity: 0.95 }}>
                     <span>+ Настройка 3PL:</span>
-                    <strong>$399</strong>
+                    <strong style={{ fontSize: '18px' }}>$399</strong>
                   </div>
                   <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    paddingTop: '12px',
-                    marginTop: '12px',
-                    borderTop: '2px solid #FCD34D',
+                    paddingTop: '16px',
+                    marginTop: '16px',
+                    borderTop: '2px solid rgba(255,255,255,0.3)',
+                    alignItems: 'center',
                   }}>
-                    <strong style={{ fontSize: '18px' }}>ИТОГО:</strong>
-                    <strong style={{ fontSize: '28px', color: '#059669' }}>$779</strong>
+                    <strong style={{ fontSize: '20px' }}>ИТОГО:</strong>
+                    <strong style={{ fontSize: '36px', fontWeight: '900' }}>$779</strong>
                   </div>
                 </div>
-                <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginTop: '16px', textAlign: 'center' }}>
-                  <span style={{ fontSize: '16px' }}>⏱</span> Срок до запуска: <strong style={{ color: '#059669' }}>2-3 НЕДЕЛИ</strong>
+                <p style={{ fontSize: '15px', marginTop: '20px', textAlign: 'center', opacity: 0.95, fontWeight: '600' }}>
+                  Срок до запуска: <strong style={{ fontSize: '17px', borderBottom: '2px solid white', paddingBottom: '2px' }}>2-3 НЕДЕЛИ</strong>
                 </p>
               </div>
             </div>
@@ -3198,34 +3323,76 @@ const WhyUsAffordableSection = () => {
 
         {/* Comparison Table */}
         <div style={{
-          background: 'var(--bg-cream)',
+          background: 'white',
           borderRadius: '24px',
-          padding: '48px',
-          marginBottom: '60px',
+          padding: '56px',
+          marginBottom: '80px',
+          border: '2px solid var(--border)',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
         }}>
           <h3 style={{
-            fontSize: '28px',
-            fontWeight: '700',
+            fontSize: '32px',
+            fontWeight: '800',
             color: 'var(--text-dark)',
             textAlign: 'center',
-            marginBottom: '40px',
+            marginBottom: '16px',
+            letterSpacing: '-0.5px',
           }}>
-            Сравнение: <span style={{ color: '#DC2626' }}>сами</span> vs <span style={{ color: '#059669' }}>с нами</span>
+            Сравнение: <span style={{ color: 'var(--text-muted)' }}>сами</span> vs <span style={{ 
+              background: 'linear-gradient(90deg, var(--primary), var(--accent))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>с нами</span>
           </h3>
+          <p style={{
+            fontSize: '16px',
+            color: 'var(--text-muted)',
+            textAlign: 'center',
+            marginBottom: '48px',
+          }}>
+            Честное сравнение всех аспектов
+          </p>
 
           <div style={{ overflowX: 'auto' }}>
             <table style={{
               width: '100%',
-              borderCollapse: 'collapse',
+              borderCollapse: 'separate',
+              borderSpacing: 0,
               background: 'white',
               borderRadius: '16px',
               overflow: 'hidden',
+              border: '1px solid var(--border)',
             }}>
               <thead>
-                <tr style={{ background: 'var(--bg-dark)', color: 'white' }}>
-                  <th style={{ padding: '20px', textAlign: 'left', fontSize: '16px', fontWeight: '700' }}>ПАРАМЕТР</th>
-                  <th style={{ padding: '20px', textAlign: 'center', fontSize: '16px', fontWeight: '700' }}>САМОСТОЯТЕЛЬНО</th>
-                  <th style={{ padding: '20px', textAlign: 'center', fontSize: '16px', fontWeight: '700', background: '#059669' }}>SHOPIFY BRIDGE</th>
+                <tr>
+                  <th style={{ 
+                    padding: '24px', 
+                    textAlign: 'left', 
+                    fontSize: '15px', 
+                    fontWeight: '800', 
+                    background: 'var(--bg-cream)',
+                    color: 'var(--text-dark)',
+                    borderBottom: '2px solid var(--border)',
+                  }}>ПАРАМЕТР</th>
+                  <th style={{ 
+                    padding: '24px', 
+                    textAlign: 'center', 
+                    fontSize: '15px', 
+                    fontWeight: '800',
+                    background: 'var(--bg-cream)',
+                    color: 'var(--text-dark)',
+                    borderBottom: '2px solid var(--border)',
+                  }}>САМОСТОЯТЕЛЬНО</th>
+                  <th style={{ 
+                    padding: '24px', 
+                    textAlign: 'center', 
+                    fontSize: '15px', 
+                    fontWeight: '800', 
+                    background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                    color: 'white',
+                    borderBottom: '2px solid var(--primary)',
+                  }}>SHOPIFY BRIDGE</th>
                 </tr>
               </thead>
               <tbody>
@@ -3241,21 +3408,30 @@ const WhyUsAffordableSection = () => {
                   { param: 'Ежегодные расходы', self: '$6,000-15,000', us: 'от $1,200/год' },
                   { param: 'Риски', self: 'ВЫСОКИЕ', us: 'МИНИМАЛЬНЫЕ' },
                 ].map((row, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid #E5E7EB' }}>
-                    <td style={{ padding: '20px', fontWeight: '600', color: 'var(--text-dark)' }}>{row.param}</td>
+                  <tr key={i} style={{ 
+                    borderBottom: i < 9 ? '1px solid var(--border)' : 'none',
+                  }}>
+                    <td style={{ 
+                      padding: '20px 24px', 
+                      fontWeight: '700', 
+                      color: 'var(--text-dark)',
+                      fontSize: '14px',
+                    }}>{row.param}</td>
                     <td style={{
-                      padding: '20px',
+                      padding: '20px 24px',
                       textAlign: 'center',
-                      color: '#DC2626',
+                      color: 'var(--text-muted)',
                       fontWeight: '600',
-                      background: i % 2 === 0 ? '#FEF2F2' : 'white',
+                      fontSize: '14px',
+                      background: i % 2 === 0 ? 'var(--bg-cream)' : 'white',
                     }}>{row.self}</td>
                     <td style={{
-                      padding: '20px',
+                      padding: '20px 24px',
                       textAlign: 'center',
-                      color: '#059669',
-                      fontWeight: '600',
-                      background: i % 2 === 0 ? '#ECFDF5' : 'white',
+                      color: 'var(--primary)',
+                      fontWeight: '700',
+                      fontSize: '14px',
+                      background: i % 2 === 0 ? 'var(--bg-cream)' : 'white',
                     }}>{row.us}</td>
                   </tr>
                 ))}
@@ -3266,79 +3442,135 @@ const WhyUsAffordableSection = () => {
 
         {/* Calculator */}
         <div style={{
-          background: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)',
+          background: 'var(--bg-cream)',
           borderRadius: '24px',
-          padding: '48px',
-          border: '2px solid #FBBF24',
-          marginBottom: '60px',
+          padding: '56px',
+          border: '2px solid var(--border)',
+          marginBottom: '80px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+          position: 'relative' as const,
+          overflow: 'hidden' as const,
         }}>
+          <div style={{
+            position: 'absolute' as const,
+            top: -100,
+            right: -100,
+            width: '300px',
+            height: '300px',
+            background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+            opacity: 0.05,
+            borderRadius: '50%',
+            filter: 'blur(80px)',
+          }}></div>
           <h3 style={{
-            fontSize: '32px',
+            fontSize: '34px',
             fontWeight: '800',
             color: 'var(--text-dark)',
             textAlign: 'center',
-            marginBottom: '40px',
+            marginBottom: '16px',
+            letterSpacing: '-0.5px',
+            position: 'relative' as const,
           }}>
-            💎 Ваша экономия с Shopify Bridge
+            Ваша экономия с Shopify Bridge
           </h3>
+          <p style={{
+            fontSize: '16px',
+            color: 'var(--text-muted)',
+            textAlign: 'center',
+            marginBottom: '48px',
+            position: 'relative' as const,
+          }}>
+            Реальные цифры и сравнение
+          </p>
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '24px',
-            marginBottom: '40px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '32px',
+            marginBottom: '48px',
+            position: 'relative' as const,
           }}>
             <div className="hover-card" style={{
               background: 'white',
-              borderRadius: '16px',
-              padding: '32px',
+              borderRadius: '20px',
+              padding: '40px',
               textAlign: 'center',
+              border: '2px solid var(--border)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
             }}>
-              <div style={{ fontSize: '48px', marginBottom: '12px' }}>💸</div>
-              <h4 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '20px' }}>
+              <div style={{ 
+                width: '72px',
+                height: '72px',
+                borderRadius: '18px',
+                background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '36px',
+                margin: '0 auto 20px',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              }}>💸</div>
+              <h4 style={{ fontSize: '19px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '24px', letterSpacing: '-0.3px' }}>
                 ЭКОНОМИЯ НА СТАРТЕ
               </h4>
-              <div style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '8px' }}>
-                Самостоятельно: <span style={{ fontWeight: '600', color: '#DC2626' }}>~$25,000</span>
+              <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '12px', lineHeight: '1.8' }}>
+                Самостоятельно: <span style={{ fontWeight: '700', color: 'var(--text-dark)' }}>~$25,000</span>
               </div>
-              <div style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '16px' }}>
-                С нами: <span style={{ fontWeight: '600', color: '#059669' }}>~$779</span>
+              <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '24px', lineHeight: '1.8' }}>
+                С нами: <span style={{ fontWeight: '700', color: 'var(--primary)' }}>~$779</span>
               </div>
               <div style={{
-                padding: '16px',
-                background: '#ECFDF5',
-                borderRadius: '12px',
-                marginTop: '16px',
+                padding: '24px',
+                background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                borderRadius: '16px',
+                marginTop: '20px',
+                color: 'white',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
-                <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '4px' }}>ЭКОНОМИЯ:</p>
-                <p style={{ fontSize: '36px', fontWeight: '800', color: '#059669', margin: 0 }}>$24,000+ ✨</p>
+                <p style={{ fontSize: '14px', marginBottom: '8px', opacity: 0.9, fontWeight: '600' }}>ЭКОНОМИЯ:</p>
+                <p style={{ fontSize: '42px', fontWeight: '900', margin: 0 }}>$24,000+</p>
               </div>
             </div>
 
             <div className="hover-card" style={{
               background: 'white',
-              borderRadius: '16px',
-              padding: '32px',
+              borderRadius: '20px',
+              padding: '40px',
               textAlign: 'center',
+              border: '2px solid var(--border)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
             }}>
-              <div style={{ fontSize: '48px', marginBottom: '12px' }}>⏱</div>
-              <h4 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '20px' }}>
+              <div style={{ 
+                width: '72px',
+                height: '72px',
+                borderRadius: '18px',
+                background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '36px',
+                margin: '0 auto 20px',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              }}>⏱</div>
+              <h4 style={{ fontSize: '19px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '24px', letterSpacing: '-0.3px' }}>
                 ЭКОНОМИЯ ВРЕМЕНИ
               </h4>
-              <div style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '8px' }}>
-                Самостоятельно: <span style={{ fontWeight: '600', color: '#DC2626' }}>4-6 месяцев</span>
+              <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '12px', lineHeight: '1.8' }}>
+                Самостоятельно: <span style={{ fontWeight: '700', color: 'var(--text-dark)' }}>4-6 месяцев</span>
               </div>
-              <div style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '16px' }}>
-                С нами: <span style={{ fontWeight: '600', color: '#059669' }}>2-3 недели</span>
+              <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '24px', lineHeight: '1.8' }}>
+                С нами: <span style={{ fontWeight: '700', color: 'var(--primary)' }}>2-3 недели</span>
               </div>
               <div style={{
-                padding: '16px',
-                background: '#ECFDF5',
-                borderRadius: '12px',
-                marginTop: '16px',
+                padding: '24px',
+                background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                borderRadius: '16px',
+                marginTop: '20px',
+                color: 'white',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
-                <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '4px' }}>ЭКОНОМИЯ:</p>
-                <p style={{ fontSize: '36px', fontWeight: '800', color: '#059669', margin: 0 }}>5+ месяцев ✨</p>
+                <p style={{ fontSize: '14px', marginBottom: '8px', opacity: 0.9, fontWeight: '600' }}>ЭКОНОМИЯ:</p>
+                <p style={{ fontSize: '42px', fontWeight: '900', margin: 0 }}>5+ месяцев</p>
               </div>
             </div>
           </div>
@@ -3346,80 +3578,100 @@ const WhyUsAffordableSection = () => {
           {/* When own infrastructure is better */}
           <div style={{
             background: 'white',
-            borderRadius: '16px',
-            padding: '32px',
+            borderRadius: '20px',
+            padding: '40px',
+            border: '2px solid var(--border)',
+            position: 'relative' as const,
           }}>
-            <h4 style={{ fontSize: '20px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '24px', textAlign: 'center' }}>
-              🎯 Когда своя инфраструктура выгоднее?
+            <h4 style={{ fontSize: '22px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '32px', textAlign: 'center', letterSpacing: '-0.3px' }}>
+              Когда своя инфраструктура выгоднее?
             </h4>
             
             <div style={{ fontSize: '15px', lineHeight: '2', color: 'var(--text-muted)' }}>
-              <p style={{ marginBottom: '16px' }}>
-                <strong style={{ color: 'var(--text-dark)' }}>Пример:</strong> продажи <strong>$10,000/мес</strong>
+              <p style={{ marginBottom: '24px', textAlign: 'center', fontSize: '16px' }}>
+                <strong style={{ color: 'var(--text-dark)', fontSize: '18px' }}>Пример:</strong> продажи <strong style={{ color: 'var(--primary)', fontSize: '18px' }}>$10,000/мес</strong>
               </p>
               
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
-                <div style={{ padding: '20px', background: '#ECFDF5', borderRadius: '12px' }}>
-                  <p style={{ fontWeight: '700', color: '#059669', marginBottom: '12px' }}>С нами:</p>
-                  <div>Комиссия 10% = $1,000</div>
-                  <div>+ Обслуживание ~$150</div>
-                  <div>+ Фулфилмент ~$500</div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px', marginBottom: '32px' }}>
+                <div style={{ 
+                  padding: '28px', 
+                  background: 'var(--bg-cream)', 
+                  borderRadius: '16px',
+                  border: '2px solid var(--primary)',
+                }}>
+                  <p style={{ fontWeight: '800', color: 'var(--primary)', marginBottom: '16px', fontSize: '16px' }}>С нами:</p>
+                  <div style={{ lineHeight: '2.2', fontSize: '14px' }}>
+                    <div>Комиссия 10% = $1,000</div>
+                    <div>+ Обслуживание ~$150</div>
+                    <div>+ Фулфилмент ~$500</div>
+                  </div>
                   <div style={{
-                    marginTop: '12px',
-                    paddingTop: '12px',
-                    borderTop: '2px solid #059669',
-                    fontWeight: '700',
-                    color: '#059669',
+                    marginTop: '20px',
+                    paddingTop: '20px',
+                    borderTop: '2px solid var(--primary)',
+                    fontWeight: '800',
+                    color: 'var(--primary)',
+                    fontSize: '20px',
                   }}>Итого: ~$1,650/мес</div>
                 </div>
 
-                <div style={{ padding: '20px', background: '#FEF2F2', borderRadius: '12px' }}>
-                  <p style={{ fontWeight: '700', color: '#DC2626', marginBottom: '12px' }}>Своя инфраструктура:</p>
-                  <div>Старт: $25,000</div>
-                  <div>+ Ежегодные ~$830/мес</div>
-                  <div>+ Процессинг 3%: $300</div>
+                <div style={{ 
+                  padding: '28px', 
+                  background: 'var(--bg-cream)', 
+                  borderRadius: '16px',
+                  border: '2px solid var(--text-muted)',
+                }}>
+                  <p style={{ fontWeight: '800', color: 'var(--text-dark)', marginBottom: '16px', fontSize: '16px' }}>Своя инфраструктура:</p>
+                  <div style={{ lineHeight: '2.2', fontSize: '14px' }}>
+                    <div>Старт: $25,000</div>
+                    <div>+ Ежегодные ~$830/мес</div>
+                    <div>+ Процессинг 3%: $300</div>
+                  </div>
                   <div style={{
-                    marginTop: '12px',
-                    paddingTop: '12px',
-                    borderTop: '2px solid #DC2626',
-                    fontWeight: '700',
-                    color: '#DC2626',
-                  }}>Итого: ~$1,130/мес<br/>+ $25,000 старт</div>
+                    marginTop: '20px',
+                    paddingTop: '20px',
+                    borderTop: '2px solid var(--text-muted)',
+                    fontWeight: '800',
+                    color: 'var(--text-dark)',
+                    fontSize: '20px',
+                  }}>Итого: ~$1,130/мес<br/><span style={{ fontSize: '14px', opacity: 0.7 }}>+ $25,000 старт</span></div>
                 </div>
               </div>
 
               <div style={{
-                background: '#FEF3C7',
-                padding: '24px',
-                borderRadius: '12px',
+                background: 'linear-gradient(135deg, var(--primary), var(--accent))',
+                padding: '32px',
+                borderRadius: '16px',
                 textAlign: 'center',
+                color: 'white',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
-                <p style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-dark)', marginBottom: '12px' }}>
-                  📊 ВЫВОД:
+                <p style={{ fontSize: '17px', fontWeight: '700', marginBottom: '16px', opacity: 0.95 }}>
+                  ВЫВОД:
                 </p>
-                <p style={{ fontSize: '17px', color: 'var(--text-dark)', marginBottom: '16px', lineHeight: '1.7' }}>
-                  Точка окупаемости: <strong>$25,000 ÷ ($1,650 - $1,130) = 48 месяцев</strong>
+                <p style={{ fontSize: '18px', marginBottom: '20px', lineHeight: '1.7', opacity: 0.95 }}>
+                  Точка окупаемости: <strong style={{ fontSize: '20px', borderBottom: '2px solid rgba(255,255,255,0.5)', paddingBottom: '2px' }}>$25,000 ÷ ($1,650 - $1,130) = 48 месяцев</strong>
                 </p>
-                <p style={{ fontSize: '18px', fontWeight: '700', color: 'var(--primary)', marginBottom: '20px' }}>
-                  Своя инфраструктура окупается через <span style={{ fontSize: '24px' }}>4 ГОДА</span> стабильных продаж
+                <p style={{ fontSize: '21px', fontWeight: '800' }}>
+                  Своя инфраструктура окупается через <span style={{ fontSize: '28px', borderBottom: '3px solid white', paddingBottom: '2px' }}>4 ГОДА</span> стабильных продаж
                 </p>
                 <div style={{
                   background: 'white',
-                  padding: '20px',
-                  borderRadius: '12px',
-                  marginTop: '20px',
+                  padding: '28px',
+                  borderRadius: '16px',
+                  marginTop: '28px',
                 }}>
-                  <p style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-dark)', marginBottom: '12px' }}>
+                  <p style={{ fontSize: '17px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '20px' }}>
                     А если продажи не пойдут?
                   </p>
-                  <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', fontSize: '18px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '48px', fontSize: '18px' }}>
                     <div>
-                      <div style={{ color: 'var(--text-muted)', marginBottom: '6px' }}>С нами:</div>
-                      <div style={{ fontWeight: '800', fontSize: '24px', color: '#059669' }}>$779</div>
+                      <div style={{ color: 'var(--text-muted)', marginBottom: '8px', fontSize: '15px' }}>С нами:</div>
+                      <div style={{ fontWeight: '900', fontSize: '32px', color: 'var(--primary)' }}>$779</div>
                     </div>
                     <div>
-                      <div style={{ color: 'var(--text-muted)', marginBottom: '6px' }}>Самостоятельно:</div>
-                      <div style={{ fontWeight: '800', fontSize: '24px', color: '#DC2626' }}>$25,000</div>
+                      <div style={{ color: 'var(--text-muted)', marginBottom: '8px', fontSize: '15px' }}>Самостоятельно:</div>
+                      <div style={{ fontWeight: '900', fontSize: '32px', color: 'var(--text-dark)' }}>$25,000</div>
                     </div>
                   </div>
                 </div>
@@ -3432,26 +3684,54 @@ const WhyUsAffordableSection = () => {
         <div style={{
           background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--bg-dark) 100%)',
           borderRadius: '24px',
-          padding: '60px 40px',
+          padding: '72px 48px',
           textAlign: 'center',
           color: 'white',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
+          position: 'relative' as const,
+          overflow: 'hidden' as const,
         }}>
+          <div style={{
+            position: 'absolute' as const,
+            top: -150,
+            left: -150,
+            width: '400px',
+            height: '400px',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+            borderRadius: '50%',
+          }}></div>
+          <div style={{
+            position: 'absolute' as const,
+            bottom: -150,
+            right: -150,
+            width: '400px',
+            height: '400px',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+            borderRadius: '50%',
+          }}></div>
           <h3 style={{
-            fontSize: 'clamp(24px, 4vw, 36px)',
-            fontWeight: '800',
-            marginBottom: '16px',
+            fontSize: 'clamp(26px, 4vw, 40px)',
+            fontWeight: '900',
+            marginBottom: '20px',
             lineHeight: '1.3',
+            letterSpacing: '-0.5px',
+            position: 'relative' as const,
           }}>
             Зачем рисковать $25,000,<br/>
-            если можно проверить рынок за <span style={{ color: 'var(--accent)' }}>$779?</span>
+            если можно проверить рынок за <span style={{ 
+              color: 'var(--accent)',
+              borderBottom: '4px solid var(--accent)',
+              paddingBottom: '4px',
+            }}>$779?</span>
           </h3>
           <p style={{
-            fontSize: '18px',
-            color: 'rgba(255,255,255,0.8)',
-            marginBottom: '32px',
-            maxWidth: '700px',
-            margin: '0 auto 32px',
-            lineHeight: '1.7',
+            fontSize: '19px',
+            color: 'rgba(255,255,255,0.9)',
+            marginBottom: '40px',
+            maxWidth: '750px',
+            margin: '0 auto 40px',
+            lineHeight: '1.8',
+            position: 'relative' as const,
           }}>
             Начните с тестовой партии. Убедитесь, что товар продаётся.<br/>
             Масштабируйте или стройте свою инфраструктуру — уже с данными.
@@ -3460,40 +3740,69 @@ const WhyUsAffordableSection = () => {
           <div style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '16px',
-            marginBottom: '32px',
+            gap: '24px',
+            marginBottom: '40px',
             flexWrap: 'wrap',
-            fontSize: '16px',
+            fontSize: '17px',
+            position: 'relative' as const,
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '20px' }}>✓</span>
-              <span>Экономия $24,000+ на старте</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', opacity: 0.95 }}>
+              <span style={{ 
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: 'rgba(255,255,255,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>✓</span>
+              <span style={{ fontWeight: '600' }}>Экономия $24,000+ на старте</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '20px' }}>✓</span>
-              <span>Запуск за 2-3 недели вместо 6 месяцев</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', opacity: 0.95 }}>
+              <span style={{ 
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: 'rgba(255,255,255,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>✓</span>
+              <span style={{ fontWeight: '600' }}>Запуск за 2-3 недели вместо 6 месяцев</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '20px' }}>✓</span>
-              <span>Нулевой риск отказа в верификации</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', opacity: 0.95 }}>
+              <span style={{ 
+                fontSize: '24px',
+                width: '32px',
+                height: '32px',
+                borderRadius: '50%',
+                background: 'rgba(255,255,255,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>✓</span>
+              <span style={{ fontWeight: '600' }}>Нулевой риск отказа в верификации</span>
             </div>
           </div>
 
           <Link to="/contact" className="btn-primary gradient-animate" style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '10px',
-            background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%)',
-            color: 'white',
-            padding: '20px 56px',
-            borderRadius: '12px',
+            gap: '12px',
+            background: 'white',
+            color: 'var(--text-dark)',
+            padding: '24px 60px',
+            borderRadius: '16px',
             textDecoration: 'none',
-            fontWeight: '700',
-            fontSize: '18px',
-            boxShadow: '0 8px 32px rgba(224, 122, 95, 0.5)',
+            fontWeight: '800',
+            fontSize: '20px',
+            boxShadow: '0 12px 40px rgba(0,0,0,0.2)',
+            position: 'relative' as const,
           }}>
             Рассчитать запуск
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
