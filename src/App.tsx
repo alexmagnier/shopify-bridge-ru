@@ -2636,10 +2636,10 @@ const PricingSection = () => {
       {/* Commission Block */}
       <div className="anim-hidden delay-5" style={{
         marginTop: '48px',
-        padding: '24px',
-        background: 'rgba(10, 107, 92, 0.08)',
-        borderRadius: '16px',
-        border: '1px solid rgba(10, 107, 92, 0.2)',
+        padding: '32px',
+        background: 'var(--bg-cream)',
+        borderRadius: '20px',
+        border: '2px solid var(--border)',
         textAlign: 'center',
         maxWidth: '700px',
         margin: '48px auto 0',
@@ -2649,7 +2649,7 @@ const PricingSection = () => {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '8px',
-          marginBottom: '12px',
+          marginBottom: '16px',
         }}>
           <span style={{ fontSize: '20px' }}>ℹ️</span>
           <span style={{
@@ -2661,19 +2661,45 @@ const PricingSection = () => {
           }}>Комиссия от продаж</span>
         </div>
         <div style={{
-          fontSize: '48px',
+          fontSize: '64px',
           fontWeight: '800',
           color: 'var(--text-dark)',
           lineHeight: '1',
-          marginBottom: '12px',
+          marginBottom: '16px',
         }}>10%</div>
         <p style={{
-          fontSize: '15px',
+          fontSize: '16px',
           color: 'var(--text-muted)',
-          margin: 0,
+          maxWidth: '450px',
+          margin: '0 auto 12px',
         }}>
-          От каждой выплаты — за Shopify-инфраструктуру, обработку платежей, контроль рисков и сопровождение
+          От каждой выплаты — за Shopify-инфраструктуру, обработку платежей, 
+          контроль рисков и сопровождение
         </p>
+        <p style={{
+          fontSize: '13px',
+          color: 'var(--text-muted)',
+          fontStyle: 'italic',
+        }}>
+          (взимается только с фактических продаж)
+        </p>
+      </div>
+
+      {/* Learn More Button */}
+      <div style={{ textAlign: 'center', marginTop: '32px' }}>
+        <Link to="/pricing" className="btn-secondary" style={{
+          display: 'inline-block',
+          background: 'transparent',
+          color: 'var(--text-dark)',
+          padding: '16px 40px',
+          borderRadius: '12px',
+          textDecoration: 'none',
+          fontWeight: '700',
+          fontSize: '16px',
+          border: '2px solid var(--text-dark)',
+        }}>
+          Узнать подробнее об услугах →
+        </Link>
       </div>
     </div>
   </section>
