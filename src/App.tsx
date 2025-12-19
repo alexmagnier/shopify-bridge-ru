@@ -2385,103 +2385,147 @@ const PricingSection = () => {
         <span style={{
           color: 'var(--accent)',
           fontWeight: '600',
-          fontSize: '13px',
+          fontSize: '14px',
           textTransform: 'uppercase',
           letterSpacing: '2px',
-        }}>{t('pricing.label')}</span>
+        }}>Тарифы</span>
         <h2 style={{
           fontFamily: "var(--font-family)",
           fontWeight: '800',
-          fontSize: 'clamp(24px, 5vw, 38px)',
+          fontSize: 'clamp(28px, 4vw, 36px)',
           color: 'var(--text-dark)',
           marginTop: '12px',
+          marginBottom: '12px',
         }}>
-          {t('pricing.title1')}<br/>
-          <span style={{ color: 'var(--primary)' }}>{t('pricing.title2')}</span>
+          Пакеты запуска <span style={{ color: 'var(--primary)' }}>магазина</span>
         </h2>
+        <p style={{ fontSize: '16px', color: 'var(--text-muted)' }}>
+          Стоимость зависит от количества SKU
+        </p>
+        
+        {/* SKU Explanation */}
+        <div style={{
+          background: 'rgba(10, 107, 92, 0.08)',
+          borderRadius: '12px',
+          padding: '16px 24px',
+          marginTop: '20px',
+          maxWidth: '700px',
+          margin: '20px auto 0',
+          border: '1px solid rgba(10, 107, 92, 0.2)',
+        }}>
+          <p style={{ fontSize: '14px', color: 'var(--text-dark)', margin: 0 }}>
+            <strong>Важно:</strong> Под "SKU" понимается один тип товара, который можно купить отдельно.
+            <br/>
+            <span style={{ color: 'var(--text-muted)' }}>
+              Например: белая футболка и чёрная футболка = 2 SKU. 
+              Но размеры S/M/L каждой футболки — это вариации одного SKU, а не отдельные SKU.
+            </span>
+          </p>
+        </div>
       </div>
 
       {/* Pricing Cards */}
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-        gap: '16px',
-        maxWidth: '900px',
-        margin: '0 auto',
+        gap: '20px',
+        maxWidth: '1100px',
+        margin: '40px auto 0',
       }}>
         {[
           {
-            name: 'Starter',
-            subtitle: t('pricing.starter.subtitle'),
-            price: '$99',
-            commission: '12%',
-            limit: t('pricing.starter.limit'),
+            badge: 'Тестирование',
+            badgeColor: 'var(--text-muted)',
+            name: 'Testing Package',
+            subtitle: 'Для тестирования рынка и валидации спроса',
+            sku: 'до 2 SKU',
+            price: '$380',
+            maintenance: null,
             features: [
-              t('pricing.starter.f1'),
-              t('pricing.starter.f2'),
-              t('pricing.starter.f3'),
-              t('pricing.starter.f4'),
+              'Настройка Shopify-магазина',
+              'Чистая, простая тема',
+              'Подключение платёжного шлюза',
+              'Базовая навигация',
+              'Мобильная оптимизация',
+              'Готовность к интеграции фулфилмента',
+            ],
+            highlight: 'Включает хранение на 1-2 типа товара',
+            popular: false,
+          },
+          {
+            badge: null,
+            name: 'Starter Store',
+            subtitle: 'Для старта с минимальным каталогом',
+            sku: 'до 10 SKU',
+            price: '$590',
+            maintenance: '$300 каждые 3 месяца',
+            features: [
+              'Полная настройка магазина',
+              'Подключение платёжных решений',
+              'Базовое оформление и мобильная адаптация',
+              'Подготовка магазина к международным продажам',
             ],
             popular: false,
           },
           {
-            name: 'Growth',
-            subtitle: t('pricing.growth.subtitle'),
-            price: '$199',
-            commission: '8%',
-            limit: t('pricing.growth.limit'),
+            badge: 'Рекомендуем',
+            badgeColor: 'var(--primary)',
+            name: 'Growth Store',
+            subtitle: 'Для роста и масштабирования',
+            sku: 'до 25 SKU',
+            price: '$1,200',
+            maintenance: '$450 каждые 3 месяца',
             features: [
-              t('pricing.growth.f1'),
-              t('pricing.growth.f2'),
-              t('pricing.growth.f3'),
-              t('pricing.growth.f4'),
-              t('pricing.growth.f5'),
+              'Всё из Starter',
+              'Улучшенная структура каталога',
+              'Логика категорий',
+              'Базовая SEO-структура',
+              'Подготовка магазина к масштабированию',
             ],
             popular: true,
           },
           {
-            name: 'Scale',
-            subtitle: t('pricing.scale.subtitle'),
-            price: '$399',
-            commission: '10%',
-            limit: t('pricing.scale.limit'),
+            badge: null,
+            name: 'Business Store',
+            subtitle: 'Для серьёзного бизнеса',
+            sku: 'до 50 SKU',
+            price: '$2,200',
+            maintenance: '$650 каждые 3 месяца',
             features: [
-              t('pricing.scale.f1'),
-              t('pricing.scale.f2'),
-              t('pricing.scale.f3'),
-              t('pricing.scale.f4'),
-              t('pricing.scale.f5'),
-              t('pricing.scale.f6'),
+              'Всё из Growth',
+              'Продвинутая логика каталога',
+              'Аналитика и отслеживание заказов',
+              'Готовность к рекламе и росту',
             ],
             popular: false,
           },
         ].map((plan, i) => (
-          <div
-            key={i}
-            className={`anim-card card-3d delay-${i + 1}`}
-            style={{
-              background: plan.popular ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'var(--bg-cream)',
-              borderRadius: '16px',
-              padding: '24px',
-              border: plan.popular ? 'none' : '1px solid var(--border)',
-              position: 'relative',
-            }}
-          >
-            {plan.popular && (
+          <div key={i} className="hover-card" style={{
+            background: plan.popular ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'var(--bg-cream)',
+            borderRadius: '20px',
+            padding: '28px',
+            border: plan.popular ? 'none' : '1px solid var(--border)',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+          }}>
+            {plan.badge && (
               <div style={{
                 position: 'absolute',
-                top: '-10px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                background: 'var(--accent)',
+                top: '-12px',
+                left: '20px',
+                background: plan.popular ? 'var(--accent)' : 'var(--bg-dark)',
                 color: 'white',
-                padding: '4px 12px',
+                padding: '6px 14px',
                 borderRadius: '100px',
                 fontSize: '11px',
                 fontWeight: '700',
-              }}>{t('pricing.popular')}</div>
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+              }}>{plan.badge}</div>
             )}
-            <div style={{ marginBottom: '16px' }}>
+            
+            <div style={{ marginBottom: '20px', marginTop: plan.badge ? '8px' : 0 }}>
               <h3 style={{
                 fontSize: '20px',
                 fontWeight: '700',
@@ -2493,89 +2537,142 @@ const PricingSection = () => {
                 color: plan.popular ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)',
               }}>{plan.subtitle}</p>
             </div>
+
+            <div style={{
+              background: plan.popular ? 'rgba(255,255,255,0.1)' : 'white',
+              borderRadius: '8px',
+              padding: '6px 12px',
+              display: 'inline-block',
+              marginBottom: '16px',
+              alignSelf: 'flex-start',
+            }}>
+              <span style={{
+                fontSize: '12px',
+                fontWeight: '600',
+                color: plan.popular ? 'var(--accent-light)' : 'var(--primary)',
+              }}>{plan.sku}</span>
+            </div>
+
             <div style={{ marginBottom: '16px' }}>
               <span style={{
-                fontSize: '36px',
+                fontSize: '42px',
                 fontWeight: '800',
                 color: plan.popular ? 'white' : 'var(--text-dark)',
               }}>{plan.price}</span>
-              <span style={{
-                fontSize: '14px',
+            </div>
+
+            {plan.maintenance && (
+              <div style={{
+                fontSize: '13px',
                 color: plan.popular ? 'rgba(255,255,255,0.7)' : 'var(--text-muted)',
-              }}>{t('pricing.month')}</span>
-            </div>
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '8px',
-              marginBottom: '16px',
-            }}>
-              <span style={{
-                background: plan.popular ? 'rgba(255,255,255,0.2)' : 'rgba(10, 107, 92, 0.1)',
-                color: plan.popular ? 'white' : 'var(--primary)',
-                padding: '4px 10px',
-                borderRadius: '6px',
+                marginBottom: '20px',
+                padding: '8px 12px',
+                background: plan.popular ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.03)',
+                borderRadius: '8px',
+              }}>
+                <strong>Обслуживание и поддержка:</strong><br/>
+                {plan.maintenance}
+              </div>
+            )}
+
+            {plan.highlight && (
+              <div style={{
                 fontSize: '12px',
+                color: 'var(--primary)',
+                marginBottom: '16px',
+                padding: '10px 12px',
+                background: 'rgba(10, 107, 92, 0.1)',
+                borderRadius: '8px',
                 fontWeight: '600',
-              }}>+{plan.commission} {t('pricing.commissionText')}</span>
-              <span style={{
-                background: plan.popular ? 'rgba(255,255,255,0.2)' : 'rgba(224, 122, 95, 0.1)',
-                color: plan.popular ? 'white' : 'var(--accent)',
-                padding: '4px 10px',
-                borderRadius: '6px',
-                fontSize: '12px',
-                fontWeight: '600',
-              }}>{plan.limit}</span>
-            </div>
+              }}>
+                ✓ {plan.highlight}
+              </div>
+            )}
+
             <ul style={{
               listStyle: 'none',
-              marginBottom: '16px',
+              marginBottom: '24px',
+              flex: 1,
             }}>
               {plan.features.map((feature, j) => (
                 <li key={j} style={{
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: '8px',
+                  gap: '10px',
                   padding: '6px 0',
                   fontSize: '13px',
                   color: plan.popular ? 'rgba(255,255,255,0.9)' : 'var(--text-dark)',
-                  lineHeight: '1.4',
                 }}>
-                  <span style={{ color: plan.popular ? 'var(--accent-light)' : 'var(--primary)', flexShrink: 0, marginTop: '2px' }}>✓</span>
+                  <span style={{ 
+                    color: plan.popular ? 'var(--accent-light)' : 'var(--primary)',
+                    flexShrink: 0,
+                  }}>✓</span>
                   {feature}
                 </li>
               ))}
             </ul>
-            <Link
-              to="/contact"
-              className="card-3d"
+
+            <Link 
+              to="/contact" 
+              className={plan.popular ? 'btn-primary' : 'btn-secondary'}
               style={{
-                display: 'block',
-                background: plan.popular ? 'white' : 'var(--primary)',
-                color: plan.popular ? 'var(--primary)' : 'white',
-                padding: '12px',
-                borderRadius: '10px',
-                textDecoration: 'none',
-                fontWeight: '600',
-                fontSize: '14px',
-                textAlign: 'center',
-              }}
-            >{t('pricing.choose')}</Link>
+              display: 'block',
+              background: plan.popular ? 'white' : 'transparent',
+              color: plan.popular ? 'var(--primary)' : 'var(--text-dark)',
+              padding: '16px',
+              borderRadius: '10px',
+              textDecoration: 'none',
+              fontWeight: '700',
+              fontSize: '15px',
+              textAlign: 'center',
+              border: plan.popular ? 'none' : '2px solid var(--border)',
+            }}>
+              Оставить заявку
+            </Link>
           </div>
         ))}
       </div>
 
-      {/* Fulfillment Note */}
+      {/* Commission Block */}
       <div className="anim-hidden delay-5" style={{
-        marginTop: '32px',
-        padding: '16px 20px',
-        background: 'var(--bg-cream)',
-        borderRadius: '12px',
-        border: '1px solid var(--border)',
+        marginTop: '48px',
+        padding: '24px',
+        background: 'rgba(10, 107, 92, 0.08)',
+        borderRadius: '16px',
+        border: '1px solid rgba(10, 107, 92, 0.2)',
         textAlign: 'center',
+        maxWidth: '700px',
+        margin: '48px auto 0',
       }}>
-        <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.5' }}>
-          <strong style={{ color: 'var(--text-dark)' }}>{t('pricing.fulfillment.note')}</strong> {t('pricing.fulfillment.text')}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '8px',
+          marginBottom: '12px',
+        }}>
+          <span style={{ fontSize: '20px' }}>ℹ️</span>
+          <span style={{
+            color: 'var(--accent)',
+            fontWeight: '700',
+            fontSize: '14px',
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+          }}>Комиссия от продаж</span>
+        </div>
+        <div style={{
+          fontSize: '48px',
+          fontWeight: '800',
+          color: 'var(--text-dark)',
+          lineHeight: '1',
+          marginBottom: '12px',
+        }}>10%</div>
+        <p style={{
+          fontSize: '15px',
+          color: 'var(--text-muted)',
+          margin: 0,
+        }}>
+          От каждой выплаты — за Shopify-инфраструктуру, обработку платежей, контроль рисков и сопровождение
         </p>
       </div>
     </div>
