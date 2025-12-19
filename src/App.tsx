@@ -3199,9 +3199,9 @@ const PricingPage = () => {
             letterSpacing: '2px',
           }}>Тарифы</span>
           <h1 style={{
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "var(--font-family)",
             fontSize: 'clamp(32px, 5vw, 48px)',
-            fontWeight: '700',
+            fontWeight: '800',
             color: 'var(--text-dark)',
             marginTop: '12px',
             marginBottom: '16px',
@@ -3275,9 +3275,9 @@ const PricingPage = () => {
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <h2 style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "var(--font-family)",
               fontSize: 'clamp(28px, 4vw, 36px)',
-              fontWeight: '700',
+              fontWeight: '800',
               color: 'var(--text-dark)',
               marginBottom: '12px',
             }}>
@@ -3575,9 +3575,9 @@ const PricingPage = () => {
       <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
         <div className="container">
           <h2 style={{
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "var(--font-family)",
             fontSize: 'clamp(28px, 4vw, 36px)',
-            fontWeight: '700',
+            fontWeight: '800',
             color: 'var(--text-dark)',
             textAlign: 'center',
             marginBottom: '48px',
@@ -3666,9 +3666,9 @@ const PricingPage = () => {
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <h2 style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "var(--font-family)",
               fontSize: 'clamp(28px, 4vw, 36px)',
-              fontWeight: '700',
+              fontWeight: '800',
               color: 'var(--text-dark)',
               marginBottom: '12px',
             }}>
@@ -4000,9 +4000,9 @@ const PricingPage = () => {
       }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <h2 style={{
-            fontFamily: "'Playfair Display', serif",
+            fontFamily: "var(--font-family)",
             fontSize: 'clamp(28px, 4vw, 42px)',
-            fontWeight: '700',
+            fontWeight: '800',
             color: 'var(--text-light)',
             marginBottom: '16px',
           }}>
