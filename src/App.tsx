@@ -874,11 +874,106 @@ const GlobalStyles = () => (
     .card-3d {
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       transform-style: preserve-3d;
+      position: relative;
     }
     
     .card-3d:hover {
-      transform: translateY(-12px) scale(1.02) perspective(1000px) rotateX(2deg);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      transform: translateY(-12px) scale(1.05) perspective(1000px) rotateX(2deg);
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3), 0 10px 20px -5px rgba(224, 122, 95, 0.2);
+    }
+    
+    /* ========== BUTTON STYLES ========== */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 10px 30px -5px rgba(224, 122, 95, 0.5), 0 5px 15px -3px rgba(224, 122, 95, 0.3);
+    }
+    
+    .btn-primary:active {
+      transform: translateY(0) scale(1.02);
+    }
+    
+    .btn-secondary {
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px -5px rgba(10, 107, 92, 0.3);
+      background: var(--primary) !important;
+      color: white !important;
+      border-color: var(--primary) !important;
+    }
+    
+    .btn-secondary:active {
+      transform: translateY(0);
+    }
+    
+    /* ========== CARD HOVER EFFECTS ========== */
+    .hover-card {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    
+    .hover-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* ========== LINK HOVER ========== */
+    .link-hover {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    
+    .link-hover::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    
+    .link-hover:hover::after {
+      width: 100%;
+    }
+    
+    /* ========== GRADIENT ANIMATIONS ========== */
+    @keyframes gradient-shift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .gradient-animate {
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
     }
     
     /* ========== GLASSMORPHISM ========== */
@@ -1118,15 +1213,15 @@ const Header = () => {
             {language === 'ru' ? 'EN' : 'RU'}
           </button>
           
-          <Link to="/contact" style={{
+          <Link to="/contact" className="btn-primary" style={{
             background: 'var(--accent)',
             color: 'white',
-            padding: '12px 24px',
-            borderRadius: '8px',
+            padding: '12px 28px',
+            borderRadius: '10px',
             textDecoration: 'none',
-            fontWeight: '600',
+            fontWeight: '700',
             fontSize: '14px',
-            transition: 'all 0.2s ease',
+            boxShadow: '0 4px 16px rgba(224, 122, 95, 0.3)',
           }}>{t('nav.contact')}</Link>
         </nav>
 
@@ -1388,23 +1483,23 @@ const HeroSection = () => {
         }}>
           <Link
             to="/contact"
-            className="card-3d"
+            className="btn-primary gradient-animate"
             style={{
-              background: 'linear-gradient(135deg, var(--accent), var(--accent-dark))',
+              background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%)',
               color: 'white',
-              padding: '16px 40px',
+              padding: '18px 48px',
               borderRadius: '12px',
               textDecoration: 'none',
               fontWeight: '700',
-              fontSize: '15px',
+              fontSize: '16px',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '8px',
-              boxShadow: '0 4px 24px rgba(224, 122, 95, 0.4)',
+              gap: '10px',
+              boxShadow: '0 8px 32px rgba(224, 122, 95, 0.5)',
             }}
           >
             {t('hero.cta')}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
@@ -2655,21 +2750,21 @@ const CTASection = () => {
           {t('cta.subtitle')}
         </p>
 
-        <Link to="/contact" style={{
+        <Link to="/contact" className="btn-primary gradient-animate" style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '8px',
-          background: 'var(--accent)',
+          gap: '10px',
+          background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%)',
           color: 'white',
-          padding: '18px 48px',
+          padding: '20px 56px',
           borderRadius: '12px',
           textDecoration: 'none',
           fontWeight: '700',
-          fontSize: '16px',
-          boxShadow: '0 4px 24px rgba(224, 122, 95, 0.4)',
+          fontSize: '17px',
+          boxShadow: '0 8px 32px rgba(224, 122, 95, 0.5)',
         }}>
           {t('cta.button')}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </Link>
@@ -3383,7 +3478,7 @@ const PricingPage = () => {
                 popular: false,
               },
             ].map((plan, i) => (
-              <div key={i} style={{
+              <div key={i} className="hover-card" style={{
                 background: plan.popular ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'var(--bg-cream)',
                 borderRadius: '20px',
                 padding: '28px',
@@ -3495,18 +3590,20 @@ const PricingPage = () => {
                   ))}
                 </ul>
 
-                <Link to="/contact" style={{
+                <Link 
+                  to="/contact" 
+                  className={plan.popular ? 'btn-primary' : 'btn-secondary'}
+                  style={{
                   display: 'block',
                   background: plan.popular ? 'white' : 'transparent',
                   color: plan.popular ? 'var(--primary)' : 'var(--text-dark)',
-                  padding: '14px',
+                  padding: '16px',
                   borderRadius: '10px',
                   textDecoration: 'none',
-                  fontWeight: '600',
-                  fontSize: '14px',
+                  fontWeight: '700',
+                  fontSize: '15px',
                   textAlign: 'center',
                   border: plan.popular ? 'none' : '2px solid var(--border)',
-                  transition: 'all 0.2s ease',
                 }}>
                   Оставить заявку
                 </Link>
@@ -3538,15 +3635,15 @@ const PricingPage = () => {
             }}>
               Свяжитесь для индивидуального предложения под ваш масштаб
             </p>
-            <Link to="/contact" style={{
+            <Link to="/contact" className="btn-secondary" style={{
               display: 'inline-block',
               background: 'transparent',
               color: 'var(--text-dark)',
-              padding: '12px 28px',
-              borderRadius: '8px',
+              padding: '14px 32px',
+              borderRadius: '10px',
               textDecoration: 'none',
-              fontWeight: '600',
-              fontSize: '14px',
+              fontWeight: '700',
+              fontSize: '15px',
               border: '2px solid var(--text-dark)',
             }}>
               Связаться с нами
@@ -3769,22 +3866,22 @@ const PricingPage = () => {
                 Стоимость доставки рассчитывается отдельно в зависимости от направления и тарифов перевозчика.
               </p>
 
-              <Link to="/fulfillment" style={{
+              <Link to="/fulfillment" className="btn-secondary" style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px',
+                gap: '10px',
                 background: 'transparent',
                 color: 'var(--text-dark)',
-                padding: '14px',
+                padding: '16px',
                 borderRadius: '10px',
                 textDecoration: 'none',
-                fontWeight: '600',
-                fontSize: '14px',
+                fontWeight: '700',
+                fontSize: '15px',
                 border: '2px solid var(--border)',
               }}>
                 Подробнее о фулфилменте
-                <span>→</span>
+                <span style={{ fontSize: '18px' }}>→</span>
               </Link>
             </div>
 
@@ -3889,22 +3986,22 @@ const PricingPage = () => {
                 Стоимость маркетинговых услуг рассчитывается индивидуально в зависимости от потребностей бизнеса.
               </p>
 
-              <Link to="/contact" style={{
+              <Link to="/contact" className="btn-secondary" style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px',
+                gap: '10px',
                 background: 'transparent',
                 color: 'var(--text-dark)',
-                padding: '14px',
+                padding: '16px',
                 borderRadius: '10px',
                 textDecoration: 'none',
-                fontWeight: '600',
-                fontSize: '14px',
+                fontWeight: '700',
+                fontSize: '15px',
                 border: '2px solid var(--border)',
               }}>
                 Узнать подробнее
-                <span>→</span>
+                <span style={{ fontSize: '18px' }}>→</span>
               </Link>
             </div>
           </div>
@@ -3974,20 +4071,20 @@ const PricingPage = () => {
                 </div>
               ))}
             </div>
-            <Link to="/contact" style={{
+            <Link to="/contact" className="btn-primary" style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '8px',
+              gap: '10px',
               background: 'var(--accent)',
               color: 'white',
-              padding: '16px 32px',
-              borderRadius: '10px',
+              padding: '18px 36px',
+              borderRadius: '12px',
               textDecoration: 'none',
               fontWeight: '700',
-              fontSize: '15px',
+              fontSize: '16px',
             }}>
               Оставить заявку на подключение
-              <span>→</span>
+              <span style={{ fontSize: '20px' }}>→</span>
             </Link>
           </div>
         </div>
@@ -4018,21 +4115,21 @@ const PricingPage = () => {
           }}>
             Оставьте заявку — обсудим ваш товар и рассчитаем экономику запуска
           </p>
-          <Link to="/contact" style={{
+          <Link to="/contact" className="btn-primary gradient-animate" style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '8px',
-            background: 'var(--accent)',
+            gap: '10px',
+            background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%)',
             color: 'white',
-            padding: '18px 40px',
+            padding: '20px 48px',
             borderRadius: '12px',
             textDecoration: 'none',
             fontWeight: '700',
-            fontSize: '16px',
-            boxShadow: '0 4px 24px rgba(224, 122, 95, 0.4)',
+            fontSize: '17px',
+            boxShadow: '0 8px 32px rgba(224, 122, 95, 0.5)',
           }}>
             Получить консультацию
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
@@ -4286,23 +4383,24 @@ const ContactPage = () => {
                   />
                 </div>
 
-                <button type="submit" style={{
+                <button type="submit" className="btn-primary gradient-animate" style={{
                   width: '100%',
-                  background: 'linear-gradient(135deg, var(--accent), var(--accent-dark))',
+                  background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%)',
                   color: 'white',
-                  padding: '16px',
-                  borderRadius: '10px',
+                  padding: '18px',
+                  borderRadius: '12px',
                   border: 'none',
                   fontWeight: '700',
-                  fontSize: '16px',
+                  fontSize: '17px',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px',
+                  gap: '10px',
+                  boxShadow: '0 4px 20px rgba(224, 122, 95, 0.3)',
                 }}>
                   {t('contact.submit')}
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </button>
