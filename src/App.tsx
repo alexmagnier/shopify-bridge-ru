@@ -2584,6 +2584,804 @@ const PricingSection = () => {
 };
 
 // ============================================
+// WHY US AFFORDABLE SECTION
+// ============================================
+const WhyUsAffordableSection = () => {
+  return (
+    <section style={{ background: 'white', padding: '100px 0' }}>
+      <div className="container">
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '60px', maxWidth: '900px', margin: '0 auto 60px' }}>
+          <span style={{
+            color: 'var(--accent)',
+            fontWeight: '600',
+            fontSize: '14px',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+          }}>Экономика решения</span>
+          <h2 style={{
+            fontFamily: "var(--font-family)",
+            fontSize: 'clamp(28px, 4vw, 42px)',
+            fontWeight: '800',
+            color: 'var(--text-dark)',
+            marginTop: '12px',
+            marginBottom: '20px',
+          }}>
+            Сколько стоит выйти на международный рынок <span style={{ color: 'var(--primary)' }}>самостоятельно?</span>
+          </h2>
+          <p style={{ fontSize: '18px', color: 'var(--text-muted)', lineHeight: '1.7' }}>
+            Разберём реальные затраты на создание инфраструктуры для продаж через Shopify — и покажем, 
+            почему наш сервис экономит вам <strong style={{ color: 'var(--primary)' }}>$24,000+</strong> и <strong style={{ color: 'var(--primary)' }}>5 месяцев</strong> времени.
+          </p>
+        </div>
+
+        {/* Comparison Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
+          gap: '40px',
+          marginBottom: '60px',
+        }}>
+          {/* LEFT: Self-made */}
+          <div style={{
+            background: 'linear-gradient(135deg, #FEF3F2 0%, #FEE2E2 100%)',
+            borderRadius: '24px',
+            padding: '40px',
+            border: '2px solid #FCA5A5',
+          }}>
+            <h3 style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              marginBottom: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+            }}>
+              <span style={{ fontSize: '28px' }}>❌</span>
+              Если делать всё самому
+            </h3>
+
+            {/* Card 1: UAE Company */}
+            <div className="hover-card" style={{
+              background: 'white',
+              borderRadius: '16px',
+              padding: '24px',
+              marginBottom: '20px',
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '16px',
+              }}>
+                <span style={{ fontSize: '32px' }}>🏢</span>
+                <div>
+                  <h4 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '4px' }}>
+                    КОМПАНИЯ В ОАЭ
+                  </h4>
+                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+                    для работы со складом
+                  </p>
+                </div>
+              </div>
+              
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '16px', lineHeight: '1.6' }}>
+                Для работы с фулфилментом в Дубае нужна торговая лицензия, регистрация компании, 
+                банковский счёт и личный визит.
+              </p>
+
+              <div style={{
+                background: '#F9FAFB',
+                borderRadius: '12px',
+                padding: '16px',
+                fontSize: '14px',
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Лицензия Free Zone</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$3,000-8,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Регистрация компании</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$1,500-3,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Виза инвестора</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$2,000-4,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Офис/рабочее место</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$2,000-5,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Банковский счёт</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$500-2,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Перелёт + проживание</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$1,500-3,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '2px solid var(--text-dark)' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Услуги агентства</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$1,000-2,500</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0 0' }}>
+                  <span style={{ fontWeight: '700', color: 'var(--text-dark)' }}>ИТОГО:</span>
+                  <span style={{ fontWeight: '800', fontSize: '18px', color: '#DC2626' }}>$11,500-27,500</span>
+                </div>
+              </div>
+
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span>⏱</span> Срок: 4-8 недель
+              </p>
+            </div>
+
+            {/* Card 2: UK Company */}
+            <div className="hover-card" style={{
+              background: 'white',
+              borderRadius: '16px',
+              padding: '24px',
+              marginBottom: '20px',
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '16px',
+              }}>
+                <span style={{ fontSize: '32px' }}>💳</span>
+                <div>
+                  <h4 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '4px' }}>
+                    КОМПАНИЯ В UK
+                  </h4>
+                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+                    для приёма платежей Shopify
+                  </p>
+                </div>
+              </div>
+              
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '16px', lineHeight: '1.6' }}>
+                Shopify требует компанию в поддерживаемой юрисдикции: UK Ltd, банковский счёт, 
+                подключение процессинга и бухгалтерию.
+              </p>
+
+              <div style={{
+                background: '#F9FAFB',
+                borderRadius: '12px',
+                padding: '16px',
+                fontSize: '14px',
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Регистрация UK Ltd</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$500-1,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Юридический адрес</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$300-600/год</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Директор-номинал</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$2,000-5,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Открытие счёта*</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$2,000-5,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Бухгалтерия</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$1,500-3,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '2px solid var(--text-dark)' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Процессинг</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$500-2,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0 0' }}>
+                  <span style={{ fontWeight: '700', color: 'var(--text-dark)' }}>ИТОГО 1-й год:</span>
+                  <span style={{ fontWeight: '800', fontSize: '18px', color: '#DC2626' }}>$6,800-16,600</span>
+                </div>
+              </div>
+
+              <p style={{ fontSize: '12px', color: '#DC2626', marginTop: '12px', fontStyle: 'italic' }}>
+                *Многие банки отказывают нерезидентам без личного присутствия
+              </p>
+              
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span>⏱</span> Срок: 4-12 недель
+              </p>
+            </div>
+
+            {/* Card 3: Shopify */}
+            <div className="hover-card" style={{
+              background: 'white',
+              borderRadius: '16px',
+              padding: '24px',
+              marginBottom: '24px',
+            }}>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '16px',
+              }}>
+                <span style={{ fontSize: '32px' }}>🛒</span>
+                <div>
+                  <h4 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '4px' }}>
+                    SHOPIFY МАГАЗИН
+                  </h4>
+                  <p style={{ fontSize: '13px', color: 'var(--text-muted)', margin: 0 }}>
+                    настройка и верификация
+                  </p>
+                </div>
+              </div>
+              
+              <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '16px', lineHeight: '1.6' }}>
+                Shopify проверяет продавцов, особенно из России. Верификация может занять недели или закончиться отказом.
+              </p>
+
+              <div style={{
+                background: '#F9FAFB',
+                borderRadius: '12px',
+                padding: '16px',
+                fontSize: '14px',
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Shopify Basic</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$39/мес</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Тема/дизайн</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$150-400</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Настройка магазина</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$500-2,000</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #E5E7EB' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Интеграция фулфилмент</span>
+                  <span style={{ fontWeight: '600', color: 'var(--text-dark)' }}>$500-1,500</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '2px solid var(--text-dark)' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Риск отказа</span>
+                  <span style={{ fontWeight: '600', color: '#DC2626' }}>ВЫСОКИЙ</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0 0' }}>
+                  <span style={{ fontWeight: '700', color: 'var(--text-dark)' }}>ИТОГО:</span>
+                  <span style={{ fontWeight: '800', fontSize: '18px', color: '#DC2626' }}>$1,150-3,900</span>
+                </div>
+              </div>
+
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span>⏱</span> Срок: 2-6 недель (если одобрят)
+              </p>
+            </div>
+
+            {/* Total Self-made */}
+            <div style={{
+              background: 'linear-gradient(135deg, #DC2626 0%, #991B1B 100%)',
+              borderRadius: '20px',
+              padding: '32px',
+              color: 'white',
+            }}>
+              <h4 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '24px', textAlign: 'center' }}>
+                📊 ИТОГО САМОСТОЯТЕЛЬНЫЙ ВЫХОД
+              </h4>
+              
+              <div style={{ fontSize: '15px', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+                  <span>💰 Стартовые затраты:</span>
+                  <strong style={{ fontSize: '24px' }}>$19,450-48,000</strong>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+                  <span>⏱ Время до запуска:</span>
+                  <strong style={{ fontSize: '20px' }}>3-6 МЕСЯЦЕВ</strong>
+                </div>
+              </div>
+
+              <div style={{
+                background: 'rgba(255,255,255,0.1)',
+                borderRadius: '12px',
+                padding: '16px',
+                marginBottom: '16px',
+              }}>
+                <p style={{ fontSize: '14px', fontWeight: '600', marginBottom: '12px' }}>⚠️ Риски:</p>
+                <ul style={{ fontSize: '13px', lineHeight: '1.8', paddingLeft: '20px', margin: 0 }}>
+                  <li>Отказ банка в открытии счёта</li>
+                  <li>Отказ Shopify в верификации</li>
+                  <li>Проблемы с compliance</li>
+                  <li>Сложности с выводом средств в РФ</li>
+                </ul>
+              </div>
+
+              <div style={{ textAlign: 'center', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+                <p style={{ fontSize: '13px', marginBottom: '4px', opacity: 0.9 }}>📅 Ежегодные расходы:</p>
+                <p style={{ fontSize: '20px', fontWeight: '800', margin: 0 }}>$6,000-15,000/год</p>
+                <p style={{ fontSize: '12px', marginTop: '4px', opacity: 0.8 }}>(бухгалтерия, лицензии, обслуживание)</p>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: With Shopify Bridge */}
+          <div style={{
+            background: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)',
+            borderRadius: '24px',
+            padding: '40px',
+            border: '2px solid #10B981',
+          }}>
+            <h3 style={{
+              fontSize: '24px',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              marginBottom: '30px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+            }}>
+              <span style={{ fontSize: '28px' }}>✅</span>
+              С Shopify Bridge
+            </h3>
+
+            {/* What we handle */}
+            <div style={{
+              background: 'white',
+              borderRadius: '16px',
+              padding: '28px',
+              marginBottom: '24px',
+            }}>
+              <h4 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '24px' }}>
+                🎯 ВСЁ ВКЛЮЧЕНО В СЕРВИС
+              </h4>
+
+              {[
+                {
+                  icon: '🏢',
+                  title: 'КОМПАНИЯ В ОАЭ',
+                  desc: 'У нас партнёрство с фулфилментом в Дубае. Вам не нужна своя компания в ОАЭ.',
+                },
+                {
+                  icon: '💳',
+                  title: 'ПРИЁМ ПЛАТЕЖЕЙ',
+                  desc: 'Наша UK-компания принимает платежи через Shopify. Вы получаете в USDT.',
+                },
+                {
+                  icon: '🛒',
+                  title: 'SHOPIFY МАГАЗИН',
+                  desc: 'Мы создаём и настраиваем магазин. Верификация уже пройдена.',
+                },
+                {
+                  icon: '💰',
+                  title: 'ВЫВОД СРЕДСТВ',
+                  desc: 'Еженедельные выплаты в USDT. Никаких сложностей с банками.',
+                },
+              ].map((item, i) => (
+                <div key={i} style={{
+                  paddingBottom: '20px',
+                  marginBottom: '20px',
+                  borderBottom: i < 3 ? '1px solid #E5E7EB' : 'none',
+                }}>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '12px',
+                    marginBottom: '8px',
+                  }}>
+                    <span style={{ fontSize: '24px' }}>{item.icon}</span>
+                    <div style={{ flex: 1 }}>
+                      <h5 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '6px' }}>
+                        {item.title}
+                      </h5>
+                      <p style={{ fontSize: '14px', color: 'var(--text-muted)', margin: 0, lineHeight: '1.6' }}>
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{
+                    marginLeft: '36px',
+                    padding: '8px 16px',
+                    background: '#ECFDF5',
+                    borderRadius: '8px',
+                    display: 'inline-block',
+                  }}>
+                    <span style={{ fontSize: '14px', fontWeight: '700', color: '#059669' }}>
+                      ВАШ РАСХОД: $0
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* What you pay */}
+            <div style={{
+              background: 'white',
+              borderRadius: '16px',
+              padding: '28px',
+            }}>
+              <h4 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '20px' }}>
+                💵 ВАШИ ЗАТРАТЫ С SHOPIFY BRIDGE
+              </h4>
+
+              <div style={{ fontSize: '14px', marginBottom: '20px' }}>
+                <p style={{ fontWeight: '600', color: 'var(--text-dark)', marginBottom: '12px' }}>
+                  📦 ПАКЕТЫ ЗАПУСКА (разово):
+                </p>
+                <div style={{ paddingLeft: '20px', color: 'var(--text-muted)', lineHeight: '2' }}>
+                  <div>Testing Package (до 2 SKU) — <strong style={{ color: 'var(--primary)' }}>$380</strong></div>
+                  <div>Starter Store (до 10 SKU) — <strong style={{ color: 'var(--primary)' }}>$590</strong></div>
+                  <div>Growth Store (до 25 SKU) — <strong style={{ color: 'var(--primary)' }}>$1,200</strong></div>
+                  <div>Business Store (до 50 SKU) — <strong style={{ color: 'var(--primary)' }}>$2,200</strong></div>
+                </div>
+              </div>
+
+              <div style={{
+                background: '#F0FDF4',
+                borderRadius: '12px',
+                padding: '16px',
+                marginBottom: '16px',
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-dark)' }}>
+                    💳 КОМИССИЯ ОТ ПРОДАЖ:
+                  </span>
+                  <span style={{ fontSize: '24px', fontWeight: '800', color: '#059669' }}>10%</span>
+                </div>
+                <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '6px 0 0', lineHeight: '1.5' }}>
+                  Shopify-инфраструктура, обработка платежей, контроль рисков
+                </p>
+              </div>
+
+              <div style={{ fontSize: '14px', marginBottom: '20px' }}>
+                <p style={{ fontWeight: '600', color: 'var(--text-dark)', marginBottom: '8px' }}>
+                  🔄 ОБСЛУЖИВАНИЕ (каждые 3 месяца):
+                </p>
+                <div style={{ paddingLeft: '20px', color: 'var(--text-muted)', lineHeight: '1.8' }}>
+                  <div>Starter: $300 | Growth: $450 | Business: $650</div>
+                </div>
+              </div>
+
+              <div style={{
+                background: '#FEF3C7',
+                borderRadius: '12px',
+                padding: '20px',
+                marginTop: '24px',
+              }}>
+                <p style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '12px' }}>
+                  🚀 МИНИМАЛЬНЫЙ СТАРТ (тест рынка):
+                </p>
+                <div style={{ fontSize: '16px', lineHeight: '2' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>Testing Package:</span>
+                    <strong>$380</strong>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span>+ Настройка 3PL:</span>
+                    <strong>$399</strong>
+                  </div>
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    paddingTop: '12px',
+                    marginTop: '12px',
+                    borderTop: '2px solid #FCD34D',
+                  }}>
+                    <strong style={{ fontSize: '18px' }}>ИТОГО:</strong>
+                    <strong style={{ fontSize: '28px', color: '#059669' }}>$779</strong>
+                  </div>
+                </div>
+                <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginTop: '16px', textAlign: 'center' }}>
+                  <span style={{ fontSize: '16px' }}>⏱</span> Срок до запуска: <strong style={{ color: '#059669' }}>2-3 НЕДЕЛИ</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Comparison Table */}
+        <div style={{
+          background: 'var(--bg-cream)',
+          borderRadius: '24px',
+          padding: '48px',
+          marginBottom: '60px',
+        }}>
+          <h3 style={{
+            fontSize: '28px',
+            fontWeight: '700',
+            color: 'var(--text-dark)',
+            textAlign: 'center',
+            marginBottom: '40px',
+          }}>
+            Сравнение: <span style={{ color: '#DC2626' }}>сами</span> vs <span style={{ color: '#059669' }}>с нами</span>
+          </h3>
+
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{
+              width: '100%',
+              borderCollapse: 'collapse',
+              background: 'white',
+              borderRadius: '16px',
+              overflow: 'hidden',
+            }}>
+              <thead>
+                <tr style={{ background: 'var(--bg-dark)', color: 'white' }}>
+                  <th style={{ padding: '20px', textAlign: 'left', fontSize: '16px', fontWeight: '700' }}>ПАРАМЕТР</th>
+                  <th style={{ padding: '20px', textAlign: 'center', fontSize: '16px', fontWeight: '700' }}>САМОСТОЯТЕЛЬНО</th>
+                  <th style={{ padding: '20px', textAlign: 'center', fontSize: '16px', fontWeight: '700', background: '#059669' }}>SHOPIFY BRIDGE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { param: 'Стартовые затраты', self: '$18,000-43,000', us: 'от $779' },
+                  { param: 'Время до запуска', self: '3-6 месяцев', us: '2-3 недели' },
+                  { param: 'Компания в ОАЭ', self: 'Нужна', us: 'Не нужна' },
+                  { param: 'Компания в UK', self: 'Нужна', us: 'Не нужна' },
+                  { param: 'Банковский счёт', self: 'Сложно открыть', us: 'Не нужен' },
+                  { param: 'Верификация Shopify', self: 'Риск отказа', us: 'Уже пройдена' },
+                  { param: 'Вывод средств', self: 'Проблемы', us: 'USDT еженедельно' },
+                  { param: 'Комиссия с продаж', self: '2-3% процессинг', us: '10% (всё вкл.)' },
+                  { param: 'Ежегодные расходы', self: '$6,000-15,000', us: 'от $1,200/год' },
+                  { param: 'Риски', self: 'ВЫСОКИЕ', us: 'МИНИМАЛЬНЫЕ' },
+                ].map((row, i) => (
+                  <tr key={i} style={{ borderBottom: '1px solid #E5E7EB' }}>
+                    <td style={{ padding: '20px', fontWeight: '600', color: 'var(--text-dark)' }}>{row.param}</td>
+                    <td style={{
+                      padding: '20px',
+                      textAlign: 'center',
+                      color: '#DC2626',
+                      fontWeight: '600',
+                      background: i % 2 === 0 ? '#FEF2F2' : 'white',
+                    }}>{row.self}</td>
+                    <td style={{
+                      padding: '20px',
+                      textAlign: 'center',
+                      color: '#059669',
+                      fontWeight: '600',
+                      background: i % 2 === 0 ? '#ECFDF5' : 'white',
+                    }}>{row.us}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Calculator */}
+        <div style={{
+          background: 'linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%)',
+          borderRadius: '24px',
+          padding: '48px',
+          border: '2px solid #FBBF24',
+          marginBottom: '60px',
+        }}>
+          <h3 style={{
+            fontSize: '32px',
+            fontWeight: '800',
+            color: 'var(--text-dark)',
+            textAlign: 'center',
+            marginBottom: '40px',
+          }}>
+            💎 Ваша экономия с Shopify Bridge
+          </h3>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '24px',
+            marginBottom: '40px',
+          }}>
+            <div className="hover-card" style={{
+              background: 'white',
+              borderRadius: '16px',
+              padding: '32px',
+              textAlign: 'center',
+            }}>
+              <div style={{ fontSize: '48px', marginBottom: '12px' }}>💸</div>
+              <h4 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '20px' }}>
+                ЭКОНОМИЯ НА СТАРТЕ
+              </h4>
+              <div style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '8px' }}>
+                Самостоятельно: <span style={{ fontWeight: '600', color: '#DC2626' }}>~$25,000</span>
+              </div>
+              <div style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '16px' }}>
+                С нами: <span style={{ fontWeight: '600', color: '#059669' }}>~$779</span>
+              </div>
+              <div style={{
+                padding: '16px',
+                background: '#ECFDF5',
+                borderRadius: '12px',
+                marginTop: '16px',
+              }}>
+                <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '4px' }}>ЭКОНОМИЯ:</p>
+                <p style={{ fontSize: '36px', fontWeight: '800', color: '#059669', margin: 0 }}>$24,000+ ✨</p>
+              </div>
+            </div>
+
+            <div className="hover-card" style={{
+              background: 'white',
+              borderRadius: '16px',
+              padding: '32px',
+              textAlign: 'center',
+            }}>
+              <div style={{ fontSize: '48px', marginBottom: '12px' }}>⏱</div>
+              <h4 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '20px' }}>
+                ЭКОНОМИЯ ВРЕМЕНИ
+              </h4>
+              <div style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '8px' }}>
+                Самостоятельно: <span style={{ fontWeight: '600', color: '#DC2626' }}>4-6 месяцев</span>
+              </div>
+              <div style={{ fontSize: '16px', color: 'var(--text-muted)', marginBottom: '16px' }}>
+                С нами: <span style={{ fontWeight: '600', color: '#059669' }}>2-3 недели</span>
+              </div>
+              <div style={{
+                padding: '16px',
+                background: '#ECFDF5',
+                borderRadius: '12px',
+                marginTop: '16px',
+              }}>
+                <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginBottom: '4px' }}>ЭКОНОМИЯ:</p>
+                <p style={{ fontSize: '36px', fontWeight: '800', color: '#059669', margin: 0 }}>5+ месяцев ✨</p>
+              </div>
+            </div>
+          </div>
+
+          {/* When own infrastructure is better */}
+          <div style={{
+            background: 'white',
+            borderRadius: '16px',
+            padding: '32px',
+          }}>
+            <h4 style={{ fontSize: '20px', fontWeight: '700', color: 'var(--text-dark)', marginBottom: '24px', textAlign: 'center' }}>
+              🎯 Когда своя инфраструктура выгоднее?
+            </h4>
+            
+            <div style={{ fontSize: '15px', lineHeight: '2', color: 'var(--text-muted)' }}>
+              <p style={{ marginBottom: '16px' }}>
+                <strong style={{ color: 'var(--text-dark)' }}>Пример:</strong> продажи <strong>$10,000/мес</strong>
+              </p>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+                <div style={{ padding: '20px', background: '#ECFDF5', borderRadius: '12px' }}>
+                  <p style={{ fontWeight: '700', color: '#059669', marginBottom: '12px' }}>С нами:</p>
+                  <div>Комиссия 10% = $1,000</div>
+                  <div>+ Обслуживание ~$150</div>
+                  <div>+ Фулфилмент ~$500</div>
+                  <div style={{
+                    marginTop: '12px',
+                    paddingTop: '12px',
+                    borderTop: '2px solid #059669',
+                    fontWeight: '700',
+                    color: '#059669',
+                  }}>Итого: ~$1,650/мес</div>
+                </div>
+
+                <div style={{ padding: '20px', background: '#FEF2F2', borderRadius: '12px' }}>
+                  <p style={{ fontWeight: '700', color: '#DC2626', marginBottom: '12px' }}>Своя инфраструктура:</p>
+                  <div>Старт: $25,000</div>
+                  <div>+ Ежегодные ~$830/мес</div>
+                  <div>+ Процессинг 3%: $300</div>
+                  <div style={{
+                    marginTop: '12px',
+                    paddingTop: '12px',
+                    borderTop: '2px solid #DC2626',
+                    fontWeight: '700',
+                    color: '#DC2626',
+                  }}>Итого: ~$1,130/мес<br/>+ $25,000 старт</div>
+                </div>
+              </div>
+
+              <div style={{
+                background: '#FEF3C7',
+                padding: '24px',
+                borderRadius: '12px',
+                textAlign: 'center',
+              }}>
+                <p style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-dark)', marginBottom: '12px' }}>
+                  📊 ВЫВОД:
+                </p>
+                <p style={{ fontSize: '17px', color: 'var(--text-dark)', marginBottom: '16px', lineHeight: '1.7' }}>
+                  Точка окупаемости: <strong>$25,000 ÷ ($1,650 - $1,130) = 48 месяцев</strong>
+                </p>
+                <p style={{ fontSize: '18px', fontWeight: '700', color: 'var(--primary)', marginBottom: '20px' }}>
+                  Своя инфраструктура окупается через <span style={{ fontSize: '24px' }}>4 ГОДА</span> стабильных продаж
+                </p>
+                <div style={{
+                  background: 'white',
+                  padding: '20px',
+                  borderRadius: '12px',
+                  marginTop: '20px',
+                }}>
+                  <p style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-dark)', marginBottom: '12px' }}>
+                    А если продажи не пойдут?
+                  </p>
+                  <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', fontSize: '18px' }}>
+                    <div>
+                      <div style={{ color: 'var(--text-muted)', marginBottom: '6px' }}>С нами:</div>
+                      <div style={{ fontWeight: '800', fontSize: '24px', color: '#059669' }}>$779</div>
+                    </div>
+                    <div>
+                      <div style={{ color: 'var(--text-muted)', marginBottom: '6px' }}>Самостоятельно:</div>
+                      <div style={{ fontWeight: '800', fontSize: '24px', color: '#DC2626' }}>$25,000</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Final CTA */}
+        <div style={{
+          background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--bg-dark) 100%)',
+          borderRadius: '24px',
+          padding: '60px 40px',
+          textAlign: 'center',
+          color: 'white',
+        }}>
+          <h3 style={{
+            fontSize: 'clamp(24px, 4vw, 36px)',
+            fontWeight: '800',
+            marginBottom: '16px',
+            lineHeight: '1.3',
+          }}>
+            Зачем рисковать $25,000,<br/>
+            если можно проверить рынок за <span style={{ color: 'var(--accent)' }}>$779?</span>
+          </h3>
+          <p style={{
+            fontSize: '18px',
+            color: 'rgba(255,255,255,0.8)',
+            marginBottom: '32px',
+            maxWidth: '700px',
+            margin: '0 auto 32px',
+            lineHeight: '1.7',
+          }}>
+            Начните с тестовой партии. Убедитесь, что товар продаётся.<br/>
+            Масштабируйте или стройте свою инфраструктуру — уже с данными.
+          </p>
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '16px',
+            marginBottom: '32px',
+            flexWrap: 'wrap',
+            fontSize: '16px',
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '20px' }}>✓</span>
+              <span>Экономия $24,000+ на старте</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '20px' }}>✓</span>
+              <span>Запуск за 2-3 недели вместо 6 месяцев</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '20px' }}>✓</span>
+              <span>Нулевой риск отказа в верификации</span>
+            </div>
+          </div>
+
+          <Link to="/contact" className="btn-primary gradient-animate" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '10px',
+            background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%)',
+            color: 'white',
+            padding: '20px 56px',
+            borderRadius: '12px',
+            textDecoration: 'none',
+            fontWeight: '700',
+            fontSize: '18px',
+            boxShadow: '0 8px 32px rgba(224, 122, 95, 0.5)',
+          }}>
+            Рассчитать запуск
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
 // FAQ SECTION
 // ============================================
 const FAQSection = () => {
@@ -2924,6 +3722,7 @@ const HomePage = () => (
     <TransparencySection />
     <WhyUsSection />
     <PricingSection />
+    <WhyUsAffordableSection />
     <FAQSection />
     <CTASection />
   </>
