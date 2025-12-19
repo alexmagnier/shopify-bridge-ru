@@ -1081,12 +1081,22 @@ const GlobalStyles = () => (
       }
       
       .calculator-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
       }
       
       .calculator-card {
-        padding: 28px 20px !important;
+        padding: 24px 16px !important;
+      }
+      
+      .calculator-card h4 {
+        font-size: 15px !important;
+        margin-bottom: 16px !important;
+      }
+      
+      .calculator-card > div:first-child {
+        font-size: 13px !important;
+        line-height: 1.6 !important;
       }
       
       .calculator-comparison {
@@ -1137,14 +1147,16 @@ const GlobalStyles = () => (
       }
       
       .icon-box {
-        width: 56px !important;
-        height: 56px !important;
-        font-size: 28px !important;
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 24px !important;
+        margin-bottom: 12px !important;
       }
       
       .gradient-box-cta {
-        padding: 20px !important;
+        padding: 16px !important;
       }
+      
       
       /* Hide decorative background blurs on mobile */
       .final-cta-section > div[style*="position: absolute"] {
@@ -1176,66 +1188,6 @@ const GlobalStyles = () => (
         padding: 0 12px;
       }
       
-      .comparison-card {
-        padding: 24px 16px !important;
-      }
-      
-      .comparison-table-container {
-        padding: 24px 16px !important;
-      }
-      
-      .comparison-table th,
-      .comparison-table td {
-        padding: 10px 6px !important;
-        font-size: 11px !important;
-      }
-      
-      .calculator-card {
-        padding: 24px 16px !important;
-      }
-      
-      .icon-box {
-        width: 48px !important;
-        height: 48px !important;
-        font-size: 24px !important;
-      }
-      
-      .final-cta-section {
-        padding: 36px 16px !important;
-      }
-      
-      .final-cta-section h3 {
-        font-size: 20px !important;
-      }
-      
-      .cta-button {
-        padding: 16px 32px !important;
-        font-size: 16px !important;
-      }
-      
-      .gradient-box-cta {
-        padding: 16px !important;
-      }
-      
-      .price-breakdown {
-        padding: 16px 12px !important;
-        font-size: 12px !important;
-      }
-      
-      .total-box {
-        padding: 24px 16px !important;
-      }
-      
-      .mobile-padding {
-        padding: 20px !important;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 12px;
-      }
-      
       section {
         padding: 40px 0 !important;
       }
@@ -1254,6 +1206,54 @@ const GlobalStyles = () => (
       
       .card-3d:hover {
         transform: none;
+      }
+      
+      /* Calculator cards on very small screens */
+      .calculator-card {
+        padding: 18px 12px !important;
+      }
+      
+      .calculator-grid {
+        gap: 12px !important;
+      }
+      
+      .icon-box {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 20px !important;
+        margin-bottom: 8px !important;
+      }
+      
+      .comparison-card {
+        padding: 20px 12px !important;
+      }
+      
+      .comparison-table-container {
+        padding: 20px 12px !important;
+      }
+      
+      .comparison-table th,
+      .comparison-table td {
+        padding: 8px 4px !important;
+        font-size: 10px !important;
+      }
+      
+      .final-cta-section {
+        padding: 32px 12px !important;
+      }
+      
+      .cta-button {
+        padding: 14px 24px !important;
+        font-size: 14px !important;
+      }
+      
+      .price-breakdown {
+        padding: 14px 10px !important;
+        font-size: 11px !important;
+      }
+      
+      .total-box {
+        padding: 20px 12px !important;
       }
     }
     
@@ -3687,25 +3687,25 @@ const WhyUsAffordableSection = () => {
                 margin: '0 auto 20px',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
               }}>💸</div>
-              <h4 style={{ fontSize: '19px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '24px', letterSpacing: '-0.3px' }}>
+              <h4 style={{ fontSize: 'clamp(15px, 3vw, 19px)', fontWeight: '800', color: 'var(--text-dark)', marginBottom: 'clamp(16px, 3vw, 24px)', letterSpacing: '-0.3px' }}>
                 ЭКОНОМИЯ НА СТАРТЕ
               </h4>
-              <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '12px', lineHeight: '1.8' }}>
+              <div style={{ fontSize: 'clamp(13px, 2.5vw, 15px)', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.6' }}>
                 Самостоятельно: <span style={{ fontWeight: '700', color: 'var(--text-dark)' }}>~$25,000</span>
               </div>
-              <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '24px', lineHeight: '1.8' }}>
+              <div style={{ fontSize: 'clamp(13px, 2.5vw, 15px)', color: 'var(--text-muted)', marginBottom: 'clamp(16px, 3vw, 24px)', lineHeight: '1.6' }}>
                 С нами: <span style={{ fontWeight: '700', color: 'var(--primary)' }}>~$779</span>
               </div>
               <div className="gradient-box-cta" style={{
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 background: 'linear-gradient(135deg, var(--primary), var(--accent))',
                 borderRadius: '16px',
-                marginTop: '20px',
+                marginTop: 'clamp(12px, 3vw, 20px)',
                 color: 'white',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
-                <p style={{ fontSize: '14px', marginBottom: '8px', opacity: 0.9, fontWeight: '600' }}>ЭКОНОМИЯ:</p>
-                <p style={{ fontSize: '42px', fontWeight: '900', margin: 0 }}>$24,000+</p>
+                <p style={{ fontSize: 'clamp(11px, 2vw, 14px)', marginBottom: 'clamp(4px, 1vw, 8px)', opacity: 0.9, fontWeight: '600' }}>ЭКОНОМИЯ:</p>
+                <p style={{ fontSize: 'clamp(28px, 6vw, 42px)', fontWeight: '900', margin: 0 }}>$24,000+</p>
               </div>
             </div>
 
@@ -3729,25 +3729,25 @@ const WhyUsAffordableSection = () => {
                 margin: '0 auto 20px',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
               }}>⏱</div>
-              <h4 style={{ fontSize: '19px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '24px', letterSpacing: '-0.3px' }}>
+              <h4 style={{ fontSize: 'clamp(15px, 3vw, 19px)', fontWeight: '800', color: 'var(--text-dark)', marginBottom: 'clamp(16px, 3vw, 24px)', letterSpacing: '-0.3px' }}>
                 ЭКОНОМИЯ ВРЕМЕНИ
               </h4>
-              <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '12px', lineHeight: '1.8' }}>
+              <div style={{ fontSize: 'clamp(13px, 2.5vw, 15px)', color: 'var(--text-muted)', marginBottom: '8px', lineHeight: '1.6' }}>
                 Самостоятельно: <span style={{ fontWeight: '700', color: 'var(--text-dark)' }}>4-6 месяцев</span>
               </div>
-              <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '24px', lineHeight: '1.8' }}>
+              <div style={{ fontSize: 'clamp(13px, 2.5vw, 15px)', color: 'var(--text-muted)', marginBottom: 'clamp(16px, 3vw, 24px)', lineHeight: '1.6' }}>
                 С нами: <span style={{ fontWeight: '700', color: 'var(--primary)' }}>2-3 недели</span>
               </div>
               <div className="gradient-box-cta" style={{
-                padding: '24px',
+                padding: 'clamp(16px, 3vw, 24px)',
                 background: 'linear-gradient(135deg, var(--primary), var(--accent))',
                 borderRadius: '16px',
-                marginTop: '20px',
+                marginTop: 'clamp(12px, 3vw, 20px)',
                 color: 'white',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
-                <p style={{ fontSize: '14px', marginBottom: '8px', opacity: 0.9, fontWeight: '600' }}>ЭКОНОМИЯ:</p>
-                <p style={{ fontSize: '42px', fontWeight: '900', margin: 0 }}>5+ месяцев</p>
+                <p style={{ fontSize: 'clamp(11px, 2vw, 14px)', marginBottom: 'clamp(4px, 1vw, 8px)', opacity: 0.9, fontWeight: '600' }}>ЭКОНОМИЯ:</p>
+                <p style={{ fontSize: 'clamp(28px, 6vw, 42px)', fontWeight: '900', margin: 0 }}>5+ месяцев</p>
               </div>
             </div>
           </div>
