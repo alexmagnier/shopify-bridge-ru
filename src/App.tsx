@@ -1049,6 +1049,183 @@ const GlobalStyles = () => (
         gap: 12px !important;
       }
       
+      /* WhyUsAffordableSection Mobile Adaptations */
+      .comparison-grid {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+      }
+      
+      .comparison-card {
+        padding: 28px 20px !important;
+      }
+      
+      .comparison-card h3 {
+        font-size: 20px !important;
+      }
+      
+      .comparison-card h4 {
+        font-size: 15px !important;
+      }
+      
+      .price-breakdown {
+        padding: 20px 16px !important;
+        font-size: 13px !important;
+      }
+      
+      .total-box {
+        padding: 28px 20px !important;
+      }
+      
+      .total-box h4 {
+        font-size: 16px !important;
+      }
+      
+      .calculator-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      
+      .calculator-card {
+        padding: 28px 20px !important;
+      }
+      
+      .calculator-comparison {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      
+      .comparison-table-container {
+        padding: 32px 20px !important;
+      }
+      
+      .comparison-table-container h3 {
+        font-size: 24px !important;
+      }
+      
+      .comparison-table table {
+        font-size: 13px !important;
+      }
+      
+      .comparison-table th,
+      .comparison-table td {
+        padding: 12px 8px !important;
+        font-size: 12px !important;
+      }
+      
+      .final-cta-section {
+        padding: 48px 24px !important;
+      }
+      
+      .final-cta-section h3 {
+        font-size: 24px !important;
+        margin-bottom: 16px !important;
+      }
+      
+      .final-cta-section p {
+        font-size: 16px !important;
+      }
+      
+      .cta-benefits {
+        flex-direction: column !important;
+        gap: 16px !important;
+        font-size: 14px !important;
+      }
+      
+      .cta-button {
+        padding: 18px 40px !important;
+        font-size: 17px !important;
+      }
+      
+      .icon-box {
+        width: 56px !important;
+        height: 56px !important;
+        font-size: 28px !important;
+      }
+      
+      .gradient-box-cta {
+        padding: 20px !important;
+      }
+      
+      /* Hide decorative background blurs on mobile */
+      .final-cta-section > div[style*="position: absolute"] {
+        display: none !important;
+      }
+      
+      /* Improve table overflow on mobile */
+      .comparison-table-container > div {
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .comparison-table th:first-child,
+      .comparison-table td:first-child {
+        position: sticky;
+        left: 0;
+        background: white;
+        z-index: 1;
+      }
+      
+      .comparison-table thead th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 12px;
+      }
+      
+      .comparison-card {
+        padding: 24px 16px !important;
+      }
+      
+      .comparison-table-container {
+        padding: 24px 16px !important;
+      }
+      
+      .comparison-table th,
+      .comparison-table td {
+        padding: 10px 6px !important;
+        font-size: 11px !important;
+      }
+      
+      .calculator-card {
+        padding: 24px 16px !important;
+      }
+      
+      .icon-box {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 24px !important;
+      }
+      
+      .final-cta-section {
+        padding: 36px 16px !important;
+      }
+      
+      .final-cta-section h3 {
+        font-size: 20px !important;
+      }
+      
+      .cta-button {
+        padding: 16px 32px !important;
+        font-size: 16px !important;
+      }
+      
+      .gradient-box-cta {
+        padding: 16px !important;
+      }
+      
+      .price-breakdown {
+        padding: 16px 12px !important;
+        font-size: 12px !important;
+      }
+      
+      .total-box {
+        padding: 24px 16px !important;
+      }
+      
       .mobile-padding {
         padding: 20px !important;
       }
@@ -2738,14 +2915,14 @@ const WhyUsAffordableSection = () => {
         </div>
 
         {/* Comparison Grid */}
-        <div style={{
+        <div className="comparison-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: '32px',
           marginBottom: '80px',
         }}>
           {/* LEFT: Self-made */}
-          <div style={{
+          <div className="comparison-card" style={{
             background: 'white',
             borderRadius: '24px',
             padding: '48px',
@@ -3034,7 +3211,7 @@ const WhyUsAffordableSection = () => {
             </div>
 
             {/* Total Self-made */}
-            <div style={{
+            <div className="total-box" style={{
               background: 'var(--text-dark)',
               borderRadius: '20px',
               padding: '40px',
@@ -3116,7 +3293,7 @@ const WhyUsAffordableSection = () => {
           </div>
 
           {/* RIGHT: With Shopify Bridge */}
-          <div style={{
+          <div className="comparison-card" style={{
             background: 'white',
             borderRadius: '24px',
             padding: '48px',
@@ -3281,7 +3458,7 @@ const WhyUsAffordableSection = () => {
                 </div>
               </div>
 
-              <div style={{
+              <div className="gradient-box-cta" style={{
                 background: 'linear-gradient(135deg, var(--primary), var(--accent))',
                 borderRadius: '16px',
                 padding: '28px',
@@ -3322,7 +3499,7 @@ const WhyUsAffordableSection = () => {
         </div>
 
         {/* Comparison Table */}
-        <div style={{
+        <div className="comparison-table-container" style={{
           background: 'white',
           borderRadius: '24px',
           padding: '56px',
@@ -3355,7 +3532,7 @@ const WhyUsAffordableSection = () => {
           </p>
 
           <div style={{ overflowX: 'auto' }}>
-            <table style={{
+            <table className="comparison-table" style={{
               width: '100%',
               borderCollapse: 'separate',
               borderSpacing: 0,
@@ -3483,14 +3660,14 @@ const WhyUsAffordableSection = () => {
             Реальные цифры и сравнение
           </p>
 
-          <div style={{
+          <div className="calculator-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '32px',
             marginBottom: '48px',
             position: 'relative' as const,
           }}>
-            <div className="hover-card" style={{
+            <div className="hover-card calculator-card" style={{
               background: 'white',
               borderRadius: '20px',
               padding: '40px',
@@ -3498,7 +3675,7 @@ const WhyUsAffordableSection = () => {
               border: '2px solid var(--border)',
               boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
             }}>
-              <div style={{ 
+              <div className="icon-box" style={{ 
                 width: '72px',
                 height: '72px',
                 borderRadius: '18px',
@@ -3519,7 +3696,7 @@ const WhyUsAffordableSection = () => {
               <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '24px', lineHeight: '1.8' }}>
                 С нами: <span style={{ fontWeight: '700', color: 'var(--primary)' }}>~$779</span>
               </div>
-              <div style={{
+              <div className="gradient-box-cta" style={{
                 padding: '24px',
                 background: 'linear-gradient(135deg, var(--primary), var(--accent))',
                 borderRadius: '16px',
@@ -3532,7 +3709,7 @@ const WhyUsAffordableSection = () => {
               </div>
             </div>
 
-            <div className="hover-card" style={{
+            <div className="hover-card calculator-card" style={{
               background: 'white',
               borderRadius: '20px',
               padding: '40px',
@@ -3540,7 +3717,7 @@ const WhyUsAffordableSection = () => {
               border: '2px solid var(--border)',
               boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
             }}>
-              <div style={{ 
+              <div className="icon-box" style={{ 
                 width: '72px',
                 height: '72px',
                 borderRadius: '18px',
@@ -3561,7 +3738,7 @@ const WhyUsAffordableSection = () => {
               <div style={{ fontSize: '15px', color: 'var(--text-muted)', marginBottom: '24px', lineHeight: '1.8' }}>
                 С нами: <span style={{ fontWeight: '700', color: 'var(--primary)' }}>2-3 недели</span>
               </div>
-              <div style={{
+              <div className="gradient-box-cta" style={{
                 padding: '24px',
                 background: 'linear-gradient(135deg, var(--primary), var(--accent))',
                 borderRadius: '16px',
@@ -3592,8 +3769,8 @@ const WhyUsAffordableSection = () => {
                 <strong style={{ color: 'var(--text-dark)', fontSize: '18px' }}>Пример:</strong> продажи <strong style={{ color: 'var(--primary)', fontSize: '18px' }}>$10,000/мес</strong>
               </p>
               
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px', marginBottom: '32px' }}>
-                <div style={{ 
+              <div className="calculator-comparison" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px', marginBottom: '32px' }}>
+                <div className="price-breakdown" style={{ 
                   padding: '28px', 
                   background: 'var(--bg-cream)', 
                   borderRadius: '16px',
@@ -3615,7 +3792,7 @@ const WhyUsAffordableSection = () => {
                   }}>Итого: ~$1,650/мес</div>
                 </div>
 
-                <div style={{ 
+                <div className="price-breakdown" style={{ 
                   padding: '28px', 
                   background: 'var(--bg-cream)', 
                   borderRadius: '16px',
@@ -3681,7 +3858,7 @@ const WhyUsAffordableSection = () => {
         </div>
 
         {/* Final CTA */}
-        <div style={{
+        <div className="final-cta-section" style={{
           background: 'linear-gradient(135deg, var(--primary-dark) 0%, var(--bg-dark) 100%)',
           borderRadius: '24px',
           padding: '72px 48px',
@@ -3737,7 +3914,7 @@ const WhyUsAffordableSection = () => {
             Масштабируйте или стройте свою инфраструктуру — уже с данными.
           </p>
 
-          <div style={{
+          <div className="cta-benefits" style={{
             display: 'flex',
             justifyContent: 'center',
             gap: '24px',
@@ -3787,7 +3964,7 @@ const WhyUsAffordableSection = () => {
             </div>
           </div>
 
-          <Link to="/contact" className="btn-primary gradient-animate" style={{
+          <Link to="/contact" className="btn-primary gradient-animate cta-button" style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: '12px',
