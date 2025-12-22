@@ -1,5 +1,16 @@
 import { useState, useEffect, createContext, useContext, ReactNode, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { ReferralTracker } from './components/ReferralTracker';
+import PartnersLandingPage from './pages/partners/index';
+import RegisterPage from './pages/partners/register';
+import LoginPage from './pages/partners/login';
+import DashboardPage from './pages/partners/dashboard';
+import ReferralsPage from './pages/partners/referrals';
+import PayoutsPage from './pages/partners/payouts';
+import ProfilePage from './pages/partners/profile';
+import MaterialsPage from './pages/partners/materials';
+import AdminLoginPage from './pages/admin/index';
+import AdminDashboardPage from './pages/admin/dashboard';
 
 // ============================================
 // SHOPIFY BRIDGE RU - ПОЛНЫЙ САЙТ
@@ -5848,6 +5859,7 @@ const App = () => {
       <Router>
         <GlobalStyles />
         <Header />
+        <ReferralTracker />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -5856,6 +5868,20 @@ const App = () => {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            
+            {/* Партнёрская программа */}
+            <Route path="/partners" element={<PartnersLandingPage />} />
+            <Route path="/partners/register" element={<RegisterPage />} />
+            <Route path="/partners/login" element={<LoginPage />} />
+            <Route path="/partners/dashboard" element={<DashboardPage />} />
+            <Route path="/partners/referrals" element={<ReferralsPage />} />
+            <Route path="/partners/payouts" element={<PayoutsPage />} />
+            <Route path="/partners/profile" element={<ProfilePage />} />
+            <Route path="/partners/materials" element={<MaterialsPage />} />
+            
+            {/* Админ-панель */}
+            <Route path="/admin" element={<AdminLoginPage />} />
+            <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
           </Routes>
         </main>
         <Footer />

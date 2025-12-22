@@ -1,0 +1,13 @@
+// components/ui/index.ts - Централизованный экспорт UI компонентов
+
+export * from './Button';
+export * from './Input';
+export * from './Select';
+export * from './Card';
+export * from './Badge';
+export * from './Table';
+export * from './Modal';
+export * from './Checkbox';
+export * from './Tabs';
+export * from './CopyButton';
+
