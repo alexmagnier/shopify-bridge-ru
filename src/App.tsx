@@ -5615,14 +5615,55 @@ const ContactPage = () => {
     volume: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { t, language } = useLanguage();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = language === 'ru' 
-      ? 'Заявка отправлена! Мы свяжемся с вами в течение 24 часов.'
-      : 'Request submitted! We will contact you within 24 hours.';
-    alert(msg);
+    
+    // Импортируем функцию отправки
+    const { submitLead } = await import('./utils/leadSubmission');
+    
+    setIsSubmitting(true);
+    
+    try {
+      const result = await submitLead({
+        name: formData.name,
+        contact: formData.contact,
+        product: formData.product,
+        volume: formData.volume,
+        message: formData.message,
+      });
+      
+      if (result.success) {
+        const msg = language === 'ru' 
+          ? '✅ Заявка отправлена! Мы свяжемся с вами в течение 24 часов.'
+          : '✅ Request submitted! We will contact you within 24 hours.';
+        alert(msg);
+        
+        // Очищаем форму
+        setFormData({
+          name: '',
+          contact: '',
+          product: '',
+          volume: '',
+          message: '',
+        });
+      } else {
+        const errorMsg = language === 'ru' 
+          ? '❌ Ошибка при отправке заявки. Попробуйте позже или свяжитесь с нами напрямую.'
+          : '❌ Error submitting request. Please try again later or contact us directly.';
+        alert(errorMsg);
+      }
+    } catch (error) {
+      console.error('Submit error:', error);
+      const errorMsg = language === 'ru' 
+        ? '❌ Ошибка при отправке заявки. Попробуйте позже.'
+        : '❌ Error submitting request. Please try again later.';
+      alert(errorMsg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -5812,26 +5853,35 @@ const ContactPage = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn-primary gradient-animate" style={{
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="btn-primary gradient-animate" 
+                  style={{
                   width: '100%',
-                  background: 'linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%)',
+                  background: isSubmitting 
+                    ? 'linear-gradient(135deg, #999 0%, #666 50%, #999 100%)' 
+                    : 'linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 50%, var(--accent) 100%)',
                   color: 'white',
                   padding: '18px',
                   borderRadius: '12px',
                   border: 'none',
                   fontWeight: '700',
                   fontSize: '17px',
-                  cursor: 'pointer',
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '10px',
                   boxShadow: '0 4px 20px rgba(224, 122, 95, 0.3)',
+                  opacity: isSubmitting ? 0.7 : 1,
                 }}>
-                  {t('contact.submit')}
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
+                  {isSubmitting ? (language === 'ru' ? '⏳ Отправка...' : '⏳ Sending...') : t('contact.submit')}
+                  {!isSubmitting && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  )}
                 </button>
 
                 <p style={{
