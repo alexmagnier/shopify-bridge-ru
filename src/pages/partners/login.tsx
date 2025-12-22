@@ -1,24 +1,45 @@
 // pages/partners/login.tsx
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Input, Button, Checkbox, Card } from '@/components/ui';
+import { useAuth } from '@/contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+  const { signIn } = useAuth();
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
     
     try {
-      // TODO: Implement API call
-      console.log('Login:', { email, password, rememberMe });
-      alert('Авторизация пока не реализована (TODO: подключить API)');
+      const { error: signInError } = await signIn(email, password);
+      
+      if (signInError) {
+        if (signInError.message.includes('Invalid login credentials')) {
+          setError('Неверный email или пароль');
+        } else if (signInError.message.includes('Email not confirmed')) {
+          setError('Пожалуйста, подтвердите email перед входом');
+        } else {
+          setError(signInError.message);
+        }
+        return;
+      }
+      
+      // Успешный вход - перенаправляем в кабинет
+      navigate('/partners/dashboard');
+      
     } catch (error) {
       console.error('Login error:', error);
+      setError('Произошла ошибка. Попробуйте позже.');
     } finally {
       setLoading(false);
     }
@@ -40,6 +61,13 @@ const LoginPage: React.FC = () => {
           
           {/* Форма */}
           <Card>
+            {/* Ошибка */}
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-800">{error}</p>
+              </div>
+            )}
+            
             <form onSubmit={handleSubmit} className="space-y-6">
               <Input
                 label="Email"

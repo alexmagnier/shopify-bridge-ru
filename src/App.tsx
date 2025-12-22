@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext, useContext, ReactNode, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { ReferralTracker } from './components/ReferralTracker';
+import { ProtectedRoute } from './components/ProtectedRoute';
 import PartnersLandingPage from './pages/partners/index';
 import RegisterPage from './pages/partners/register';
 import LoginPage from './pages/partners/login';
@@ -5923,11 +5924,11 @@ const App = () => {
             <Route path="/partners" element={<PartnersLandingPage />} />
             <Route path="/partners/register" element={<RegisterPage />} />
             <Route path="/partners/login" element={<LoginPage />} />
-            <Route path="/partners/dashboard" element={<DashboardPage />} />
-            <Route path="/partners/referrals" element={<ReferralsPage />} />
-            <Route path="/partners/payouts" element={<PayoutsPage />} />
-            <Route path="/partners/profile" element={<ProfilePage />} />
-            <Route path="/partners/materials" element={<MaterialsPage />} />
+            <Route path="/partners/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+            <Route path="/partners/referrals" element={<ProtectedRoute><ReferralsPage /></ProtectedRoute>} />
+            <Route path="/partners/payouts" element={<ProtectedRoute><PayoutsPage /></ProtectedRoute>} />
+            <Route path="/partners/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+            <Route path="/partners/materials" element={<ProtectedRoute><MaterialsPage /></ProtectedRoute>} />
             
             {/* Админ-панель */}
             <Route path="/admin" element={<AdminLoginPage />} />

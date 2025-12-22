@@ -1,11 +1,16 @@
 // pages/partners/register.tsx
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Input, Select, Button, Checkbox, Card } from '@/components/ui';
 import { RegisterData } from '@/types';
 import { validateRegisterForm } from '@/utils/validators';
+import { useAuth } from '@/contexts/AuthContext';
 
 const RegisterPage: React.FC = () => {
+  const navigate = useNavigate();
+  const { signUp } = useAuth();
+  
   const [formData, setFormData] = useState<RegisterData>({
     firstName: '',
     lastName: '',
@@ -21,6 +26,7 @@ const RegisterPage: React.FC = () => {
   
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -47,12 +53,48 @@ const RegisterPage: React.FC = () => {
     }
     
     setLoading(true);
+    setErrors({});
+    
     try {
-      // TODO: Implement API call
-      console.log('Registration data:', formData);
-      alert('Регистрация пока не реализована (TODO: подключить API)');
+      const { error } = await signUp(
+        formData.email,
+        formData.password,
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone || undefined,
+          telegram: formData.telegram || undefined,
+        }
+      );
+      
+      if (error) {
+        // Обработка ошибок
+        if (error.message.includes('already registered')) {
+          setErrors({ email: 'Этот email уже зарегистрирован' });
+        } else if (error.message.includes('Invalid email')) {
+          setErrors({ email: 'Неверный формат email' });
+        } else if (error.message.includes('Password')) {
+          setErrors({ password: 'Пароль должен быть минимум 8 символов' });
+        } else {
+          setErrors({ form: error.message });
+        }
+        return;
+      }
+      
+      // Успешная регистрация
+      setSuccess(true);
+      
+      // Показываем сообщение
+      alert('✅ Регистрация успешна!\n\nПроверьте email для подтверждения аккаунта.\nПосле подтверждения вы сможете войти в партнерский кабинет.');
+      
+      // Перенаправляем на страницу входа через 2 секунды
+      setTimeout(() => {
+        navigate('/partners/login');
+      }, 2000);
+      
     } catch (error) {
       console.error('Registration error:', error);
+      setErrors({ form: 'Произошла ошибка. Попробуйте позже.' });
     } finally {
       setLoading(false);
     }
@@ -74,6 +116,22 @@ const RegisterPage: React.FC = () => {
           
           {/* Форма */}
           <Card>
+            {/* Сообщение об успехе */}
+            {success && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-green-800 font-medium">
+                  ✅ Регистрация успешна! Проверьте email для подтверждения.
+                </p>
+              </div>
+            )}
+            
+            {/* Общая ошибка */}
+            {errors.form && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-800">{errors.form}</p>
+              </div>
+            )}
+            
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Имя и Фамилия */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
