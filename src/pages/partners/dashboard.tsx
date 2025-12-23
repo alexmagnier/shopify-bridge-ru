@@ -51,7 +51,7 @@ const DashboardPage: React.FC = () => {
           totalPayments: ref.total_payments || 0,
           lifetimeValue: ref.lifetime_value || 0,
           planSelected: ref.plan_selected,
-          lifetimeBinding: ref.lifetime_binding !== false,
+          lifetimeBinding: Boolean(ref.lifetime_binding),
           createdAt: new Date(ref.created_at),
           updatedAt: new Date(ref.updated_at),
         }));

@@ -1,6 +1,6 @@
 // components/partners/dashboard/ReferralLink.tsx
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent, CopyButton, Button } from '@/components/ui';
 
 interface ReferralLinkProps {

@@ -1,4 +1,4 @@
-image.png// components/partners/dashboard/RecentReferrals.tsx
+// components/partners/dashboard/RecentReferrals.tsx
 
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '@/components/ui';
