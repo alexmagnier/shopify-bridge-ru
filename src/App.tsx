@@ -5,6 +5,8 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import PartnersLandingPage from './pages/partners/index';
 import RegisterPage from './pages/partners/register';
 import LoginPage from './pages/partners/login';
+import ForgotPasswordPage from './pages/partners/forgot-password';
+import ResetPasswordPage from './pages/partners/reset-password';
 import DashboardPage from './pages/partners/dashboard';
 import ReferralsPage from './pages/partners/referrals';
 import PayoutsPage from './pages/partners/payouts';
@@ -5928,6 +5930,8 @@ const App = () => {
             <Route path="/partners" element={<PartnersLandingPage />} />
             <Route path="/partners/register" element={<RegisterPage />} />
             <Route path="/partners/login" element={<LoginPage />} />
+            <Route path="/partners/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/partners/reset-password" element={<ResetPasswordPage />} />
             <Route path="/partners/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/partners/referrals" element={<ProtectedRoute><ReferralsPage /></ProtectedRoute>} />
             <Route path="/partners/payouts" element={<ProtectedRoute><PayoutsPage /></ProtectedRoute>} />
