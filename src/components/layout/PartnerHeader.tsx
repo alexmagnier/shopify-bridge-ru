@@ -1,6 +1,8 @@
 // components/layout/PartnerHeader.tsx
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui';
 
 interface PartnerHeaderProps {
@@ -9,6 +11,12 @@ interface PartnerHeaderProps {
 
 export const PartnerHeader: React.FC<PartnerHeaderProps> = ({ partnerName }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/partners/login');
+  };
   
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -64,11 +72,14 @@ export const PartnerHeader: React.FC<PartnerHeaderProps> = ({ partnerName }) => 
                     <a href="/partners/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                       Профиль
                     </a>
-                    <a href="/partners/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                    <a href="/partners/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                       Настройки
                     </a>
                     <hr className="my-2" />
-                    <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50">
+                    <button 
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50"
+                    >
                       Выйти
                     </button>
                   </div>

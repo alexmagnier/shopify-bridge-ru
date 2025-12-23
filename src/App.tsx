@@ -5908,6 +5908,36 @@ const ContactPage = () => {
 };
 
 // ============================================
+// LAYOUT WRAPPER - скрывает Header/Footer на партнёрских и админ страницах
+// ============================================
+const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const routerLocation = useLocation();
+  const location = routerLocation.pathname;
+  const isPartnerCabinet = location.startsWith('/partners/dashboard') || 
+                           location.startsWith('/partners/referrals') || 
+                           location.startsWith('/partners/payouts') || 
+                           location.startsWith('/partners/profile') || 
+                           location.startsWith('/partners/materials');
+  const isAdminPanel = location.startsWith('/admin/');
+  const isAuthPage = location === '/partners/login' || 
+                     location === '/partners/register' || 
+                     location === '/partners/forgot-password' ||
+                     location === '/partners/reset-password' ||
+                     location === '/admin';
+  
+  const hideMainLayout = isPartnerCabinet || isAdminPanel || isAuthPage;
+  
+  return (
+    <>
+      {!hideMainLayout && <Header />}
+      <ReferralTracker />
+      <main>{children}</main>
+      {!hideMainLayout && <Footer />}
+    </>
+  );
+};
+
+// ============================================
 // MAIN APP
 // ============================================
 const App = () => {
@@ -5915,9 +5945,7 @@ const App = () => {
     <LanguageProvider>
       <Router>
         <GlobalStyles />
-        <Header />
-        <ReferralTracker />
-        <main>
+        <MainLayout>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/how-it-works" element={<HowItWorksPage />} />
@@ -5926,12 +5954,16 @@ const App = () => {
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/contact" element={<ContactPage />} />
             
-            {/* Партнёрская программа */}
+            {/* Партнёрская программа - Landing */}
             <Route path="/partners" element={<PartnersLandingPage />} />
+            
+            {/* Партнёрская программа - Auth */}
             <Route path="/partners/register" element={<RegisterPage />} />
             <Route path="/partners/login" element={<LoginPage />} />
             <Route path="/partners/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/partners/reset-password" element={<ResetPasswordPage />} />
+            
+            {/* Партнёрский кабинет */}
             <Route path="/partners/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/partners/referrals" element={<ProtectedRoute><ReferralsPage /></ProtectedRoute>} />
             <Route path="/partners/payouts" element={<ProtectedRoute><PayoutsPage /></ProtectedRoute>} />
@@ -5946,8 +5978,7 @@ const App = () => {
             <Route path="/admin/payouts" element={<AdminPayoutsPage />} />
             <Route path="/admin/settings" element={<AdminSettingsPage />} />
           </Routes>
-        </main>
-        <Footer />
+        </MainLayout>
       </Router>
     </LanguageProvider>
   );
