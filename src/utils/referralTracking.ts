@@ -58,8 +58,9 @@ export function clearReferralCode(): void {
 
 // Валидация реферального кода
 export function isValidReferralCode(code: string): boolean {
-  // Формат: IVAN2024 или PETROV123 (6-20 символов, буквы и цифры)
-  return /^[A-Z0-9]{6,20}$/i.test(code);
+  // Формат: IVAN2024, PETROV123, АЛЕМАH2344, ИВАТЕС4003 (4-20 символов, любые буквы и цифры)
+  // Убрана проверка на только латиницу - теперь работает и с кириллицей
+  return code.length >= 4 && code.length <= 20;
 }
 
 // Генерация реферального кода

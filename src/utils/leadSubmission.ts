@@ -57,6 +57,9 @@ export async function submitLead(formData: LeadFormData): Promise<SubmitLeadResp
       ref: refCode, // ← Реферальный код партнера
     };
     
+    console.log('🚀 Отправка данных:', payload);
+    console.log('📍 URL:', SUPABASE_FUNCTION_URL);
+    
     // Отправляем на Edge Function
     const response = await fetch(SUPABASE_FUNCTION_URL, {
       method: 'POST',
@@ -66,11 +69,16 @@ export async function submitLead(formData: LeadFormData): Promise<SubmitLeadResp
       body: JSON.stringify(payload),
     });
     
+    console.log('📥 Ответ сервера:', response.status, response.statusText);
+    
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorText = await response.text();
+      console.error('❌ Ошибка от сервера:', errorText);
+      throw new Error(`HTTP ${response.status}: ${errorText}`);
     }
     
     const result = await response.json();
+    console.log('✅ Успешный ответ:', result);
     
     return {
       success: true,
@@ -78,12 +86,17 @@ export async function submitLead(formData: LeadFormData): Promise<SubmitLeadResp
     };
     
   } catch (error) {
-    console.error('Error submitting lead:', error);
+    console.error('❌ Error submitting lead:', error);
+    
+    // Детальная информация об ошибке
+    const errorDetails = error instanceof Error 
+      ? `${error.message} (${error.name})` 
+      : JSON.stringify(error);
     
     return {
       success: false,
-      message: 'Произошла ошибка при отправке заявки',
-      error: error instanceof Error ? error.message : 'Unknown error',
+      message: `Ошибка: ${errorDetails}`,
+      error: errorDetails,
     };
   }
 }
