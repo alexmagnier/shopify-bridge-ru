@@ -10,8 +10,8 @@ const REF_CLICK_TRACKED_KEY = 'sb_ref_click_tracked';
 const COOKIE_EXPIRY_DAYS = 3650; // 10 лет
 const TRACK_CLICK_URL = 'https://oyjxzrvhvndbdoyshwfc.supabase.co/functions/v1/track-click';
 
-// DEBUG MODE - покажет индикатор на странице
-const DEBUG_MODE = true;
+// DEBUG MODE - покажет индикатор на странице (включить для отладки)
+const DEBUG_MODE = false;
 
 /**
  * Сохраняет реферальный код в localStorage и cookie

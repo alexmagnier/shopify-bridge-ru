@@ -51,6 +51,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.fulfillment': 'Фулфилмент',
     'nav.pricing': 'Тарифы',
     'nav.faq': 'FAQ',
+    'nav.partners': 'Партнёрам',
     'nav.contact': 'Обсудить запуск',
     
     // Hero Section
@@ -356,6 +357,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.fulfillment': 'Fulfillment',
     'nav.pricing': 'Pricing',
     'nav.faq': 'FAQ',
+    'nav.partners': 'Partners',
     'nav.contact': 'Get Started',
     
     // Hero Section
@@ -1334,6 +1336,7 @@ const Header = () => {
     { path: '/fulfillment', label: t('nav.fulfillment') },
     { path: '/pricing', label: t('nav.pricing') },
     { path: '/faq', label: t('nav.faq') },
+    { path: '/partners', label: t('nav.partners') },
   ];
 
   return (
