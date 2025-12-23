@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import { Input, Button, Card } from '@/components/ui';
+import { Button, Card } from '@/components/ui';
 
 const AdminLoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -17,14 +17,15 @@ const AdminLoginPage: React.FC = () => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        // Проверяем, есть ли запись в таблице admins
-        const { data: admin } = await supabase
-          .from('admins')
-          .select('id')
-          .eq('email', session.user.email)
+        // Проверяем, есть ли роль admin в таблице user_roles
+        const { data: roleData } = await supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', session.user.id)
+          .eq('role', 'admin')
           .single();
         
-        if (admin) {
+        if (roleData) {
           navigate('/admin/dashboard');
         }
       }
@@ -39,21 +40,8 @@ const AdminLoginPage: React.FC = () => {
     setError('');
     
     try {
-      // Сначала проверяем, существует ли админ в таблице admins
-      const { data: admin, error: adminError } = await supabase
-        .from('admins')
-        .select('id, email')
-        .eq('email', email.toLowerCase())
-        .single();
-
-      if (adminError || !admin) {
-        setError('Доступ запрещён. Вы не являетесь администратором.');
-        setLoading(false);
-        return;
-      }
-
-      // Если админ существует, авторизуемся через Supabase Auth
-      const { error: authError } = await supabase.auth.signInWithPassword({
+      // Авторизуемся через Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -64,11 +52,27 @@ const AdminLoginPage: React.FC = () => {
         return;
       }
 
-      // Обновляем last_login_at
-      await supabase
-        .from('admins')
-        .update({ last_login_at: new Date().toISOString() })
-        .eq('id', admin.id);
+      if (!authData.user) {
+        setError('Ошибка авторизации');
+        setLoading(false);
+        return;
+      }
+
+      // Проверяем, есть ли роль admin в таблице user_roles
+      const { data: roleData, error: roleError } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', authData.user.id)
+        .eq('role', 'admin')
+        .single();
+
+      if (roleError || !roleData) {
+        // Если нет роли admin, выходим
+        await supabase.auth.signOut();
+        setError('Доступ запрещён. Вы не являетесь администратором.');
+        setLoading(false);
+        return;
+      }
 
       navigate('/admin/dashboard');
     } catch (err) {
