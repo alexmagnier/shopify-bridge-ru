@@ -1345,6 +1345,47 @@ const GlobalStyles = () => (
       }
     }
     
+    /* Savings section mobile fixes */
+    @media (max-width: 768px) {
+      .savings-section {
+        padding: 24px !important;
+        margin-bottom: 40px !important;
+      }
+      
+      .savings-section h3 {
+        font-size: 24px !important;
+      }
+      
+      .savings-comparison-wrap {
+        padding: 20px !important;
+      }
+      
+      .savings-conclusion {
+        padding: 20px !important;
+      }
+      
+      .savings-conclusion p {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+      }
+      
+      .savings-conclusion .formula {
+        font-size: 13px !important;
+        word-break: break-word !important;
+      }
+      
+      .savings-final-compare {
+        flex-direction: column !important;
+        gap: 20px !important;
+        align-items: center !important;
+      }
+      
+      .savings-final-compare > div {
+        text-align: center !important;
+        width: 100% !important;
+      }
+    }
+    
     /* Prevent horizontal overflow */
     .overflow-hidden {
       overflow: hidden;
@@ -4396,7 +4437,7 @@ const WhyUsAffordableSection = () => {
         </div>
 
         {/* Calculator */}
-        <div style={{
+        <div className="savings-section" style={{
           background: 'var(--bg-cream)',
           borderRadius: '24px',
           padding: '56px',
@@ -4418,7 +4459,7 @@ const WhyUsAffordableSection = () => {
             filter: 'blur(80px)',
           }}></div>
           <h3 style={{
-            fontSize: '34px',
+            fontSize: 'clamp(24px, 5vw, 34px)',
             fontWeight: '800',
             color: 'var(--text-dark)',
             textAlign: 'center',
@@ -4525,14 +4566,14 @@ const WhyUsAffordableSection = () => {
           </div>
 
           {/* When own infrastructure is better */}
-          <div style={{
+          <div className="savings-comparison-wrap" style={{
             background: 'white',
             borderRadius: '20px',
             padding: '40px',
             border: '2px solid var(--border)',
             position: 'relative' as const,
           }}>
-            <h4 style={{ fontSize: '22px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '32px', textAlign: 'center', letterSpacing: '-0.3px' }}>
+            <h4 style={{ fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '24px', textAlign: 'center', letterSpacing: '-0.3px' }}>
               Когда своя инфраструктура выгоднее?
             </h4>
             
@@ -4541,53 +4582,53 @@ const WhyUsAffordableSection = () => {
                 <strong style={{ color: 'var(--text-dark)', fontSize: '18px' }}>Пример:</strong> продажи <strong style={{ color: 'var(--primary)', fontSize: '18px' }}>$10,000/мес</strong>
               </p>
               
-              <div className="calculator-comparison" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px', marginBottom: '32px' }}>
+              <div className="calculator-comparison" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
                 <div className="price-breakdown" style={{ 
-                  padding: '28px', 
+                  padding: 'clamp(16px, 4vw, 28px)', 
                   background: 'var(--bg-cream)', 
                   borderRadius: '16px',
                   border: '2px solid var(--primary)',
                 }}>
-                  <p style={{ fontWeight: '800', color: 'var(--primary)', marginBottom: '16px', fontSize: '16px' }}>С нами:</p>
-                  <div style={{ lineHeight: '2.2', fontSize: '14px' }}>
+                  <p style={{ fontWeight: '800', color: 'var(--primary)', marginBottom: '12px', fontSize: 'clamp(14px, 3vw, 16px)' }}>С нами:</p>
+                  <div style={{ lineHeight: '2', fontSize: 'clamp(12px, 2.5vw, 14px)' }}>
                     <div>Комиссия 10% = $1,000</div>
                     <div>+ Обслуживание ~$150</div>
                     <div>+ Фулфилмент ~$500</div>
                   </div>
                   <div style={{
-                    marginTop: '20px',
-                    paddingTop: '20px',
+                    marginTop: '16px',
+                    paddingTop: '16px',
                     borderTop: '2px solid var(--primary)',
                     fontWeight: '800',
                     color: 'var(--primary)',
-                    fontSize: '20px',
+                    fontSize: 'clamp(16px, 4vw, 20px)',
                   }}>Итого: ~$1,650/мес</div>
                 </div>
 
                 <div className="price-breakdown" style={{ 
-                  padding: '28px', 
+                  padding: 'clamp(16px, 4vw, 28px)', 
                   background: 'var(--bg-cream)', 
                   borderRadius: '16px',
                   border: '2px solid var(--text-muted)',
                 }}>
-                  <p style={{ fontWeight: '800', color: 'var(--text-dark)', marginBottom: '16px', fontSize: '16px' }}>Своя инфраструктура:</p>
-                  <div style={{ lineHeight: '2.2', fontSize: '14px' }}>
+                  <p style={{ fontWeight: '800', color: 'var(--text-dark)', marginBottom: '12px', fontSize: 'clamp(14px, 3vw, 16px)' }}>Своя инфраструктура:</p>
+                  <div style={{ lineHeight: '2', fontSize: 'clamp(12px, 2.5vw, 14px)' }}>
                     <div>Старт: $25,000</div>
                     <div>+ Ежегодные ~$830/мес</div>
                     <div>+ Процессинг 3%: $300</div>
                   </div>
                   <div style={{
-                    marginTop: '20px',
-                    paddingTop: '20px',
+                    marginTop: '16px',
+                    paddingTop: '16px',
                     borderTop: '2px solid var(--text-muted)',
                     fontWeight: '800',
                     color: 'var(--text-dark)',
-                    fontSize: '20px',
-                  }}>Итого: ~$1,130/мес<br/><span style={{ fontSize: '14px', opacity: 0.7 }}>+ $25,000 старт</span></div>
+                    fontSize: 'clamp(16px, 4vw, 20px)',
+                  }}>Итого: ~$1,130/мес<br/><span style={{ fontSize: 'clamp(12px, 2.5vw, 14px)', opacity: 0.7 }}>+ $25,000 старт</span></div>
                 </div>
               </div>
 
-              <div style={{
+              <div className="savings-conclusion" style={{
                 background: 'linear-gradient(135deg, var(--primary), var(--accent))',
                 padding: '32px',
                 borderRadius: '16px',
@@ -4595,32 +4636,33 @@ const WhyUsAffordableSection = () => {
                 color: 'white',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
               }}>
-                <p style={{ fontSize: '17px', fontWeight: '700', marginBottom: '16px', opacity: 0.95 }}>
+                <p style={{ fontSize: 'clamp(14px, 3vw, 17px)', fontWeight: '700', marginBottom: '16px', opacity: 0.95 }}>
                   ВЫВОД:
                 </p>
-                <p style={{ fontSize: '18px', marginBottom: '20px', lineHeight: '1.7', opacity: 0.95 }}>
-                  Точка окупаемости: <strong style={{ fontSize: '20px', borderBottom: '2px solid rgba(255,255,255,0.5)', paddingBottom: '2px' }}>$25,000 ÷ ($1,650 - $1,130) = 48 месяцев</strong>
+                <p className="formula" style={{ fontSize: 'clamp(13px, 2.5vw, 18px)', marginBottom: '20px', lineHeight: '1.7', opacity: 0.95 }}>
+                  Точка окупаемости:<br/>
+                  <strong style={{ fontSize: 'clamp(14px, 3vw, 20px)' }}>$25,000 ÷ ($1,650 - $1,130) = 48 мес</strong>
                 </p>
-                <p style={{ fontSize: '21px', fontWeight: '800' }}>
-                  Своя инфраструктура окупается через <span style={{ fontSize: '28px', borderBottom: '3px solid white', paddingBottom: '2px' }}>4 ГОДА</span> стабильных продаж
+                <p style={{ fontSize: 'clamp(16px, 3.5vw, 21px)', fontWeight: '800', lineHeight: '1.5' }}>
+                  Своя инфраструктура окупается через <span style={{ fontSize: 'clamp(22px, 5vw, 28px)', display: 'block', marginTop: '8px', borderBottom: '3px solid white', paddingBottom: '4px', width: 'fit-content', margin: '8px auto 0' }}>4 ГОДА</span> стабильных продаж
                 </p>
                 <div style={{
                   background: 'white',
-                  padding: '28px',
+                  padding: 'clamp(16px, 4vw, 28px)',
                   borderRadius: '16px',
-                  marginTop: '28px',
+                  marginTop: '24px',
                 }}>
-                  <p style={{ fontSize: '17px', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '20px' }}>
+                  <p style={{ fontSize: 'clamp(14px, 3vw, 17px)', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '16px' }}>
                     А если продажи не пойдут?
                   </p>
-                  <div style={{ display: 'flex', justifyContent: 'center', gap: '48px', fontSize: '18px' }}>
+                  <div className="savings-final-compare" style={{ display: 'flex', justifyContent: 'center', gap: '32px', fontSize: '18px', flexWrap: 'wrap' }}>
                     <div>
-                      <div style={{ color: 'var(--text-muted)', marginBottom: '8px', fontSize: '15px' }}>С нами:</div>
-                      <div style={{ fontWeight: '900', fontSize: '32px', color: 'var(--primary)' }}>$779</div>
+                      <div style={{ color: 'var(--text-muted)', marginBottom: '8px', fontSize: 'clamp(13px, 2.5vw, 15px)' }}>С нами:</div>
+                      <div style={{ fontWeight: '900', fontSize: 'clamp(24px, 5vw, 32px)', color: 'var(--primary)' }}>$779</div>
                     </div>
                     <div>
-                      <div style={{ color: 'var(--text-muted)', marginBottom: '8px', fontSize: '15px' }}>Самостоятельно:</div>
-                      <div style={{ fontWeight: '900', fontSize: '32px', color: 'var(--text-dark)' }}>$25,000</div>
+                      <div style={{ color: 'var(--text-muted)', marginBottom: '8px', fontSize: 'clamp(13px, 2.5vw, 15px)' }}>Самостоятельно:</div>
+                      <div style={{ fontWeight: '900', fontSize: 'clamp(24px, 5vw, 32px)', color: 'var(--text-dark)' }}>$25,000</div>
                     </div>
                   </div>
                 </div>
