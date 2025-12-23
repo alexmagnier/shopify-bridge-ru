@@ -6287,7 +6287,6 @@ const PricingPage = () => {
 // FAQ Page
 // Requirements Page - Требования и отбор
 const RequirementsPage = () => {
-  const { language } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     contact: '',
