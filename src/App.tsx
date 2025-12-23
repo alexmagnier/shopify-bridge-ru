@@ -7242,6 +7242,19 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 // ============================================
+// SCROLL TO TOP ON ROUTE CHANGE
+// ============================================
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+};
+
+// ============================================
 // MAIN APP
 // ============================================
 const App = () => {
@@ -7249,6 +7262,7 @@ const App = () => {
     <LanguageProvider>
       <Router>
         <GlobalStyles />
+        <ScrollToTop />
         <ReferralTracker />
         <MainLayout>
           <Routes>
