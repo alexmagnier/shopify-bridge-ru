@@ -50,6 +50,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.howItWorks': 'Как это работает',
     'nav.fulfillment': 'Фулфилмент',
     'nav.pricing': 'Тарифы',
+    'nav.requirements': 'Требования',
     'nav.faq': 'FAQ',
     'nav.partners': 'Партнёрам',
     'nav.contact': 'Обсудить запуск',
@@ -356,6 +357,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.howItWorks': 'How It Works',
     'nav.fulfillment': 'Fulfillment',
     'nav.pricing': 'Pricing',
+    'nav.requirements': 'Requirements',
     'nav.faq': 'FAQ',
     'nav.partners': 'Partners',
     'nav.contact': 'Get Started',
@@ -1335,6 +1337,7 @@ const Header = () => {
     { path: '/how-it-works', label: t('nav.howItWorks') },
     { path: '/fulfillment', label: t('nav.fulfillment') },
     { path: '/pricing', label: t('nav.pricing') },
+    { path: '/requirements', label: t('nav.requirements') },
     { path: '/faq', label: t('nav.faq') },
     { path: '/partners', label: t('nav.partners') },
   ];
@@ -4973,6 +4976,7 @@ const Footer = () => {
             { path: '/how-it-works', label: t('nav.howItWorks') },
             { path: '/fulfillment', label: t('nav.fulfillment') },
             { path: '/pricing', label: t('nav.pricing') },
+            { path: '/requirements', label: t('nav.requirements') },
             { path: '/faq', label: t('nav.faq') },
           ].map(link => (
             <Link key={link.path} to={link.path} style={{
@@ -6281,6 +6285,565 @@ const PricingPage = () => {
 };
 
 // FAQ Page
+// Requirements Page - Требования и отбор
+const RequirementsPage = () => {
+  const { language } = useLanguage();
+  const [formData, setFormData] = useState({
+    name: '',
+    contact: '',
+    product: '',
+    volume: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { submitLead } = await import('./utils/leadSubmission');
+    setIsSubmitting(true);
+    
+    try {
+      const result = await submitLead({
+        name: formData.name,
+        contact: formData.contact,
+        product: formData.product,
+        volume: formData.volume,
+        message: formData.message,
+      });
+      
+      if (result.success) {
+        alert('✅ Заявка отправлена! Мы свяжемся с вами в течение 24-72 часов.');
+        setFormData({ name: '', contact: '', product: '', volume: '', message: '' });
+      } else {
+        alert('❌ Ошибка при отправке заявки. Попробуйте позже.');
+      }
+    } catch (error) {
+      console.error('Submit error:', error);
+      alert('❌ Ошибка при отправке заявки.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const requirements = [
+    {
+      icon: '○',
+      title: 'Легальный бизнес',
+      items: [
+        'Зарегистрированное юридическое лицо или ИП',
+        'Легальная деятельность в соответствии с законодательством РФ',
+        'Готовность предоставить документы для проверки',
+      ],
+    },
+    {
+      icon: '✓',
+      title: 'Качественная продукция',
+      items: [
+        'Товары соответствуют описаниям и фото',
+        'Нет запрещённых или контрафактных товаров',
+        'Готовность отвечать за качество',
+      ],
+    },
+    {
+      icon: '📋',
+      title: 'Готовность к работе',
+      items: [
+        'Каталог товаров (минимум базовая информация)',
+        'Фото и описания на английском или готовность их подготовить',
+        'Понимание целевых рынков сбыта',
+      ],
+    },
+    {
+      icon: '👥',
+      title: 'Ответственный подход',
+      items: [
+        'Готовность соблюдать правила платёжных систем',
+        'Оперативная обработка заказов',
+        'Работа с возвратами по регламенту',
+      ],
+    },
+  ];
+
+  const blacklist = [
+    'Контрафактная продукция и подделки',
+    'Товары, нарушающие авторские права',
+    'Оружие и боеприпасы',
+    'Наркотические и психотропные вещества',
+    'Товары для взрослых (18+)',
+    'Азартные игры и ставки',
+    'Финансовые пирамиды и сомнительные схемы',
+    'Лекарственные препараты без лицензии',
+    'Товары, запрещённые к продаже в целевых странах',
+  ];
+
+  const individualReview = [
+    'Дропшиппинг без контроля качества',
+    'Товары с очень длительными сроками доставки (>30 дней)',
+    'Продукция без сертификатов (где требуется)',
+    'Бизнес с историей большого количества жалоб',
+    'Категории с высоким уровнем чарджбеков',
+  ];
+
+  const steps = [
+    'Вы заполняете подробную анкету',
+    'Мы проверяем предоставленную информацию',
+    'При необходимости запрашиваем дополнительные документы',
+    'Принимаем решение и связываемся с вами',
+  ];
+
+  return (
+    <div style={{ paddingTop: '100px' }}>
+      {/* Hero Section */}
+      <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
+        <div className="container" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+          <h1 style={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: 'clamp(36px, 5vw, 56px)',
+            color: 'var(--text-dark)',
+            marginBottom: '24px',
+          }}>
+            Требования и <span style={{ color: 'var(--accent)' }}>отбор</span>
+          </h1>
+          <p style={{ fontSize: '18px', color: 'var(--text-muted)', lineHeight: '1.7' }}>
+            Мы работаем только с проверенным бизнесом. Это защищает и вас, и нас, и других клиентов платформы.
+          </p>
+        </div>
+      </section>
+
+      {/* Зачем нужен отбор */}
+      <section style={{ background: 'white', padding: '80px 0' }}>
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: 'clamp(28px, 4vw, 40px)',
+            color: 'var(--text-dark)',
+            marginBottom: '24px',
+          }}>Зачем нужен отбор?</h2>
+          <p style={{ fontSize: '17px', color: 'var(--text-muted)', lineHeight: '1.8' }}>
+            Каждый клиент влияет на репутацию всей платформы. Один проблемный магазин может привести к повышенному вниманию платёжных провайдеров ко всем остальным. Строгий отбор — это не ограничение, а защита вашего бизнеса.
+          </p>
+        </div>
+      </section>
+
+      {/* Что мы требуем */}
+      <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
+        <div className="container">
+          <h2 style={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: 'clamp(28px, 4vw, 40px)',
+            color: 'var(--text-dark)',
+            marginBottom: '48px',
+            textAlign: 'center',
+          }}>Что мы требуем</h2>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '24px',
+          }}>
+            {requirements.map((req, index) => (
+              <div key={index} style={{
+                background: 'white',
+                borderRadius: '16px',
+                padding: '32px',
+                border: '1px solid rgba(0,0,0,0.08)',
+              }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  marginBottom: '20px',
+                }}>
+                  <span style={{
+                    width: '40px',
+                    height: '40px',
+                    background: 'var(--bg-cream)',
+                    borderRadius: '10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '18px',
+                    color: 'var(--accent)',
+                  }}>{req.icon}</span>
+                  <h3 style={{
+                    fontWeight: '700',
+                    fontSize: '18px',
+                    color: 'var(--text-dark)',
+                    margin: 0,
+                  }}>{req.title}</h3>
+                </div>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {req.items.map((item, i) => (
+                    <li key={i} style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '10px',
+                      fontSize: '14px',
+                      color: 'var(--text-muted)',
+                      marginBottom: '12px',
+                      lineHeight: '1.5',
+                    }}>
+                      <span style={{ color: 'var(--primary)', fontSize: '12px', marginTop: '4px' }}>✓</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Черный список и индивидуально */}
+      <section style={{ background: 'white', padding: '80px 0' }}>
+        <div className="container">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '40px',
+          }}>
+            {/* Категорически не работаем */}
+            <div>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '24px',
+              }}>
+                <span style={{
+                  width: '36px',
+                  height: '36px',
+                  background: 'rgba(220, 53, 69, 0.1)',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#dc3545',
+                  fontSize: '18px',
+                }}>✕</span>
+                <h3 style={{
+                  fontWeight: '700',
+                  fontSize: '20px',
+                  color: 'var(--text-dark)',
+                  margin: 0,
+                }}>Категорически не работаем</h3>
+              </div>
+              <div style={{
+                background: 'var(--bg-cream)',
+                borderRadius: '16px',
+                padding: '24px',
+              }}>
+                {blacklist.map((item, i) => (
+                  <div key={i} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '12px 0',
+                    borderBottom: i < blacklist.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none',
+                  }}>
+                    <span style={{ color: '#dc3545', fontSize: '14px' }}>✕</span>
+                    <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Рассматриваем индивидуально */}
+            <div>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginBottom: '24px',
+              }}>
+                <span style={{
+                  width: '36px',
+                  height: '36px',
+                  background: 'rgba(202, 138, 4, 0.1)',
+                  borderRadius: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--accent)',
+                  fontSize: '18px',
+                }}>⚠</span>
+                <h3 style={{
+                  fontWeight: '700',
+                  fontSize: '20px',
+                  color: 'var(--text-dark)',
+                  margin: 0,
+                }}>Рассматриваем индивидуально</h3>
+              </div>
+              <div style={{
+                background: 'var(--bg-cream)',
+                borderRadius: '16px',
+                padding: '24px',
+              }}>
+                {individualReview.map((item, i) => (
+                  <div key={i} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '12px 0',
+                    borderBottom: i < individualReview.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none',
+                  }}>
+                    <span style={{ color: 'var(--accent)', fontSize: '14px' }}>⚠</span>
+                    <span style={{ fontSize: '14px', color: 'var(--text-muted)' }}>{item}</span>
+                  </div>
+                ))}
+                <p style={{
+                  fontSize: '13px',
+                  color: 'var(--text-muted)',
+                  marginTop: '16px',
+                  fontStyle: 'italic',
+                  lineHeight: '1.6',
+                }}>
+                  Эти категории требуют дополнительной проверки и могут иметь особые условия работы.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Как проходит проверка */}
+      <section style={{ background: 'var(--bg-cream)', padding: '80px 0' }}>
+        <div className="container" style={{ maxWidth: '700px', margin: '0 auto' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: 'clamp(28px, 4vw, 40px)',
+            color: 'var(--text-dark)',
+            marginBottom: '48px',
+            textAlign: 'center',
+          }}>Как проходит проверка</h2>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            {steps.map((step, i) => (
+              <div key={i} style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '20px',
+                background: 'white',
+                padding: '24px',
+                borderRadius: '12px',
+                border: '1px solid rgba(0,0,0,0.06)',
+              }}>
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  background: 'var(--primary)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: '700',
+                  fontSize: '18px',
+                  flexShrink: 0,
+                }}>{i + 1}</div>
+                <span style={{ fontSize: '16px', color: 'var(--text-dark)' }}>{step}</span>
+              </div>
+            ))}
+          </div>
+          
+          <p style={{
+            textAlign: 'center',
+            marginTop: '32px',
+            fontSize: '15px',
+            color: 'var(--text-muted)',
+          }}>
+            Срок проверки: <strong style={{ color: 'var(--text-dark)' }}>24-72 часа</strong>
+          </p>
+        </div>
+      </section>
+
+      {/* Юридический дисклеймер */}
+      <section style={{ background: 'white', padding: '60px 0' }}>
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <div style={{
+            background: 'var(--bg-cream)',
+            borderRadius: '16px',
+            padding: '32px',
+            border: '1px solid rgba(0,0,0,0.06)',
+          }}>
+            <h3 style={{
+              fontWeight: '700',
+              fontSize: '20px',
+              color: 'var(--text-dark)',
+              marginBottom: '16px',
+            }}>Юридический дисклеймер</h3>
+            <div style={{ fontSize: '14px', color: 'var(--text-muted)', lineHeight: '1.8' }}>
+              <p style={{ marginBottom: '12px' }}>
+                Shopify Bridge RU работает исключительно с легальными компаниями и продуктами. Все заявки проходят обязательную проверку.
+              </p>
+              <p style={{ marginBottom: '12px' }}>
+                Условия выплат зависят от соблюдения комплаенса, уровня возвратов и чарджбеков, а также выполнения клиентом своих обязательств по договору.
+              </p>
+              <p style={{ margin: 0 }}>
+                Клиент обязуется соблюдать законодательство РФ и целевых стран продаж, а также правила платёжных провайдеров.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA with Form */}
+      <section style={{
+        background: 'linear-gradient(135deg, var(--bg-dark) 0%, #0D2B26 100%)',
+        padding: '80px 0',
+      }}>
+        <div className="container" style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: 'clamp(28px, 4vw, 40px)',
+            color: 'var(--text-light)',
+            marginBottom: '16px',
+          }}>Соответствуете требованиям?</h2>
+          <p style={{
+            fontSize: '17px',
+            color: 'rgba(255,255,255,0.7)',
+            marginBottom: '40px',
+          }}>
+            Заполните заявку — мы проверим и свяжемся в течение 24-72 часов
+          </p>
+          
+          <form onSubmit={handleSubmit} style={{
+            background: 'rgba(255,255,255,0.05)',
+            borderRadius: '20px',
+            padding: '32px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            textAlign: 'left',
+          }}>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>
+                Ваше имя *
+              </label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                required
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: '10px',
+                  color: 'white',
+                  fontSize: '16px',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+                placeholder="Как к вам обращаться?"
+              />
+            </div>
+            
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>
+                Email или телефон *
+              </label>
+              <input
+                type="text"
+                value={formData.contact}
+                onChange={(e) => setFormData({...formData, contact: e.target.value})}
+                required
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: '10px',
+                  color: 'white',
+                  fontSize: '16px',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+                placeholder="email@example.com или +7..."
+              />
+            </div>
+            
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>
+                Что продаёте?
+              </label>
+              <input
+                type="text"
+                value={formData.product}
+                onChange={(e) => setFormData({...formData, product: e.target.value})}
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: '10px',
+                  color: 'white',
+                  fontSize: '16px',
+                  outline: 'none',
+                  boxSizing: 'border-box',
+                }}
+                placeholder="Категория товаров"
+              />
+            </div>
+            
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>
+                Дополнительная информация
+              </label>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                rows={3}
+                style={{
+                  width: '100%',
+                  padding: '14px 16px',
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: '10px',
+                  color: 'white',
+                  fontSize: '16px',
+                  outline: 'none',
+                  resize: 'vertical',
+                  boxSizing: 'border-box',
+                  fontFamily: 'inherit',
+                }}
+                placeholder="Расскажите о вашем бизнесе"
+              />
+            </div>
+            
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              style={{
+                width: '100%',
+                padding: '16px',
+                background: isSubmitting ? 'var(--text-muted)' : 'var(--accent)',
+                color: isSubmitting ? 'white' : 'var(--text-dark)',
+                border: 'none',
+                borderRadius: '10px',
+                fontSize: '16px',
+                fontWeight: '700',
+                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              {isSubmitting ? '⏳ Отправка...' : 'Подать заявку →'}
+            </button>
+          </form>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 const FAQPage = () => {
   const { t } = useLanguage();
   return (
@@ -6645,6 +7208,7 @@ const App = () => {
             <Route path="/how-it-works" element={<HowItWorksPage />} />
             <Route path="/fulfillment" element={<FulfillmentPage />} />
             <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/requirements" element={<RequirementsPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/contact" element={<ContactPage />} />
             
