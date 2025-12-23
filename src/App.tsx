@@ -1294,6 +1294,55 @@ const GlobalStyles = () => (
       .total-box {
         padding: 20px 12px !important;
       }
+      
+      /* Fix grids on very small screens */
+      [style*="gridTemplateColumns"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    
+    /* Mobile grid fixes */
+    @media (max-width: 768px) {
+      /* Requirements page grids */
+      .requirements-grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Contact page grid */
+      .contact-grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Calculator comparison */
+      .calculator-comparison {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Comparison grid */
+      .comparison-grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Fix form inputs */
+      input, textarea, select {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+      }
+      
+      /* Contact page form */
+      form {
+        padding: 20px !important;
+      }
+      
+      /* Stats grid on mobile */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr !important;
+      }
     }
     
     /* Prevent horizontal overflow */
@@ -1728,7 +1777,7 @@ const HeroSection = () => {
       </div>
 
       {/* Stats Row - 2x2 grid on mobile */}
-      <div className="anim-hidden delay-5" style={{
+      <div className="anim-hidden delay-5 stats-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(2, 1fr)',
         gap: '12px',
@@ -6499,9 +6548,9 @@ const RequirementsPage = () => {
       {/* Черный список и индивидуально */}
       <section style={{ background: 'white', padding: '80px 0' }}>
         <div className="container">
-          <div style={{
+          <div className="requirements-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '40px',
           }}>
             {/* Категорически не работаем */}
@@ -6937,10 +6986,10 @@ const ContactPage = () => {
         minHeight: '100vh',
       }}>
         <div className="container">
-          <div style={{
+          <div className="contact-grid" style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
-            gap: '60px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '40px',
             alignItems: 'start',
           }}>
             <div>
