@@ -11,6 +11,7 @@ interface PayoutRequestModalProps {
   onClose: () => void;
   availableBalance: number;
   onSubmit: (request: PayoutRequest) => void;
+  loading?: boolean;
 }
 
 export const PayoutRequestModal: React.FC<PayoutRequestModalProps> = ({
@@ -18,6 +19,7 @@ export const PayoutRequestModal: React.FC<PayoutRequestModalProps> = ({
   onClose,
   availableBalance,
   onSubmit,
+  loading: externalLoading,
 }) => {
   const [formData, setFormData] = useState<PayoutRequest>({
     amount: availableBalance,
@@ -27,7 +29,9 @@ export const PayoutRequestModal: React.FC<PayoutRequestModalProps> = ({
   });
   
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [loading, setLoading] = useState(false);
+  const [internalLoading, setInternalLoading] = useState(false);
+  
+  const loading = externalLoading || internalLoading;
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,14 +46,13 @@ export const PayoutRequestModal: React.FC<PayoutRequestModalProps> = ({
       return;
     }
     
-    setLoading(true);
+    setInternalLoading(true);
     try {
       await onSubmit(formData);
-      onClose();
     } catch (error) {
       console.error('Payout request error:', error);
     } finally {
-      setLoading(false);
+      setInternalLoading(false);
     }
   };
   

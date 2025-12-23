@@ -12,6 +12,10 @@ import ProfilePage from './pages/partners/profile';
 import MaterialsPage from './pages/partners/materials';
 import AdminLoginPage from './pages/admin/index';
 import AdminDashboardPage from './pages/admin/dashboard';
+import AdminPartnersPage from './pages/admin/partners';
+import AdminReferralsPage from './pages/admin/referrals';
+import AdminPayoutsPage from './pages/admin/payouts';
+import AdminSettingsPage from './pages/admin/settings';
 
 // ============================================
 // SHOPIFY BRIDGE RU - ПОЛНЫЙ САЙТ
@@ -5933,6 +5937,10 @@ const App = () => {
             {/* Админ-панель */}
             <Route path="/admin" element={<AdminLoginPage />} />
             <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+            <Route path="/admin/partners" element={<AdminPartnersPage />} />
+            <Route path="/admin/referrals" element={<AdminReferralsPage />} />
+            <Route path="/admin/payouts" element={<AdminPayoutsPage />} />
+            <Route path="/admin/settings" element={<AdminSettingsPage />} />
           </Routes>
         </main>
         <Footer />
