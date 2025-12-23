@@ -42,10 +42,10 @@ const DashboardPage: React.FC = () => {
           email: ref.email || undefined,
           phone: ref.phone || undefined,
           status: ref.status || 'registered',
-          clickedAt: ref.clicked_at ? new Date(ref.clicked_at) : undefined,
-          registeredAt: ref.registered_at ? new Date(ref.registered_at) : undefined,
-          paidAt: ref.paid_at ? new Date(ref.paid_at) : undefined,
-          lastPaymentAt: ref.last_payment_at ? new Date(ref.last_payment_at) : undefined,
+          clickedAt: ref.clicked_at ? new Date(ref.clicked_at) : new Date(),
+          registeredAt: ref.registered_at ? new Date(ref.registered_at) : new Date(),
+          paidAt: ref.paid_at ? new Date(ref.paid_at) : new Date(),
+          lastPaymentAt: ref.last_payment_at ? new Date(ref.last_payment_at) : new Date(),
           source: ref.source || 'link',
           commissionEarned: ref.commission_earned || 0,
           totalPayments: ref.total_payments || 0,
@@ -150,7 +150,7 @@ const DashboardPage: React.FC = () => {
           <div className="space-y-8">
             {/* Прогресс уровня */}
             <TierProgress 
-              currentTier={partner.tier || 'standard'}
+              currentTier={(partner.tier as 'standard' | 'silver' | 'gold' | 'platinum' | 'master') || 'standard'}
               activeReferrals={partner.active_referrals || 0}
             />
           </div>

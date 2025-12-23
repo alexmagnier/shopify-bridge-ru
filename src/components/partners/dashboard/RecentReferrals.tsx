@@ -1,4 +1,4 @@
-// components/partners/dashboard/RecentReferrals.tsx
+image.png// components/partners/dashboard/RecentReferrals.tsx
 
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '@/components/ui';
@@ -7,6 +7,7 @@ import { formatUSD, formatRelativeTime, formatPlanName } from '@/utils/formatter
 
 interface RecentReferralsProps {
   referrals: Referral[];
+  loading?: boolean;
 }
 
 export const RecentReferrals: React.FC<RecentReferralsProps> = ({ referrals }) => {

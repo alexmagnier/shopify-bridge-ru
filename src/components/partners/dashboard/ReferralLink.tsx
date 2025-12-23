@@ -9,10 +9,8 @@ interface ReferralLinkProps {
 }
 
 export const ReferralLink: React.FC<ReferralLinkProps> = ({ referralCode, referralLink }) => {
-  const [showQR, setShowQR] = useState(false);
-  
   const handleShare = async () => {
-    if (navigator.share) {
+    if (typeof navigator.share === 'function') {
       try {
         await navigator.share({
           title: 'Shopify Bridge — продажи по всему миру',
@@ -45,7 +43,7 @@ export const ReferralLink: React.FC<ReferralLinkProps> = ({ referralCode, referr
             variant="primary"
             className="flex-1"
           />
-          {navigator.share && (
+          {typeof navigator.share === 'function' && (
             <Button 
               onClick={handleShare}
               variant="outline"
