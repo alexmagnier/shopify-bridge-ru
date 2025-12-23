@@ -2026,6 +2026,303 @@ const SolutionSection = () => {
 };
 
 // ============================================
+// INFRASTRUCTURE SECTION - Инфраструктура под ключ
+// ============================================
+const InfrastructureSection = () => {
+  const animRef = useScrollAnimation();
+  
+  const features = [
+    {
+      icon: '🛒',
+      title: 'Shopify и платежи вне РФ',
+      description: 'Полностью настроенный магазин с международными платежами',
+    },
+    {
+      icon: '📦',
+      title: 'Фулфилмент и обработка заказов за пределами России',
+      description: 'Склад в Дубае, упаковка, отправка по всему миру',
+    },
+    {
+      icon: '🚢',
+      title: 'Логистика Китай — Дубай под ключ',
+      description: 'Координируем всю цепочку поставок от производителя',
+    },
+    {
+      icon: '💻',
+      title: 'Поддержка физических и цифровых продуктов',
+      description: 'Работаем с товарами, курсами, консультациями',
+    },
+    {
+      icon: '🎯',
+      title: 'Продавец фокусируется только на продажах и маркетинге',
+      description: 'Вы думаете о росте — мы обо всём остальном',
+    },
+  ];
+
+  return (
+    <section style={{
+      background: 'white',
+      padding: '80px 0',
+    }}>
+      <div ref={animRef} className="container">
+        <div className="anim-hidden" style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: 'clamp(26px, 4vw, 38px)',
+            color: 'var(--text-dark)',
+            marginBottom: '16px',
+          }}>
+            Полная международная e-commerce{' '}
+            <span style={{ color: 'var(--primary)' }}>инфраструктура под ключ</span>
+          </h2>
+        </div>
+
+        {/* Features Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '20px',
+          maxWidth: '1000px',
+          margin: '0 auto 40px',
+        }}>
+          {features.map((feature, i) => (
+            <div key={i} className="anim-up hover-card" style={{
+              background: 'var(--bg-cream)',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid var(--border)',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '16px',
+              animationDelay: `${i * 0.1}s`,
+            }}>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '12px',
+                background: 'linear-gradient(135deg, var(--accent), var(--accent-light))',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                flexShrink: 0,
+              }}>
+                {feature.icon}
+              </div>
+              <div>
+                <h3 style={{
+                  fontSize: '15px',
+                  fontWeight: '700',
+                  color: 'var(--text-dark)',
+                  marginBottom: '6px',
+                }}>
+                  {feature.title}
+                </h3>
+                <p style={{
+                  fontSize: '13px',
+                  color: 'var(--text-muted)',
+                  margin: 0,
+                  lineHeight: '1.5',
+                }}>
+                  {feature.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA Block */}
+        <div className="anim-up" style={{
+          background: 'var(--bg-cream)',
+          borderRadius: '20px',
+          padding: '32px 40px',
+          textAlign: 'center',
+          maxWidth: '800px',
+          margin: '0 auto',
+          border: '1px solid var(--border)',
+        }}>
+          <p style={{
+            fontSize: '17px',
+            color: 'var(--text-dark)',
+            marginBottom: '8px',
+          }}>
+            Мы берём на себя всю операционную часть — от поставки до обработки заказов.
+          </p>
+          <p style={{
+            fontSize: '18px',
+            fontWeight: '700',
+            color: 'var(--primary)',
+            margin: 0,
+          }}>
+            Продавец занимается только продажами.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// CHINA-DUBAI LOGISTICS SECTION
+// ============================================
+const ChinaDubaiLogisticsSection = () => {
+  const animRef = useScrollAnimation();
+  
+  const services = [
+    { icon: '🚚', title: 'Координация отправки из Китая', description: 'Работа с поставщиками и агентами' },
+    { icon: '📋', title: 'Процедуры и логистика до Дубая', description: 'Таможня, документы, транспортировка' },
+    { icon: '🔗', title: 'Интеграция с фулфилментом', description: 'Приёмка на склад в ОАЭ' },
+    { icon: '🌍', title: 'Подготовка к международным продажам', description: 'Готовность к отправке клиентам' },
+    { icon: '⚙️', title: 'Операционное сопровождение', description: 'Контроль на каждом этапе' },
+  ];
+
+  return (
+    <section style={{
+      background: 'var(--bg-cream)',
+      padding: '80px 0',
+    }}>
+      <div ref={animRef} className="container">
+        <div className="anim-hidden" style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: 'clamp(26px, 4vw, 38px)',
+            color: 'var(--text-dark)',
+            marginBottom: '16px',
+          }}>
+            Логистика Китай → Дубай{' '}
+            <span style={{ color: 'var(--primary)' }}>под ключ</span>
+          </h2>
+          <p style={{
+            fontSize: '15px',
+            color: 'var(--text-muted)',
+            maxWidth: '700px',
+            margin: '0 auto 30px',
+            lineHeight: '1.6',
+          }}>
+            ShopifyBridgeRU берёт на себя всю цепочку поставок Китай — Дубай, включая координацию 
+            и операционные процессы, чтобы продавцу не приходилось работать с брокерами, 
+            агентами или несколькими партнёрами.
+          </p>
+        </div>
+
+        {/* Highlight Banner */}
+        <div className="anim-up" style={{
+          background: 'white',
+          borderRadius: '16px',
+          padding: '20px 32px',
+          textAlign: 'center',
+          maxWidth: '600px',
+          margin: '0 auto 40px',
+          border: '2px solid var(--border)',
+        }}>
+          <p style={{
+            fontSize: '16px',
+            fontWeight: '600',
+            color: 'var(--text-dark)',
+            margin: 0,
+          }}>
+            Это не просто доставка. Это часть единой инфраструктуры.
+          </p>
+        </div>
+
+        {/* What We Handle */}
+        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+          <p style={{ fontSize: '15px', color: 'var(--text-muted)', fontWeight: '600' }}>
+            Что мы берём на себя:
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '16px',
+          maxWidth: '900px',
+          margin: '0 auto 40px',
+        }}>
+          {services.map((service, i) => (
+            <div key={i} className="anim-up hover-card" style={{
+              background: 'white',
+              borderRadius: '14px',
+              padding: '20px',
+              border: '1px solid var(--border)',
+              textAlign: 'center',
+              animationDelay: `${i * 0.1}s`,
+            }}>
+              <div style={{
+                width: '44px',
+                height: '44px',
+                borderRadius: '10px',
+                background: 'linear-gradient(135deg, var(--accent), var(--accent-light))',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '22px',
+                margin: '0 auto 12px',
+              }}>
+                {service.icon}
+              </div>
+              <h3 style={{
+                fontSize: '14px',
+                fontWeight: '700',
+                color: 'var(--text-dark)',
+                marginBottom: '6px',
+              }}>
+                {service.title}
+              </h3>
+              <p style={{
+                fontSize: '12px',
+                color: 'var(--text-muted)',
+                margin: 0,
+              }}>
+                {service.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Responsibility Block */}
+        <div className="anim-up" style={{
+          background: 'white',
+          borderRadius: '20px',
+          padding: '28px 36px',
+          textAlign: 'center',
+          maxWidth: '600px',
+          margin: '0 auto',
+          border: '1px solid var(--border)',
+        }}>
+          <p style={{
+            fontSize: '14px',
+            color: 'var(--text-muted)',
+            marginBottom: '8px',
+          }}>
+            Ответственность продавца:
+          </p>
+          <p style={{
+            fontSize: '17px',
+            fontWeight: '700',
+            color: 'var(--text-dark)',
+            marginBottom: '4px',
+          }}>
+            Продавец не управляет логистикой.
+          </p>
+          <p style={{
+            fontSize: '16px',
+            fontWeight: '600',
+            color: 'var(--primary)',
+            margin: 0,
+          }}>
+            Его задача — продукт, продажи и маркетинг.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
 // HOW IT WORKS SECTION
 // ============================================
 const HowItWorksSection = () => {
@@ -2331,6 +2628,184 @@ const TargetAudienceSection = () => {
       </div>
     </div>
   </section>
+  );
+};
+
+// ============================================
+// DIGITAL PRODUCTS SECTION
+// ============================================
+const DigitalProductsSection = () => {
+  const animRef = useScrollAnimation();
+  
+  const categories = [
+    { icon: '🎓', title: 'Онлайн-курсы', description: 'Образовательные программы и видеокурсы' },
+    { icon: '💼', title: 'Коучинг и консалтинг', description: 'Консультационные услуги и менторство' },
+    { icon: '📚', title: 'Образовательные программы', description: 'Обучающие материалы и тренинги' },
+    { icon: '📁', title: 'Цифровые продукты', description: 'Загружаемые материалы и подписки' },
+  ];
+
+  const benefits = [
+    'Без физической логистики и складского хранения',
+    'Фокус на платежах и Shopify-инфраструктуре',
+    'Международный доступ для ваших клиентов',
+    'Настройка магазина под цифровые товары',
+  ];
+
+  return (
+    <section style={{
+      background: 'white',
+      padding: '80px 0',
+    }}>
+      <div ref={animRef} className="container">
+        <div className="anim-hidden" style={{ textAlign: 'center', marginBottom: '16px' }}>
+          <span style={{
+            color: 'var(--accent)',
+            fontWeight: '600',
+            fontSize: '13px',
+            textTransform: 'uppercase',
+            letterSpacing: '2px',
+          }}>
+            ЦИФРОВЫЕ ПРОДУКТЫ
+          </span>
+        </div>
+        
+        <div className="anim-hidden" style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <h2 style={{
+            fontFamily: 'var(--font-family)',
+            fontWeight: '800',
+            fontSize: 'clamp(26px, 4vw, 38px)',
+            color: 'var(--text-dark)',
+            marginBottom: '16px',
+          }}>
+            Мы также работаем с{' '}
+            <span style={{ color: 'var(--primary)' }}>цифровыми продуктами</span> и услугами
+          </h2>
+          <p style={{
+            fontSize: '15px',
+            color: 'var(--text-muted)',
+            maxWidth: '700px',
+            margin: '0 auto',
+            lineHeight: '1.6',
+          }}>
+            Shopify Bridge RU помогает не только продавцам физических товаров, но и экспертам, 
+            преподавателям и сервисным бизнесам выходить на международный рынок.
+          </p>
+        </div>
+
+        {/* Main Content Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '24px',
+          maxWidth: '1000px',
+          margin: '40px auto 0',
+        }}>
+          {/* Left: Categories */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '16px',
+          }}>
+            {categories.map((cat, i) => (
+              <div key={i} className="anim-up hover-card" style={{
+                background: 'var(--bg-cream)',
+                borderRadius: '14px',
+                padding: '20px',
+                border: '1px solid var(--border)',
+                animationDelay: `${i * 0.1}s`,
+              }}>
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '10px',
+                  background: 'linear-gradient(135deg, var(--accent), var(--accent-light))',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '20px',
+                  marginBottom: '12px',
+                }}>
+                  {cat.icon}
+                </div>
+                <h3 style={{
+                  fontSize: '14px',
+                  fontWeight: '700',
+                  color: 'var(--text-dark)',
+                  marginBottom: '6px',
+                }}>
+                  {cat.title}
+                </h3>
+                <p style={{
+                  fontSize: '12px',
+                  color: 'var(--text-muted)',
+                  margin: 0,
+                  lineHeight: '1.4',
+                }}>
+                  {cat.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Right: Benefits Block */}
+          <div className="anim-right" style={{
+            background: 'var(--bg-cream)',
+            borderRadius: '20px',
+            padding: '28px',
+            border: '1px solid var(--border)',
+          }}>
+            <h3 style={{
+              fontSize: '18px',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              marginBottom: '20px',
+            }}>
+              Для цифрового бизнеса
+            </h3>
+            
+            {benefits.map((benefit, i) => (
+              <div key={i} style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                padding: '10px 0',
+                borderBottom: i < benefits.length - 1 ? '1px solid var(--border)' : 'none',
+              }}>
+                <span style={{ color: 'var(--primary)', fontSize: '16px' }}>✓</span>
+                <span style={{ fontSize: '14px', color: 'var(--text-dark)' }}>{benefit}</span>
+              </div>
+            ))}
+
+            <p style={{
+              fontSize: '13px',
+              color: 'var(--text-muted)',
+              marginTop: '20px',
+              lineHeight: '1.5',
+            }}>
+              Этот пакет предназначен для преподавателей, менторов и экспертов, 
+              продающих свои услуги и цифровые продукты международным клиентам.
+            </p>
+
+            <Link to="/pricing" style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              marginTop: '16px',
+              padding: '12px 24px',
+              background: 'var(--text-dark)',
+              color: 'white',
+              borderRadius: '10px',
+              textDecoration: 'none',
+              fontSize: '14px',
+              fontWeight: '600',
+              transition: 'all 0.2s ease',
+            }}>
+              Узнать тарифы <span>→</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
@@ -2713,6 +3188,23 @@ const PricingSection = () => {
             ],
             popular: false,
           },
+          {
+            badge: 'Цифровой',
+            badgeColor: 'var(--accent)',
+            name: 'Digital Package',
+            subtitle: 'Для цифровых продуктов и онлайн-услуг',
+            sku: null,
+            price: '$450',
+            maintenance: '$300 каждые 3 месяца',
+            features: [
+              'Настройка Shopify-магазина для цифровых товаров и услуг',
+              'Платёжная инфраструктура для международных клиентов',
+              'Конфигурация для продажи курсов, консультаций или цифрового контента',
+              'Техническая поддержка и обслуживание платформы',
+            ],
+            highlight: 'Не включает физический фулфилмент',
+            popular: false,
+          },
         ].map((plan, i) => (
           <div key={i} className="hover-card" style={{
             background: plan.popular ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'var(--bg-cream)',
@@ -2899,8 +3391,203 @@ const PricingSection = () => {
         </p>
       </div>
 
+      {/* Logistics China-Dubai Block */}
+      <div className="anim-up" style={{
+        background: 'white',
+        borderRadius: '20px',
+        padding: '40px',
+        marginTop: '50px',
+        border: '1px solid var(--border)',
+        maxWidth: '800px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      }}>
+        <h3 style={{
+          fontFamily: 'var(--font-family)',
+          fontWeight: '800',
+          fontSize: '24px',
+          color: 'var(--text-dark)',
+          textAlign: 'center',
+          marginBottom: '8px',
+        }}>
+          Логистика Китай → Дубай
+        </h3>
+        <p style={{
+          textAlign: 'center',
+          fontSize: '14px',
+          color: 'var(--text-muted)',
+          marginBottom: '24px',
+        }}>
+          Под ключ для физических товаров
+        </p>
+        
+        <p style={{
+          textAlign: 'center',
+          fontSize: '15px',
+          color: 'var(--text-dark)',
+          marginBottom: '20px',
+        }}>
+          Стоимость логистики Китай — Дубай рассчитывается индивидуально и зависит от:
+        </p>
+        
+        <div style={{ maxWidth: '400px', margin: '0 auto 24px' }}>
+          {['Количество единиц товара', 'Общий вес партии', 'Тип и категория товара'].map((item, i) => (
+            <div key={i} style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '8px 0',
+            }}>
+              <span style={{ color: 'var(--primary)', fontSize: '16px' }}>✓</span>
+              <span style={{ fontSize: '14px', color: 'var(--text-dark)' }}>{item}</span>
+            </div>
+          ))}
+        </div>
+        
+        <div style={{
+          background: 'var(--bg-cream)',
+          borderRadius: '12px',
+          padding: '16px 20px',
+          marginBottom: '24px',
+        }}>
+          <p style={{ fontSize: '14px', color: 'var(--text-dark)', margin: 0 }}>
+            <strong>Важно:</strong> Стоимость обсуждается индивидуально после анализа товара и объёма. 
+            Это часть комплексного решения, а не отдельная услуга.
+          </p>
+        </div>
+        
+        <div style={{ textAlign: 'center' }}>
+          <Link to="/contact" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '14px 28px',
+            background: 'white',
+            color: 'var(--text-dark)',
+            border: '2px solid var(--text-dark)',
+            borderRadius: '12px',
+            textDecoration: 'none',
+            fontSize: '14px',
+            fontWeight: '600',
+          }}>
+            Обсудить логистику <span>→</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Turnkey & Important Notes */}
+      <div style={{
+        marginTop: '50px',
+        maxWidth: '800px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      }}>
+        {/* Turnkey Model */}
+        <div className="anim-up" style={{
+          background: 'var(--bg-cream)',
+          borderRadius: '16px',
+          padding: '24px 32px',
+          textAlign: 'center',
+          marginBottom: '20px',
+          border: '1px solid var(--border)',
+        }}>
+          <p style={{
+            fontSize: '17px',
+            fontWeight: '700',
+            color: 'var(--text-dark)',
+            marginBottom: '8px',
+          }}>
+            Мы работаем по модели turnkey.
+          </p>
+          <p style={{
+            fontSize: '14px',
+            color: 'var(--text-muted)',
+            margin: 0,
+          }}>
+            Мы не продаём отдельные услуги — мы выстраиваем инфраструктуру.
+          </p>
+        </div>
+
+        {/* Store Setup Cost */}
+        <div className="anim-up" style={{
+          background: 'white',
+          borderRadius: '16px',
+          padding: '24px 32px',
+          marginBottom: '20px',
+          border: '1px solid var(--border)',
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '16px',
+        }}>
+          <span style={{ fontSize: '24px' }}>💡</span>
+          <div>
+            <h4 style={{
+              fontSize: '16px',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              marginBottom: '8px',
+            }}>
+              Стоимость настройки магазина
+            </h4>
+            <p style={{
+              fontSize: '14px',
+              color: 'var(--text-muted)',
+              margin: 0,
+              lineHeight: '1.6',
+            }}>
+              Определяется индивидуально после проверки вашей заявки и оценки объёма работ. 
+              Зависит от размера каталога, сложности структуры и дополнительных требований.
+            </p>
+          </div>
+        </div>
+
+        {/* Important Note */}
+        <div className="anim-up" style={{
+          background: 'white',
+          borderRadius: '16px',
+          padding: '24px 32px',
+          border: '1px solid var(--border)',
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '16px',
+        }}>
+          <span style={{ fontSize: '24px' }}>ℹ️</span>
+          <div>
+            <h4 style={{
+              fontSize: '16px',
+              fontWeight: '700',
+              color: 'var(--text-dark)',
+              marginBottom: '8px',
+            }}>
+              Важно
+            </h4>
+            <p style={{
+              fontSize: '14px',
+              color: 'var(--text-muted)',
+              margin: 0,
+              lineHeight: '1.6',
+            }}>
+              Мы работаем только после модерации заявки. Условия выплат зависят от соблюдения 
+              комплаенса, уровня возвратов и чарджбеков. Подробности — в договоре.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Learn More Button */}
-      <div style={{ textAlign: 'center', marginTop: '32px' }}>
+      <div style={{ textAlign: 'center', marginTop: '40px' }}>
+        <Link to="/contact" className="btn-primary" style={{
+          display: 'inline-block',
+          background: 'var(--primary)',
+          color: 'white',
+          padding: '18px 48px',
+          borderRadius: '12px',
+          textDecoration: 'none',
+          fontWeight: '700',
+          fontSize: '16px',
+        }}>
+          Подать заявку →
+        </Link>
         <Link to="/pricing" className="btn-secondary" style={{
           display: 'inline-block',
           background: 'transparent',
@@ -2911,8 +3598,9 @@ const PricingSection = () => {
           fontWeight: '700',
           fontSize: '16px',
           border: '2px solid var(--text-dark)',
+          marginLeft: '16px',
         }}>
-          Узнать подробнее об услугах →
+          Задать вопрос
         </Link>
       </div>
     </div>
@@ -4357,8 +5045,11 @@ const HomePage = () => (
     <HeroSection />
     <ProblemSection />
     <SolutionSection />
+    <InfrastructureSection />
+    <ChinaDubaiLogisticsSection />
     <HowItWorksSection />
     <TargetAudienceSection />
+    <DigitalProductsSection />
     <TransparencySection />
     <WhyUsSection />
     <PricingSection />
