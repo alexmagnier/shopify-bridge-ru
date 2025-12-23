@@ -35,7 +35,7 @@ export interface Referral {
   planSelected?: 'testing' | 'starter' | 'growth' | 'business';
   
   // Привязка (БЕССРОЧНАЯ)
-  lifetimeBinding: true;          // Клиент закреплён за партнёром навсегда
+  lifetimeBinding: boolean;          // Клиент закреплён за партнёром (true для партнерских, false для органических)
   
   // Примечания (для админа)
   notes?: string;
