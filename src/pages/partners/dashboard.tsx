@@ -104,7 +104,7 @@ const DashboardPage: React.FC = () => {
     { month: 'Q4', amount: partner.pending_balance || 0 },
   ];
 
-  const referralLink = `https://shopifybridge.ru/?ref=${partner.referral_code}`;
+  const referralLink = `https://shopifymost.ru/?ref=${partner.referral_code}`;
 
   return (
     <div className="min-h-screen bg-gray-50">

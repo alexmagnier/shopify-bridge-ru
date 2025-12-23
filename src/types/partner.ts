@@ -10,7 +10,7 @@ export interface Partner {
   
   // Реферальная информация
   referralCode: string;           // Уникальный код: "IVAN2024"
-  referralLink: string;           // Полная ссылка: "shopifybridge.ru/?ref=IVAN2024"
+  referralLink: string;           // Полная ссылка: "shopifymost.ru/?ref=IVAN2024"
   
   // Статус
   status: 'pending' | 'active' | 'suspended' | 'blocked';
