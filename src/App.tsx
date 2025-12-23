@@ -5930,7 +5930,6 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <>
       {!hideMainLayout && <Header />}
-      <ReferralTracker />
       <main>{children}</main>
       {!hideMainLayout && <Footer />}
     </>
@@ -5945,6 +5944,7 @@ const App = () => {
     <LanguageProvider>
       <Router>
         <GlobalStyles />
+        <ReferralTracker />
         <MainLayout>
           <Routes>
             <Route path="/" element={<HomePage />} />

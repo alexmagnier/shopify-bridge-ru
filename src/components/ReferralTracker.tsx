@@ -1,12 +1,14 @@
 // components/ReferralTracker.tsx
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 const REF_COOKIE_NAME = 'sb_ref';
 const REF_STORAGE_KEY = 'sb_ref';
 const REF_TIME_KEY = 'sb_ref_time';
+const REF_CLICK_TRACKED_KEY = 'sb_ref_click_tracked';
 const COOKIE_EXPIRY_DAYS = 3650; // 10 лет
+const TRACK_CLICK_URL = 'https://oyjxzrvhvndbdoyshwfc.supabase.co/functions/v1/track-click';
 
 /**
  * Сохраняет реферальный код в localStorage и cookie
@@ -32,51 +34,94 @@ function saveRefCode(refCode: string): void {
 }
 
 /**
+ * Регистрирует клик по реферальной ссылке в Supabase
+ */
+async function trackClick(refCode: string): Promise<void> {
+  // Проверяем, был ли уже зарегистрирован клик для этого кода
+  const trackedCode = localStorage.getItem(REF_CLICK_TRACKED_KEY);
+  if (trackedCode === refCode) {
+    console.log('[ReferralTracker] Click already tracked for:', refCode);
+    return;
+  }
+  
+  try {
+    console.log('[ReferralTracker] 📊 Tracking click for:', refCode);
+    
+    const response = await fetch(TRACK_CLICK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ref: refCode,
+        page: window.location.pathname,
+        referrer: document.referrer || null,
+        userAgent: navigator.userAgent,
+      }),
+    });
+    
+    if (response.ok) {
+      // Помечаем что клик зарегистрирован
+      localStorage.setItem(REF_CLICK_TRACKED_KEY, refCode);
+      console.log('[ReferralTracker] ✅ Click tracked successfully');
+    } else {
+      console.warn('[ReferralTracker] Failed to track click:', response.status);
+    }
+  } catch (error) {
+    console.warn('[ReferralTracker] Error tracking click:', error);
+    // Не блокируем работу сайта если трекинг не сработал
+  }
+}
+
+/**
  * Компонент для автоматического отслеживания реферальных переходов
  * Работает на ВСЕХ страницах и сохраняет ref при первом визите
  */
 export function ReferralTracker() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
+  const hasTracked = useRef(false);
   
   useEffect(() => {
-    // Проверяем URL параметр ref
-    const refFromUrl = searchParams.get('ref');
+    // Предотвращаем двойной вызов в StrictMode
+    if (hasTracked.current) return;
     
-    if (refFromUrl) {
-      console.log('[ReferralTracker] 🔍 Found ref in URL:', refFromUrl);
-      saveRefCode(refFromUrl);
-      return;
+    let refCode: string | null = null;
+    
+    // 1. Проверяем URL параметр ref через React Router
+    refCode = searchParams.get('ref');
+    
+    // 2. Fallback на window.location
+    if (!refCode) {
+      const urlParams = new URLSearchParams(window.location.search);
+      refCode = urlParams.get('ref');
     }
     
-    // Также проверяем window.location на случай если React Router не распарсил
-    const urlParams = new URLSearchParams(window.location.search);
-    const refFromWindow = urlParams.get('ref');
-    
-    if (refFromWindow) {
-      console.log('[ReferralTracker] 🔍 Found ref in window.location:', refFromWindow);
-      saveRefCode(refFromWindow);
-      return;
+    // 3. Проверяем hash (для ссылок типа /#ref=CODE)
+    if (!refCode && window.location.hash.includes('ref=')) {
+      const hashParams = new URLSearchParams(window.location.hash.replace('#', '?'));
+      refCode = hashParams.get('ref');
     }
     
-    // Проверяем hash (для ссылок типа /#ref=CODE)
-    const hash = window.location.hash;
-    if (hash.includes('ref=')) {
-      const hashParams = new URLSearchParams(hash.replace('#', '?'));
-      const refFromHash = hashParams.get('ref');
-      if (refFromHash) {
-        console.log('[ReferralTracker] 🔍 Found ref in hash:', refFromHash);
-        saveRefCode(refFromHash);
-        return;
-      }
+    if (refCode) {
+      console.log('[ReferralTracker] 🔍 Found ref in URL:', refCode);
+      hasTracked.current = true;
+      
+      // Сохраняем код
+      saveRefCode(refCode);
+      
+      // Регистрируем клик в Supabase (асинхронно, не блокируя UI)
+      trackClick(refCode.toUpperCase());
     }
-    
-    // Логируем текущий сохранённый код
+  }, [location.search, searchParams]);
+  
+  // Логируем текущий сохранённый код при каждом изменении маршрута
+  useEffect(() => {
     const savedRef = localStorage.getItem(REF_STORAGE_KEY);
     if (savedRef) {
-      console.log('[ReferralTracker] 📦 Using saved ref code:', savedRef);
+      console.log('[ReferralTracker] 📦 Current saved ref code:', savedRef);
     }
-  }, [location.pathname, location.search, searchParams]);
+  }, [location.pathname]);
   
   return null; // Невидимый компонент
 }
