@@ -8,23 +8,23 @@ import { formatUSD, formatDate } from '@/utils/formatters';
 
 interface ReferralData {
   id: string;
-  partner_id: string;
-  name: string;
+  partner_id: string | null;
+  name: string | null;
   email: string | null;
   phone: string | null;
-  status: string;
-  source: string;
-  commission_earned: number;
-  total_payments: number;
-  lifetime_value: number;
+  status: string | null;
+  source: string | null;
+  commission_earned: number | null;
+  total_payments: number | null;
+  lifetime_value: number | null;
   plan_selected: string | null;
-  registered_at: string;
-  created_at: string;
+  registered_at: string | null;
+  created_at: string | null;
   partner?: {
     first_name: string;
     last_name: string;
     referral_code: string;
-  };
+  } | null;
 }
 
 const AdminReferralsPage: React.FC = () => {
@@ -43,7 +43,9 @@ const AdminReferralsPage: React.FC = () => {
       const { data, error } = await supabase
         .from('referrals')
         .select(`
-          *,
+          id, partner_id, name, email, phone, status, source, 
+          commission_earned, total_payments, lifetime_value, 
+          plan_selected, registered_at, created_at,
           partner:partners(first_name, last_name, referral_code)
         `)
         .order('created_at', { ascending: false });
@@ -63,7 +65,7 @@ const AdminReferralsPage: React.FC = () => {
 
   const updateReferralStatus = async (referralId: string, newStatus: string) => {
     try {
-      const updateData: any = { 
+      const updateData: Record<string, string> = { 
         status: newStatus, 
         updated_at: new Date().toISOString() 
       };
@@ -105,33 +107,33 @@ const AdminReferralsPage: React.FC = () => {
     return true;
   });
 
-  const getStatusBadge = (status: string) => {
-    const config: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'error' }> = {
-      clicked: { label: '👁 Кликнул', variant: 'default' },
+  const getStatusBadge = (status: string | null) => {
+    const config: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'danger' | 'info' | 'gray' }> = {
+      clicked: { label: '👁 Кликнул', variant: 'gray' },
       registered: { label: '📝 Зарегистрирован', variant: 'default' },
       contacted: { label: '📞 На связи', variant: 'warning' },
       paid: { label: '✅ Оплатил', variant: 'success' },
       active: { label: '🟢 Активный', variant: 'success' },
-      churned: { label: '🔴 Ушёл', variant: 'error' },
+      churned: { label: '🔴 Ушёл', variant: 'danger' },
     };
-    return config[status] || config.registered;
+    return config[status || 'registered'] || config.registered;
   };
 
-  const getSourceLabel = (source: string) => {
+  const getSourceLabel = (source: string | null) => {
     const labels: Record<string, string> = {
       link: '🔗 Ссылка',
       promo_code: '🏷 Промокод',
       manual: '✍️ Вручную',
       organic: '🌱 Органика',
     };
-    return labels[source] || source;
+    return labels[source || 'organic'] || source || 'Не указан';
   };
 
   // Статистика
   const stats = {
     total: referrals.length,
     registered: referrals.filter(r => r.status === 'registered').length,
-    paid: referrals.filter(r => ['paid', 'active'].includes(r.status)).length,
+    paid: referrals.filter(r => ['paid', 'active'].includes(r.status || '')).length,
     organic: referrals.filter(r => r.source === 'organic').length,
   };
 
@@ -231,7 +233,7 @@ const AdminReferralsPage: React.FC = () => {
                       <tr key={referral.id} className="hover:bg-gray-50">
                         <td className="px-4 py-4">
                           <div>
-                            <div className="font-medium text-gray-900">{referral.name}</div>
+                            <div className="font-medium text-gray-900">{referral.name || 'Без имени'}</div>
                             <div className="text-sm text-gray-500">
                               {referral.email || referral.phone || 'Нет контакта'}
                             </div>
@@ -258,20 +260,20 @@ const AdminReferralsPage: React.FC = () => {
                           <Badge variant={statusBadge.variant}>{statusBadge.label}</Badge>
                         </td>
                         <td className="px-4 py-4">
-                          {referral.commission_earned > 0 ? (
+                          {(referral.commission_earned || 0) > 0 ? (
                             <span className="font-medium text-green-600">
-                              {formatUSD(referral.commission_earned)}
+                              {formatUSD(referral.commission_earned || 0)}
                             </span>
                           ) : (
                             <span className="text-gray-400">—</span>
                           )}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500">
-                          {formatDate(new Date(referral.created_at))}
+                          {referral.created_at ? formatDate(new Date(referral.created_at)) : '—'}
                         </td>
                         <td className="px-4 py-4">
                           <Select
-                            value={referral.status}
+                            value={referral.status || 'registered'}
                             onChange={(e) => updateReferralStatus(referral.id, e.target.value)}
                             options={[
                               { value: 'clicked', label: 'Кликнул' },
@@ -297,4 +299,3 @@ const AdminReferralsPage: React.FC = () => {
 };
 
 export default AdminReferralsPage;
-

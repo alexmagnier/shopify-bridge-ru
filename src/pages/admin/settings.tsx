@@ -16,17 +16,19 @@ interface CommissionSettings {
   clientBindingPermanent: boolean;
 }
 
+const defaultSettings: CommissionSettings = {
+  standard: 10,
+  silver: 12,
+  gold: 15,
+  platinum: 18,
+  master: 20,
+  minPayoutAmount: 50,
+  lifetimeCommissions: true,
+  clientBindingPermanent: true,
+};
+
 const AdminSettingsPage: React.FC = () => {
-  const [settings, setSettings] = useState<CommissionSettings>({
-    standard: 10,
-    silver: 12,
-    gold: 15,
-    platinum: 18,
-    master: 20,
-    minPayoutAmount: 50,
-    lifetimeCommissions: true,
-    clientBindingPermanent: true,
-  });
+  const [settings, setSettings] = useState<CommissionSettings>(defaultSettings);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -43,8 +45,19 @@ const AdminSettingsPage: React.FC = () => {
         .eq('key', 'commission_settings')
         .single();
 
-      if (!error && data) {
-        setSettings(data.value as CommissionSettings);
+      if (!error && data && data.value) {
+        // Safely parse the value
+        const value = data.value as Record<string, unknown>;
+        setSettings({
+          standard: typeof value.standard === 'number' ? value.standard : defaultSettings.standard,
+          silver: typeof value.silver === 'number' ? value.silver : defaultSettings.silver,
+          gold: typeof value.gold === 'number' ? value.gold : defaultSettings.gold,
+          platinum: typeof value.platinum === 'number' ? value.platinum : defaultSettings.platinum,
+          master: typeof value.master === 'number' ? value.master : defaultSettings.master,
+          minPayoutAmount: typeof value.minPayoutAmount === 'number' ? value.minPayoutAmount : defaultSettings.minPayoutAmount,
+          lifetimeCommissions: typeof value.lifetimeCommissions === 'boolean' ? value.lifetimeCommissions : defaultSettings.lifetimeCommissions,
+          clientBindingPermanent: typeof value.clientBindingPermanent === 'boolean' ? value.clientBindingPermanent : defaultSettings.clientBindingPermanent,
+        });
       }
     } catch (error) {
       console.error('Error fetching settings:', error);
@@ -56,11 +69,23 @@ const AdminSettingsPage: React.FC = () => {
   const saveSettings = async () => {
     setSaving(true);
     try {
+      // Convert to JSON-compatible object
+      const settingsJson = {
+        standard: settings.standard,
+        silver: settings.silver,
+        gold: settings.gold,
+        platinum: settings.platinum,
+        master: settings.master,
+        minPayoutAmount: settings.minPayoutAmount,
+        lifetimeCommissions: settings.lifetimeCommissions,
+        clientBindingPermanent: settings.clientBindingPermanent,
+      };
+
       const { error } = await supabase
         .from('settings')
         .upsert({
           key: 'commission_settings',
-          value: settings,
+          value: settingsJson,
           updated_at: new Date().toISOString(),
         });
 
@@ -286,4 +311,3 @@ const AdminSettingsPage: React.FC = () => {
 };
 
 export default AdminSettingsPage;
-

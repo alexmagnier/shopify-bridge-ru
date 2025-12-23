@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { AdminHeader } from '@/components/layout/AdminHeader';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, Button, Input, Select, Badge } from '@/components/ui';
-import { formatUSD, formatNumber, formatDate } from '@/utils/formatters';
+import { formatUSD, formatNumber } from '@/utils/formatters';
 
 interface PartnerData {
   id: string;
@@ -12,13 +12,13 @@ interface PartnerData {
   first_name: string;
   last_name: string;
   referral_code: string;
-  status: string;
-  tier: string;
-  total_referrals: number;
-  active_referrals: number;
-  total_earnings: number;
-  pending_balance: number;
-  created_at: string;
+  status: string | null;
+  tier: string | null;
+  total_referrals: number | null;
+  active_referrals: number | null;
+  total_earnings: number | null;
+  pending_balance: number | null;
+  created_at: string | null;
 }
 
 const AdminPartnersPage: React.FC = () => {
@@ -37,7 +37,7 @@ const AdminPartnersPage: React.FC = () => {
     try {
       const { data, error } = await supabase
         .from('partners')
-        .select('*')
+        .select('id, email, first_name, last_name, referral_code, status, tier, total_referrals, active_referrals, total_earnings, pending_balance, created_at')
         .order('created_at', { ascending: false });
 
       if (error) {
@@ -71,24 +71,6 @@ const AdminPartnersPage: React.FC = () => {
     }
   };
 
-  const updatePartnerTier = async (partnerId: string, newTier: string) => {
-    try {
-      const { error } = await supabase
-        .from('partners')
-        .update({ tier: newTier, updated_at: new Date().toISOString() })
-        .eq('id', partnerId);
-
-      if (error) {
-        alert('Ошибка при обновлении уровня');
-        return;
-      }
-
-      fetchPartners();
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
-
   // Фильтрация
   const filteredPartners = partners.filter(p => {
     if (statusFilter !== 'all' && p.status !== statusFilter) return false;
@@ -103,25 +85,25 @@ const AdminPartnersPage: React.FC = () => {
     return true;
   });
 
-  const getTierBadge = (tier: string) => {
-    const config: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'error' }> = {
+  const getTierBadge = (tier: string | null) => {
+    const config: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'danger' | 'info' | 'gray' }> = {
       master: { label: '👑 Мастер', variant: 'success' },
       platinum: { label: '💎 Платина', variant: 'success' },
       gold: { label: '🥇 Золото', variant: 'warning' },
       silver: { label: '🥈 Серебро', variant: 'default' },
-      standard: { label: '🥉 Стандарт', variant: 'default' },
+      standard: { label: '🥉 Стандарт', variant: 'gray' },
     };
-    return config[tier] || config.standard;
+    return config[tier || 'standard'] || config.standard;
   };
 
-  const getStatusBadge = (status: string) => {
-    const config: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'error' }> = {
+  const getStatusBadge = (status: string | null) => {
+    const config: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'danger' | 'info' | 'gray' }> = {
       active: { label: '✅ Активен', variant: 'success' },
       pending: { label: '⏳ Ожидает', variant: 'warning' },
       suspended: { label: '⚠️ Приостановлен', variant: 'warning' },
-      blocked: { label: '🚫 Заблокирован', variant: 'error' },
+      blocked: { label: '🚫 Заблокирован', variant: 'danger' },
     };
-    return config[status] || config.pending;
+    return config[status || 'pending'] || config.pending;
   };
 
   return (
@@ -230,17 +212,17 @@ const AdminPartnersPage: React.FC = () => {
                           <Badge variant={tierBadge.variant}>{tierBadge.label}</Badge>
                         </td>
                         <td className="px-4 py-4">
-                          <div className="text-gray-900">{formatNumber(partner.total_referrals)}</div>
+                          <div className="text-gray-900">{formatNumber(partner.total_referrals || 0)}</div>
                           <div className="text-xs text-gray-500">
-                            {partner.active_referrals} активных
+                            {partner.active_referrals || 0} активных
                           </div>
                         </td>
                         <td className="px-4 py-4">
                           <div className="font-medium text-green-600">
-                            {formatUSD(partner.total_earnings)}
+                            {formatUSD(partner.total_earnings || 0)}
                           </div>
                           <div className="text-xs text-gray-500">
-                            Баланс: {formatUSD(partner.pending_balance)}
+                            Баланс: {formatUSD(partner.pending_balance || 0)}
                           </div>
                         </td>
                         <td className="px-4 py-4">
@@ -289,4 +271,3 @@ const AdminPartnersPage: React.FC = () => {
 };
 
 export default AdminPartnersPage;
-

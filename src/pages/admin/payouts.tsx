@@ -3,28 +3,28 @@
 import React, { useState, useEffect } from 'react';
 import { AdminHeader } from '@/components/layout/AdminHeader';
 import { supabase } from '@/integrations/supabase/client';
-import { Card, Button, Input, Select, Badge, Tabs } from '@/components/ui';
+import { Card, Button, Input, Badge } from '@/components/ui';
 import { formatUSD, formatDate } from '@/utils/formatters';
 
 interface PayoutData {
   id: string;
   partner_id: string;
   amount: number;
-  currency: string;
-  status: string;
-  payment_method: string;
+  currency: string | null;
+  status: string | null;
+  payment_method: string | null;
   payment_details: string;
   transaction_id: string | null;
   partner_note: string | null;
   admin_note: string | null;
-  requested_at: string;
+  requested_at: string | null;
   processed_at: string | null;
-  created_at: string;
+  created_at: string | null;
   partner?: {
     first_name: string;
     last_name: string;
     email: string;
-  };
+  } | null;
 }
 
 const AdminPayoutsPage: React.FC = () => {
@@ -44,7 +44,9 @@ const AdminPayoutsPage: React.FC = () => {
       const { data, error } = await supabase
         .from('payouts')
         .select(`
-          *,
+          id, partner_id, amount, currency, status, payment_method, 
+          payment_details, transaction_id, partner_note, admin_note,
+          requested_at, processed_at, created_at,
           partner:partners(first_name, last_name, email)
         `)
         .order('created_at', { ascending: false });
@@ -164,31 +166,31 @@ const AdminPayoutsPage: React.FC = () => {
     }
   };
 
-  const getStatusBadge = (status: string) => {
-    const config: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'error' }> = {
+  const getStatusBadge = (status: string | null) => {
+    const config: Record<string, { label: string; variant: 'default' | 'success' | 'warning' | 'danger' | 'info' | 'gray' }> = {
       pending: { label: '⏳ Ожидает', variant: 'warning' },
       processing: { label: '🔄 Обработка', variant: 'warning' },
       completed: { label: '✅ Выплачено', variant: 'success' },
-      failed: { label: '❌ Ошибка', variant: 'error' },
-      cancelled: { label: '🚫 Отклонено', variant: 'error' },
+      failed: { label: '❌ Ошибка', variant: 'danger' },
+      cancelled: { label: '🚫 Отклонено', variant: 'danger' },
     };
-    return config[status] || config.pending;
+    return config[status || 'pending'] || config.pending;
   };
 
-  const getPaymentMethodLabel = (method: string) => {
+  const getPaymentMethodLabel = (method: string | null) => {
     const labels: Record<string, string> = {
       usdt_trc20: 'USDT (TRC-20)',
       usdt_erc20: 'USDT (ERC-20)',
       bank_card: 'Банковская карта',
     };
-    return labels[method] || method;
+    return labels[method || ''] || method || 'Не указан';
   };
 
   // Фильтрация по табам
   const filteredPayouts = payouts.filter(p => {
     if (activeTab === 'pending') return p.status === 'pending';
     if (activeTab === 'completed') return p.status === 'completed';
-    if (activeTab === 'cancelled') return ['cancelled', 'failed'].includes(p.status);
+    if (activeTab === 'cancelled') return ['cancelled', 'failed'].includes(p.status || '');
     return true;
   });
 
@@ -198,6 +200,13 @@ const AdminPayoutsPage: React.FC = () => {
     pendingAmount: payouts.filter(p => p.status === 'pending').reduce((sum, p) => sum + p.amount, 0),
     completed: payouts.filter(p => p.status === 'completed').reduce((sum, p) => sum + p.amount, 0),
   };
+
+  const tabs = [
+    { id: 'pending', label: `⏳ Ожидающие (${stats.pending})` },
+    { id: 'completed', label: '✅ Выплачено' },
+    { id: 'cancelled', label: '🚫 Отклонённые' },
+    { id: 'all', label: 'Все' },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -233,17 +242,20 @@ const AdminPayoutsPage: React.FC = () => {
         </div>
         
         {/* Табы */}
-        <div className="mb-6">
-          <Tabs
-            tabs={[
-              { id: 'pending', label: `⏳ Ожидающие (${stats.pending})` },
-              { id: 'completed', label: '✅ Выплачено' },
-              { id: 'cancelled', label: '🚫 Отклонённые' },
-              { id: 'all', label: 'Все' },
-            ]}
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
+        <div className="mb-6 flex border-b border-gray-200">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 font-medium text-sm transition-colors border-b-2 -mb-px ${
+                activeTab === tab.id
+                  ? 'text-primary border-primary'
+                  : 'text-gray-600 border-transparent hover:text-gray-900'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
         
         {/* Таблица */}
@@ -311,7 +323,8 @@ const AdminPayoutsPage: React.FC = () => {
                           )}
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500">
-                          {formatDate(new Date(payout.requested_at || payout.created_at))}
+                          {payout.requested_at ? formatDate(new Date(payout.requested_at)) : 
+                           payout.created_at ? formatDate(new Date(payout.created_at)) : '—'}
                         </td>
                         <td className="px-4 py-4">
                           {payout.status === 'pending' && (
@@ -370,4 +383,3 @@ const AdminPayoutsPage: React.FC = () => {
 };
 
 export default AdminPayoutsPage;
-

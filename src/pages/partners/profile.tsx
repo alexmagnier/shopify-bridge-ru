@@ -44,7 +44,7 @@ const ProfilePage: React.FC = () => {
       
       setPaymentData({
         paymentMethod: partner.payment_method || 'usdt_trc20',
-        wallet: partner.payment_details?.wallet || partner.payment_details?.cardNumber || '',
+        wallet: typeof partner.payment_details === 'string' ? partner.payment_details : '',
       });
       
       if (partner.notifications) {

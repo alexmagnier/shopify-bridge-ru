@@ -80,7 +80,7 @@ const PayoutsPage: React.FC = () => {
           status: 'pending',
           payment_method: request.paymentMethod,
           payment_details: request.paymentDetails,
-          partner_note: request.note,
+          partner_note: request.partnerNote || null,
           requested_at: new Date().toISOString(),
         });
 
