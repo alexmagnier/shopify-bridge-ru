@@ -3,17 +3,42 @@
 
 const SUPABASE_FUNCTION_URL = 'https://oyjxzrvhvndbdoyshwfc.supabase.co/functions/v1/submit-lead';
 
+const REF_STORAGE_KEY = 'sb_ref';
+const REF_COOKIE_NAME = 'sb_ref';
+
 /**
- * Получает реферальный код из cookie или localStorage
+ * Получает реферальный код из localStorage или cookie
+ * ВАЖНО: Проверяет ВСЕ возможные источники
  */
 export function getRefCode(): string | null {
-  // Проверяем localStorage
-  const storage = localStorage.getItem('sb_ref');
-  if (storage) return storage;
+  // 1. Проверяем localStorage (основное хранилище)
+  const localRef = localStorage.getItem(REF_STORAGE_KEY);
+  if (localRef) {
+    console.log('[getRefCode] Found in localStorage:', localRef);
+    return localRef;
+  }
   
-  // Проверяем cookie
-  const match = document.cookie.match(/sb_ref=([^;]+)/);
-  return match ? match[1] : null;
+  // 2. Проверяем cookie (резервное хранилище)
+  const match = document.cookie.match(new RegExp(`${REF_COOKIE_NAME}=([^;]+)`));
+  if (match) {
+    console.log('[getRefCode] Found in cookie:', match[1]);
+    // Сохраняем в localStorage для надёжности
+    localStorage.setItem(REF_STORAGE_KEY, match[1]);
+    return match[1];
+  }
+  
+  // 3. Проверяем текущий URL (на случай если трекер не сработал)
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlRef = urlParams.get('ref');
+  if (urlRef) {
+    console.log('[getRefCode] Found in current URL:', urlRef);
+    // Сохраняем для будущего использования
+    localStorage.setItem(REF_STORAGE_KEY, urlRef.toUpperCase());
+    return urlRef.toUpperCase();
+  }
+  
+  console.log('[getRefCode] No ref code found');
+  return null;
 }
 
 /**

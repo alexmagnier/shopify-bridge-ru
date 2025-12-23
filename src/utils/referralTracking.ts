@@ -34,18 +34,32 @@ export function saveReferralCode(refCode: string): void {
 // Получение реферального кода
 // ВАЖНО: Нет проверки на истечение срока — привязка бессрочная
 export function getReferralCode(): string | null {
-  // Сначала проверяем localStorage (более надёжно)
+  // 1. Сначала проверяем localStorage (более надёжно)
   const localRef = localStorage.getItem(REF_STORAGE_KEY);
-  if (localRef) return localRef;
+  if (localRef) {
+    console.log('[getReferralCode] Found in localStorage:', localRef);
+    return localRef;
+  }
   
-  // Fallback на cookie
+  // 2. Fallback на cookie
   const cookieRef = getCookie(REF_COOKIE_NAME);
   if (cookieRef) {
+    console.log('[getReferralCode] Found in cookie:', cookieRef);
     // Дублируем в localStorage для надёжности
     localStorage.setItem(REF_STORAGE_KEY, cookieRef);
     return cookieRef;
   }
   
+  // 3. Проверяем текущий URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlRef = urlParams.get('ref');
+  if (urlRef && isValidReferralCode(urlRef)) {
+    console.log('[getReferralCode] Found in URL:', urlRef);
+    saveReferralCode(urlRef);
+    return urlRef.toUpperCase();
+  }
+  
+  console.log('[getReferralCode] No ref code found');
   return null;
 }
 
